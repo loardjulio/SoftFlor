@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence version="2.0" xmlns="http://java.sun.com/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/persistence      http://java.sun.com/xml/ns/persistence/persistence_2_0.xsd">
+  <!-- nome da conexão -->
+  <persistence-unit name="tcc">
+    <!-- provedor/implementacao do JPA -->
+    <provider>org.hibernate.ejb.HibernatePersistence</provider>
+    <class>br.com.softflor.entidades.Cliente</class>
+    <class>br.com.softflor.entidades.Contato</class>
+    <class>br.com.softflor.entidades.Endereco</class>
+    <class>br.com.softflor.entidades.Fornecedor</class>
+    <class>br.com.softflor.entidades.Funcionario</class>
+    <class>br.com.softflor.entidades.Orcamento</class>
+    <class>br.com.softflor.entidades.Produto</class>
+    <properties>
+      <!-- dados da conexao -->
+      <property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver"/>
+      <!--  propriedades do hibernate -->
+      <property name="hibernate.dialect" value="org.hibernate.dialect.MySQL5InnoDBDialect"/>
+      <property name="hibernate.show_sql" value="true"/>
+      <property name="hibernate.format_sql" value="true"/>
+      <!--  atualiza o banco, gera as tabelas se for preciso -->
+      <!--<property name="hibernate.hbm2ddl.auto" value="update"/>-->
+      <property name="hibernate.id.new_generator_mappings" value="false"/>
+      <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost/softflor"/>
+      <property name="javax.persistence.jdbc.user" value="root"/>
+      <property name="javax.persistence.jdbc.driver" value=""/>
+      <property name="javax.persistence.jdbc.password" value=""/>
+    </properties>
+  </persistence-unit>
+</persistence>
