@@ -24,9 +24,7 @@ import javax.persistence.Table;
  @Entity
 @Table(name = "fornecedores")
 public class Fornecedor implements EntidadeBase, Serializable{
-
-    @ManyToMany(mappedBy = "fornecedor")
-    private List<Produto> produtos;
+    
     
    @Id
    @GeneratedValue(strategy = GenerationType.AUTO)
@@ -43,6 +41,10 @@ public class Fornecedor implements EntidadeBase, Serializable{
     @OneToOne
     private Endereco endereco;
 
+    
+    @ManyToMany(mappedBy = "fornecedor")
+    private List<Produto> produtos;
+    
     @Override
     public Serializable getId() {
        return idfornecedor;
