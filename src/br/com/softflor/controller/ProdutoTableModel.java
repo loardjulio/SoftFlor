@@ -33,6 +33,18 @@ public class ProdutoTableModel extends AbstractTableModel{
         cabecalho.add(ptotal);      
         
     }
+    
+     public ProdutoTableModel(List<Produto> listaProdutos) {
+        this.listaProdutos = listaProdutos;
+        cabecalho = new ArrayList<>();
+        cabecalho.add("CODIGO");        
+        cabecalho.add("NOME");
+        cabecalho.add("EM ESTOQUE");
+        cabecalho.add("PREÇO COMPRA");        
+        cabecalho.add("PREÇO VENDA");              
+        cabecalho.add("ESTOQUE MÍNIMO");  
+        cabecalho.add("UNIDADE MEDIDA");  
+    }
 
     public List<Produto> getListaProdutos() {
         return listaProdutos;

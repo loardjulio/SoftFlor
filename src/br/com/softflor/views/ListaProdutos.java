@@ -7,6 +7,7 @@ package br.com.softflor.views;
 
 import br.com.softflor.controller.ClienteDAO;
 import br.com.softflor.controller.ClienteTableModel;
+import br.com.softflor.controller.ProdutoDAO;
 import br.com.softflor.controller.ProdutoTableModel;
 import br.com.softflor.entidades.Produto;
 import javax.swing.JOptionPane;
@@ -27,11 +28,10 @@ public class ListaProdutos extends javax.swing.JFrame {
     public ListaProdutos() {
         initComponents();
          setLocationRelativeTo(null);       
-        
-     clienteDAO = new ClienteDAO();
-     tableModel = new ClienteTableModel(clienteDAO.consultarTodos());
-        
-      tableLista.setModel(tableModel);
+    
+        ProdutoDAO produtodao = new ProdutoDAO();
+        tableModel = new ProdutoTableModel(produtodao.consultarTodos());
+        tableLista.setModel(tableModel);
     }
 
     /**
@@ -158,12 +158,13 @@ public class ListaProdutos extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-        // TODO add your handling code here:
+        CadastroProduto cp = new CadastroProduto();
+        //DeskPane.add(cp);
+        cp.setVisible(true);
         
-        CadastroCliente cc = new CadastroCliente();        
-        cc.setVisible(true);
-        
-       
+        this.setVisible(false);
+               
+              
    
         
     }//GEN-LAST:event_jButton4ActionPerformed

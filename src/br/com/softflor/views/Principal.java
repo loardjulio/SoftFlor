@@ -169,6 +169,11 @@ public class Principal extends javax.swing.JFrame {
         jMenu2.setText("Produtos");
 
         jMenuItem4.setText("Cadastrar produto");
+        jMenuItem4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem4ActionPerformed(evt);
+            }
+        });
         jMenu2.add(jMenuItem4);
 
         jMenuItem8.setText("Listar produtos");
@@ -254,9 +259,10 @@ public class Principal extends javax.swing.JFrame {
 
     private void btnProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnProdutoActionPerformed
         // TODO add your handling code here:  
-        CadastroProduto cp = new CadastroProduto();
-        DeskPane.add(cp);
-        cp.setVisible(true);
+                
+         ListaProdutos listagem = new ListaProdutos();
+        // DeskPane.add(listagem);
+        listagem.setVisible(true);
 
 
     }//GEN-LAST:event_btnProdutoActionPerformed
@@ -285,6 +291,13 @@ public class Principal extends javax.swing.JFrame {
        new GeracaoOcamento().setVisible(true);
         
     }//GEN-LAST:event_btnOrcamentoActionPerformed
+
+    private void jMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem4ActionPerformed
+       CadastroProduto cp = new CadastroProduto();
+        DeskPane.add(cp);
+        cp.setVisible(true);
+        
+    }//GEN-LAST:event_jMenuItem4ActionPerformed
 
     /**
      * @param args the command line arguments
