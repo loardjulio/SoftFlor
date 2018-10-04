@@ -13,6 +13,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -47,8 +48,17 @@ public class Endereco implements EntidadeBase, Serializable {
     public Endereco() {
     }
 
-    public Endereco(Integer idendereco, String logradouro, String numero, String bairro, String cep, String estado, String cidade) {
-        this.idendereco = idendereco;
+    public boolean ChecaEstado(){
+        String padrao = "--SELECIONE--";
+        if(estado == padrao){
+        JOptionPane.showMessageDialog(null, "Selecione um estado");
+           return false; 
+        }else {
+           return true;  
+        }       
+    }
+    
+    public Endereco(String logradouro, String numero, String bairro, String cep, String estado, String cidade) {
         this.logradouro = logradouro;
         this.numero = numero;
         this.bairro = bairro;
@@ -112,5 +122,6 @@ public class Endereco implements EntidadeBase, Serializable {
     public void setCidade(String cidade) {
         this.cidade = cidade;
     }
+    
 
 }

@@ -14,17 +14,17 @@ import javax.persistence.Persistence;
  * @author Julio
  */
 public class ConectaBD {
-    
-    public static EntityManagerFactory factory;
-    
-   public static EntityManager getEntityManager(){
-      factory = Persistence.createEntityManagerFactory("tcc");		
-          return factory.createEntityManager();
-          
-	}
-   
-   public void FechaConexao(){
-    factory.close();
-}
-  
+
+    public  EntityManagerFactory factory;
+
+    public  EntityManager getEntityManager() {
+        factory = Persistence.createEntityManagerFactory("tcc");
+        return factory.createEntityManager();
+
+    }
+
+    public void FechaConexao() {
+        factory.close();     
+    }
+
 }

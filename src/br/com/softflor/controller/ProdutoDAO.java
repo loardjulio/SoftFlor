@@ -6,6 +6,8 @@
 package br.com.softflor.controller;
 
 import br.com.softflor.entidades.Produto;
+import java.util.List;
+import javax.persistence.Query;
 
 /**
  *
@@ -13,4 +15,9 @@ import br.com.softflor.entidades.Produto;
  */
 public class ProdutoDAO extends GenericDAO<Produto>{
     
+    public List<Produto> consultarTodos(){       
+        Query q = em.createNamedQuery("Produto.consultarTodos");
+        List<Produto> produtos = q.getResultList();      
+        return produtos;
+    }
 }

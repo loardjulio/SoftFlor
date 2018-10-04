@@ -5,12 +5,57 @@
  */
 package br.com.softflor.controller;
 
+import br.com.softflor.entidades.Cliente;
 import br.com.softflor.entidades.Funcionario;
+import br.com.softflor.views.Login;
+import br.com.softflor.views.Principal;
+import java.util.List;
+import javax.persistence.Query;
+import javax.swing.JOptionPane;
 
 /**
  *
  * @author Julio
  */
-public class FuncionarioDAO extends GenericDAO<Funcionario>{
-    
+public class FuncionarioDAO extends GenericDAO<Funcionario> {
+
+    private boolean acesso;
+    private boolean ativador;
+    public boolean FecharJanela;
+
+    public boolean InfoAcesso(String nome, String senha) {
+
+        List<Funcionario> funcionarios = null;
+
+        Query q = em.createNamedQuery("Funcionario.consultaPorNome");
+        q.setParameter("nome", nome);
+        funcionarios = q.getResultList();
+        for (Funcionario funcionario : funcionarios) {
+
+            if (funcionario.getSenha() == null ? senha == null : funcionario.getSenha().equals(senha)) {
+                acesso = true;
+            } else {
+                acesso = false;
+            }
+
+        }
+        valida(acesso);
+
+        if (acesso == true) {
+            return FecharJanela = true; //SE RETORNA TRUE É PQ A JANELA DEVE SER FECHADA
+        } else {
+            return false;
+        }
+
+    }
+
+    private void valida(boolean chave) {
+        if (chave == true) {
+            JOptionPane.showMessageDialog(null, "Acesso liberado. Bem vindo");
+            new Principal().setVisible(true);
+        } else {
+            JOptionPane.showMessageDialog(null, "Acesso negado");
+        }
+    }
+
 }

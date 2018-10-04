@@ -5,6 +5,16 @@
  */
 package br.com.softflor.views;
 
+import br.com.softflor.controller.FornecedorDAO;
+import br.com.softflor.controller.ProdutoDAO;
+import br.com.softflor.entidades.Fornecedor;
+import br.com.softflor.entidades.Produto;
+import java.awt.Component;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 /**
  *
  * @author Julio
@@ -15,8 +25,18 @@ public class CadastroProduto extends javax.swing.JInternalFrame {
      * Creates new form CadastroProduto
      */
     public CadastroProduto() {
-        initComponents();
+        initComponents();        
+        PreCombo();
     }
+    
+    public void PreCombo(){
+        FornecedorDAO fd = new FornecedorDAO();
+         for (Fornecedor f : fd.consultarTodos()) {              
+              ComboFornecedor.addItem(f.getNome());
+    }       
+         
+    
+}
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -49,7 +69,7 @@ public class CadastroProduto extends javax.swing.JInternalFrame {
         setClosable(true);
         setName("Cadastro de produto"); // NOI18N
 
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/cadastro-produto.png"))); // NOI18N
+        jPanel1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
         jLabel7.setText("NOME:");
 
@@ -67,11 +87,26 @@ public class CadastroProduto extends javax.swing.JInternalFrame {
 
         jLabel3.setText("FORNECEDOR:");
 
-        ComboFornecedor.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "--SELECIONE--" }));
+        ComboFornecedor.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "--SELECIONE--", " " }));
+        ComboFornecedor.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                ComboFornecedorMouseClicked(evt);
+            }
+        });
+        ComboFornecedor.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ComboFornecedorActionPerformed(evt);
+            }
+        });
 
         btnSair.setText("SAIR");
 
         btnCadastrarPro.setText("CADASTRAR");
+        btnCadastrarPro.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCadastrarProActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -107,7 +142,7 @@ public class CadastroProduto extends javax.swing.JInternalFrame {
                                         .addComponent(jLabel11)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                         .addComponent(txtEstoqueMin, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 45, Short.MAX_VALUE)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                         .addGroup(jPanel1Layout.createSequentialGroup()
@@ -123,7 +158,7 @@ public class CadastroProduto extends javax.swing.JInternalFrame {
                                         .addGap(46, 46, 46)
                                         .addComponent(btnSair)
                                         .addGap(10, 10, 10)))))))
-                .addContainerGap(83, Short.MAX_VALUE))
+                .addContainerGap(89, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -155,7 +190,7 @@ public class CadastroProduto extends javax.swing.JInternalFrame {
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jLabel11)
                         .addComponent(txtEstoqueMin, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(66, Short.MAX_VALUE))
+                .addContainerGap(70, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -169,10 +204,46 @@ public class CadastroProduto extends javax.swing.JInternalFrame {
             .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
-        setBounds(0, 0, 688, 375);
+        setBounds(0, 0, 701, 381);
     }// </editor-fold>//GEN-END:initComponents
 
+    private void btnCadastrarProActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadastrarProActionPerformed
+        // TODO add your handling code here:
+        Produto produto = new Produto();
+        produto.setNome(txtNomeProduto.getText());
+       // produto.setFornecedor(fornecedor.add);        
+        produto.setEstoque_minimo(Double.parseDouble(txtEstoqueMin.getText()));
+        produto.setPreco_compra(Double.parseDouble(txtPrecoCompra.getText()));
+        produto.setQuantidade(Double.parseDouble(txtQuantidadeProduto.getText()));
+        produto.setUnidade_medida((String) ComboMedida.getSelectedItem());
+       
+        
+        ProdutoDAO pd = new ProdutoDAO();
+        try {
+            pd.salvarOuAtualizar(produto);
+        } catch (Exception ex) {
+            Logger.getLogger(CadastroProduto.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        
+        
+        
+    }//GEN-LAST:event_btnCadastrarProActionPerformed
 
+    private void ComboFornecedorMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ComboFornecedorMouseClicked
+        // TODO add your handling code here:
+                                  
+     
+
+    }//GEN-LAST:event_ComboFornecedorMouseClicked
+
+    private void ComboFornecedorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ComboFornecedorActionPerformed
+        // TODO add your handling code here:
+           
+    }//GEN-LAST:event_ComboFornecedorActionPerformed
+
+    
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JComboBox<String> ComboFornecedor;
     private javax.swing.JComboBox<String> ComboMedida;

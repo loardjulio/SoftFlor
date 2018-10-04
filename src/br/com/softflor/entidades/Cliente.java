@@ -6,12 +6,16 @@
 package br.com.softflor.entidades;
 
 import java.io.Serializable;
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import org.hibernate.annotations.NamedQueries;
+import org.hibernate.annotations.NamedQuery;
 
 /**
  *
@@ -19,15 +23,21 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name = "clientes")
+@NamedQueries(
+        @NamedQuery(name = "Cliente.consultarPorNome", 
+                query = "SELECT c from Cliente c WHERE c.nome LIKE :nome")//consulta nomeada
+) 
+
 public class Cliente implements Serializable, EntidadeBase {
  @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer idCliente;
+ @Column
     private String nome;
     private String cpf;
-    @OneToOne
+    @OneToOne (cascade = CascadeType.ALL)
     private Contato contato;
-   @OneToOne
+   @OneToOne (cascade = CascadeType.ALL)
     private Endereco endereco;
     @Override
     public Serializable getId() {

@@ -7,15 +7,21 @@ package br.com.softflor.entidades;
 
 import java.io.Serializable;
 import java.util.List;
-import javax.persistence.Column;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.ForeignKey;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.swing.JOptionPane;
+import org.hibernate.annotations.NamedQueries;
+import org.hibernate.annotations.NamedQuery;
 
 /**
  *
@@ -23,52 +29,67 @@ import javax.persistence.Table;
  */
  @Entity
 @Table(name = "fornecedores")
-public class Fornecedor implements EntidadeBase, Serializable{
-    
-    
+ @NamedQueries(
+        @NamedQuery(name = "Fornecedor.consultarTodos", query = "SELECT f FROM Fornecedor f")  //consulta nomeada
+)
+public class Fornecedor implements Serializable,EntidadeBase {
+      
    @Id
    @GeneratedValue(strategy = GenerationType.AUTO)
    // @Column
     private Integer idfornecedor;
     //@Column
-    private Integer status;
+    private String status;
      //@Column
     private String cnpj;    
     
-    @OneToOne
+    private String nome;
+    
+    @OneToOne(cascade = CascadeType.ALL)
     private Contato contato;
    
-    @OneToOne
+    @OneToOne (cascade = CascadeType.ALL)
     private Endereco endereco;
 
-    
     @ManyToMany(mappedBy = "fornecedor")
-    private List<Produto> produtos;
+     private List<Produto> produto; 
+    
+    
+     public boolean ChecaStatus(){
+        String padrao = "--SELECIONE--";
+        if(status == padrao){
+        JOptionPane.showMessageDialog(null, "Selecione um status", "Algo deu errado :(", 0);
+        return false;
+    }else {
+            return true;
+            
+        }
+     }
+    
+   
+      public Fornecedor() {
+    }
+
+    public Fornecedor(String status, String cnpj, String nome, Contato contato, Endereco endereco) {
+        this.status = status;
+        this.cnpj = cnpj;
+        this.nome = nome;
+        this.contato = contato;
+        this.endereco = endereco;
+    }
+      
+      
+      
+     
     
     @Override
     public Serializable getId() {
        return idfornecedor;
     }
 
-    public Fornecedor(List<Produto> produtos, Integer idfornecedor, Integer status, String cnpj, Contato contato, Endereco endereco) {
-        this.produtos = produtos;
-        this.idfornecedor = idfornecedor;
-        this.status = status;
-        this.cnpj = cnpj;
-        this.contato = contato;
-        this.endereco = endereco;
-    }
-
-    public Fornecedor() {
-    }
-
-    public List<Produto> getProdutos() {
-        return produtos;
-    }
-
-    public void setProdutos(List<Produto> produtos) {
-        this.produtos = produtos;
-    }
+   
+  
+   
 
     public Integer getIdfornecedor() {
         return idfornecedor;
@@ -78,11 +99,11 @@ public class Fornecedor implements EntidadeBase, Serializable{
         this.idfornecedor = idfornecedor;
     }
 
-    public Integer getStatus() {
+    public String getStatus() {
         return status;
     }
 
-    public void setStatus(Integer status) {
+    public void setStatus(String status) {
         this.status = status;
     }
 
@@ -109,7 +130,25 @@ public class Fornecedor implements EntidadeBase, Serializable{
     public void setEndereco(Endereco endereco) {
         this.endereco = endereco;
     }
+
     
-    
+    public String getNome() {
+        return nome;
+    }
+
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
+
+    public List<Produto> getProduto() {
+        return produto;
+    }
+
+    public void setProduto(List<Produto> produto) {
+        this.produto = produto;
+    }
+
+
+   
     
 }

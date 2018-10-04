@@ -7,16 +7,20 @@ package br.com.softflor.entidades;
 
 import java.io.Serializable;
 import java.util.List;
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import org.hibernate.annotations.Cascade;
+import org.hibernate.annotations.CascadeType;
+import org.hibernate.annotations.NamedQueries;
+import org.hibernate.annotations.NamedQuery;
 
 /**
  *
@@ -24,8 +28,12 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name = "produtos")
+@NamedQueries(
+        @NamedQuery(name = "Produto.consultarTodos", query = "SELECT p FROM Produto p")  //consulta nomeada
+)
 public class Produto implements EntidadeBase, Serializable {
 
+    
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     // @Column
@@ -42,29 +50,32 @@ public class Produto implements EntidadeBase, Serializable {
     private Double estoque_minimo;
     //@Column
     private String unidade_medida;
-
-    @ManyToMany
+    
+   //  private Double quantidade_produto;
+      //private Double valor_total;
+       
+    @ManyToMany(cascade = javax.persistence.CascadeType.PERSIST)
+    @JoinTable(name = "Produto_Fornecedor", joinColumns = @JoinColumn(name = "idproduto"),
+            inverseJoinColumns = @JoinColumn(name = "idfornecedor"))
     private List<Fornecedor> fornecedor;
+   
+    
+    public List<Fornecedor> getFornecedor() {
+        return fornecedor;
+    }
 
+    public void setFornecedor(List<Fornecedor> fornecedor) {
+        this.fornecedor = fornecedor;
+    }
+    
+      
+    
     @Override
     public Serializable getId() {
         return idproduto;
     }
 
-    public Produto() {
-    }
-
-    public Produto(Integer idproduto, String nome, Double quantidade, Double preco_compra, Double preco_venda, Double estoque_minimo, String unidade_medida, List<Fornecedor> fornecedor) {
-        this.idproduto = idproduto;
-        this.nome = nome;
-        this.quantidade = quantidade;
-        this.preco_compra = preco_compra;
-        this.preco_venda = preco_venda;
-        this.estoque_minimo = estoque_minimo;
-        this.unidade_medida = unidade_medida;
-        this.fornecedor = fornecedor;
-    }
-
+      
     public Integer getIdproduto() {
         return idproduto;
     }
@@ -120,13 +131,12 @@ public class Produto implements EntidadeBase, Serializable {
     public void setUnidade_medida(String unidade_medida) {
         this.unidade_medida = unidade_medida;
     }
-
-    public List<Fornecedor> getFornecedor() {
-        return fornecedor;
-    }
-
-    public void setFornecedor(List<Fornecedor> fornecedor) {
-        this.fornecedor = fornecedor;
-    }
-
+  
+public Double CalculaValor(Double quantidade){
+    
+    return preco_venda * quantidade;
+           
+};
+    
+   
 }

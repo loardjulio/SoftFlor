@@ -32,9 +32,7 @@ public class Contato implements Serializable,EntidadeBase {
     private String telefone;
     @Column
     private String email;
-    @Column
-    private String celular;
-    @Column
+        @Column
     private String nome;
 
     @Override
@@ -45,11 +43,10 @@ public class Contato implements Serializable,EntidadeBase {
     public Contato() {
     }
 
-    public Contato(Integer idcontato, String telefone, String email, String celular, String nome) {
-        this.idcontato = idcontato;
+    public Contato(String telefone, String email,String nome) {
         this.telefone = telefone;
         this.email = email;
-        this.celular = celular;
+       
         this.nome = nome;
     }
 
@@ -77,13 +74,7 @@ public class Contato implements Serializable,EntidadeBase {
         this.email = email;
     }
 
-    public String getCelular() {
-        return celular;
-    }
-
-    public void setCelular(String celular) {
-        this.celular = celular;
-    }
+    
 
     public String getNome() {
         return nome;

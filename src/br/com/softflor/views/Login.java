@@ -5,6 +5,14 @@
  */
 package br.com.softflor.views;
 
+
+import br.com.softflor.controller.FuncionarioDAO;
+import br.com.softflor.entidades.Funcionario;
+import java.util.List;
+import javax.swing.ImageIcon;
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author Julio
@@ -14,6 +22,8 @@ public class Login extends javax.swing.JFrame {
     /**
      * Creates new form Login
      */
+    
+
     public Login() {
         initComponents();
         setLocationRelativeTo(null);
@@ -35,9 +45,9 @@ public class Login extends javax.swing.JFrame {
         jPanel6 = new javax.swing.JPanel();
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
-        txtUsuario = new javax.swing.JTextField();
         jLabel8 = new javax.swing.JLabel();
         btnAcessar = new javax.swing.JButton();
+        txtUsuario1 = new javax.swing.JTextField();
         txtSenha = new javax.swing.JPasswordField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -82,6 +92,17 @@ public class Login extends javax.swing.JFrame {
         jLabel8.setText("SENHA");
 
         btnAcessar.setText("ACESSAR");
+        btnAcessar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAcessarActionPerformed(evt);
+            }
+        });
+
+        txtUsuario1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtUsuario1ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
         jPanel6.setLayout(jPanel6Layout);
@@ -95,9 +116,9 @@ public class Login extends javax.swing.JFrame {
                             .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 219, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                 .addComponent(jLabel7)
-                                .addComponent(txtUsuario)
                                 .addComponent(jLabel8)
-                                .addComponent(txtSenha, javax.swing.GroupLayout.DEFAULT_SIZE, 241, Short.MAX_VALUE))))
+                                .addComponent(txtUsuario1, javax.swing.GroupLayout.DEFAULT_SIZE, 241, Short.MAX_VALUE)
+                                .addComponent(txtSenha))))
                     .addGroup(jPanel6Layout.createSequentialGroup()
                         .addGap(103, 103, 103)
                         .addComponent(btnAcessar, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -110,13 +131,13 @@ public class Login extends javax.swing.JFrame {
                 .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jLabel7)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(txtUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(26, 26, 26)
+                .addGap(18, 18, 18)
+                .addComponent(txtUsuario1, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(14, 14, 14)
                 .addComponent(jLabel8)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(txtSenha, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(34, 34, 34)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(txtSenha, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(26, 26, 26)
                 .addComponent(btnAcessar, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(47, Short.MAX_VALUE))
         );
@@ -150,6 +171,21 @@ public class Login extends javax.swing.JFrame {
         setSize(new java.awt.Dimension(598, 389));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnAcessarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAcessarActionPerformed
+        
+        FuncionarioDAO fdao = new FuncionarioDAO();        
+        if (fdao.InfoAcesso(txtUsuario1.getText(), txtSenha.getText())) {
+        this.setVisible(false);
+        }
+        
+        
+
+    }//GEN-LAST:event_btnAcessarActionPerformed
+
+    private void txtUsuario1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtUsuario1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtUsuario1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -197,6 +233,6 @@ public class Login extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel6;
     private javax.swing.JPasswordField txtSenha;
-    private javax.swing.JTextField txtUsuario;
+    private javax.swing.JTextField txtUsuario1;
     // End of variables declaration//GEN-END:variables
 }

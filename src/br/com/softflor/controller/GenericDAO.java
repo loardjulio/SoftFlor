@@ -30,7 +30,7 @@ public class GenericDAO<T extends EntidadeBase> extends ConectaBD {
 
     EntityManager em = getEntityManager();
 
-    public T salveOrUpdate(T t) throws Exception {
+    public T salvarOuAtualizar(T t) throws Exception {
 
         try {
             em.getTransaction().begin();
@@ -46,24 +46,44 @@ public class GenericDAO<T extends EntidadeBase> extends ConectaBD {
             }
             em.getTransaction().commit();
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "Deu erro no catch do SaveOrUpdate");
-        } finally {
-            FechaConexao();
-            //emf.close();
-        }
+            System.out.println(e);
+        } 
+        FechaConexao();
+        
         return t;
+        
     }
 
     public void remover(Class<T> clazz, Serializable id) { //clazz é so pra diferenciar da palavra reservada
         T t = em.find(clazz, id);
-        try {
+        
+            try {
             em.getTransaction().begin();
             em.remove(t); //executa o delete
             em.getTransaction().commit();
-        } finally {
-            FechaConexao();
+        } catch (Exception e) {
+                System.out.println(e);
+        }finally{
+                 FechaConexao();
+ 
+            }
+        
 //emf.close();
-        }
+        
     }
-
+    
+  public T buscarPorId(Class<T> clazz, Serializable id){
+        
+      T t = null;
+            
+      try {
+          t = em.find(clazz, id);
+      } catch (Exception e) {
+          e.printStackTrace();
+      }finally{
+          em.close();
+           FechaConexao();
+                }
+     return t;
+ }
 }

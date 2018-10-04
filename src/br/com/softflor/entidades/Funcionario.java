@@ -12,6 +12,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import org.hibernate.annotations.NamedQueries;
+import org.hibernate.annotations.NamedQuery;
 
 /**
  *
@@ -19,7 +21,10 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name = "funcionarios")
-public class Funcionario implements EntidadeBase {
+@NamedQueries(
+        @NamedQuery(name = "Funcionario.consultaPorNome", query = "SELECT f FROM Funcionario f WHERE f.nome = :nome")  //consulta nomeada
+)
+public class Funcionario implements EntidadeBase, Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -40,8 +45,8 @@ public class Funcionario implements EntidadeBase {
     public Funcionario() {
     }
 
-    public Funcionario(Integer idfuncionario, String setor, String nome, String senha) {
-        this.idfuncionario = idfuncionario;
+    public Funcionario(String setor, String nome, String senha) {
+        
         this.setor = setor;
         this.nome = nome;
         this.senha = senha;

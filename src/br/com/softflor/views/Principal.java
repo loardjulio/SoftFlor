@@ -5,6 +5,10 @@
  */
 package br.com.softflor.views;
 
+import br.com.softflor.controller.FuncionarioDAO;
+import br.com.softflor.entidades.Orcamento;
+import br.com.softflor.entidades.Produto;
+
 /**
  *
  * @author Julio
@@ -17,7 +21,12 @@ public class Principal extends javax.swing.JFrame {
     public Principal() {
         initComponents();
         setLocationRelativeTo(null);
+        MenuUsuários.setEnabled(false);
+
     }
+
+   
+
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -28,12 +37,12 @@ public class Principal extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jMenuItem1 = new javax.swing.JMenuItem();
         PainelAcoes = new javax.swing.JPanel();
         btnProduto = new javax.swing.JButton();
         btnCliente = new javax.swing.JButton();
         btnFornecedor = new javax.swing.JButton();
         btnOrcamento = new javax.swing.JButton();
+        DeskPane = new javax.swing.JDesktopPane();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenuItem2 = new javax.swing.JMenuItem();
@@ -50,11 +59,11 @@ public class Principal extends javax.swing.JFrame {
         jMenu5 = new javax.swing.JMenu();
         jMenuItem10 = new javax.swing.JMenuItem();
         jMenuItem11 = new javax.swing.JMenuItem();
+        MenuUsuários = new javax.swing.JMenu();
+        jMenuItem13 = new javax.swing.JMenuItem();
         jMenu6 = new javax.swing.JMenu();
         jMenuItem12 = new javax.swing.JMenuItem();
         jMenu7 = new javax.swing.JMenu();
-
-        jMenuItem1.setText("jMenuItem1");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("SOFTFLOR - Sistema de gerenciamento");
@@ -80,8 +89,18 @@ public class Principal extends javax.swing.JFrame {
         });
 
         btnFornecedor.setText("fornecedores");
+        btnFornecedor.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnFornecedorActionPerformed(evt);
+            }
+        });
 
         btnOrcamento.setText("orçamentos");
+        btnOrcamento.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnOrcamentoActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout PainelAcoesLayout = new javax.swing.GroupLayout(PainelAcoes);
         PainelAcoes.setLayout(PainelAcoesLayout);
@@ -108,12 +127,28 @@ public class Principal extends javax.swing.JFrame {
                     .addGroup(PainelAcoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                         .addComponent(btnCliente, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(btnFornecedor, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 61, Short.MAX_VALUE)))
-                .addGap(0, 483, Short.MAX_VALUE))
+                .addGap(0, 14, Short.MAX_VALUE))
+        );
+
+        javax.swing.GroupLayout DeskPaneLayout = new javax.swing.GroupLayout(DeskPane);
+        DeskPane.setLayout(DeskPaneLayout);
+        DeskPaneLayout.setHorizontalGroup(
+            DeskPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
+        );
+        DeskPaneLayout.setVerticalGroup(
+            DeskPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 400, Short.MAX_VALUE)
         );
 
         jMenu1.setText("Clientes");
 
         jMenuItem2.setText("Cadastrar cliente");
+        jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem2ActionPerformed(evt);
+            }
+        });
         jMenu1.add(jMenuItem2);
 
         jMenuItem6.setText("Listar Clientes");
@@ -161,6 +196,18 @@ public class Principal extends javax.swing.JFrame {
 
         jMenuBar1.add(jMenu5);
 
+        MenuUsuários.setText("Usuários");
+
+        jMenuItem13.setText("Gerenciar usuários");
+        jMenuItem13.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem13ActionPerformed(evt);
+            }
+        });
+        MenuUsuários.add(jMenuItem13);
+
+        jMenuBar1.add(MenuUsuários);
+
         jMenu6.setText("Sobre");
 
         jMenuItem12.setText("Sistema");
@@ -177,15 +224,19 @@ public class Principal extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(PainelAcoes, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(PainelAcoes, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(DeskPane))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(PainelAcoes, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(PainelAcoes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(DeskPane, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
 
@@ -194,16 +245,46 @@ public class Principal extends javax.swing.JFrame {
 
     private void btnClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnClienteActionPerformed
         // TODO add your handling code here:
-        CadastroCliente cc = new CadastroCliente();
-         cc.setVisible(true);
-        desktop.add(cc);
-       
-                
+        ListaClientes listagem = new ListaClientes();
+        // DeskPane.add(listagem);
+        listagem.setVisible(true);
+
+
     }//GEN-LAST:event_btnClienteActionPerformed
 
     private void btnProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnProdutoActionPerformed
-        // TODO add your handling code here:
+        // TODO add your handling code here:  
+        CadastroProduto cp = new CadastroProduto();
+        DeskPane.add(cp);
+        cp.setVisible(true);
+
+
     }//GEN-LAST:event_btnProdutoActionPerformed
+
+    private void btnFornecedorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFornecedorActionPerformed
+        // TODO add your handling code here:
+        CadastroFornecedor cf = new CadastroFornecedor();
+        DeskPane.add(cf);
+        cf.setVisible(true);
+    }//GEN-LAST:event_btnFornecedorActionPerformed
+
+    private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
+        // TODO add your handling code here:
+        CadastroCliente cc = new CadastroCliente();
+
+        DeskPane.add(cc);
+
+
+    }//GEN-LAST:event_jMenuItem2ActionPerformed
+
+    private void jMenuItem13ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem13ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jMenuItem13ActionPerformed
+
+    private void btnOrcamentoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOrcamentoActionPerformed
+       new GeracaoOcamento().setVisible(true);
+        
+    }//GEN-LAST:event_btnOrcamentoActionPerformed
 
     /**
      * @param args the command line arguments
@@ -237,12 +318,15 @@ public class Principal extends javax.swing.JFrame {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new Principal().setVisible(true);
+
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JDesktopPane DeskPane;
     private javax.swing.JMenu Fornecedor;
+    private javax.swing.JMenu MenuUsuários;
     private javax.swing.JPanel PainelAcoes;
     private javax.swing.JButton btnCliente;
     private javax.swing.JButton btnFornecedor;
@@ -255,10 +339,10 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu6;
     private javax.swing.JMenu jMenu7;
     private javax.swing.JMenuBar jMenuBar1;
-    private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem10;
     private javax.swing.JMenuItem jMenuItem11;
     private javax.swing.JMenuItem jMenuItem12;
+    private javax.swing.JMenuItem jMenuItem13;
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JMenuItem jMenuItem4;
