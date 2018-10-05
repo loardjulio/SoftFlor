@@ -61,10 +61,11 @@ public class GenericDAO<T extends EntidadeBase> extends ConectaBD {
             em.getTransaction().begin();
             em.remove(t); //executa o delete
             em.getTransaction().commit();
+               
         } catch (Exception e) {
                 System.out.println(e);
         }finally{
-                 FechaConexao();
+              //   FechaConexao();
  
             }
         

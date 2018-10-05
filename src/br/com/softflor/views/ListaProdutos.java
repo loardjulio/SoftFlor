@@ -5,12 +5,8 @@
  */
 package br.com.softflor.views;
 
-import br.com.softflor.controller.ClienteDAO;
-import br.com.softflor.controller.ClienteTableModel;
 import br.com.softflor.controller.ProdutoDAO;
 import br.com.softflor.controller.ProdutoTableModel;
-import br.com.softflor.entidades.Produto;
-import javax.swing.JOptionPane;
 
 /**
  *
@@ -21,17 +17,17 @@ public class ListaProdutos extends javax.swing.JFrame {
     /**
      * Creates new form ListaClientes
      */
-    private ProdutoTableModel tableModel;
+    private ProdutoTableModel tableModel ;
+    ProdutoDAO produtodao = new ProdutoDAO();
     
-   
     
     public ListaProdutos() {
         initComponents();
-         setLocationRelativeTo(null);       
-    
-        ProdutoDAO produtodao = new ProdutoDAO();
-        tableModel = new ProdutoTableModel(produtodao.consultarTodos());
-        tableLista.setModel(tableModel);
+         setLocationRelativeTo(null);          
+         
+         tableModel = new ProdutoTableModel(produtodao.consultarTodos());
+        
+      tableLista.setModel(tableModel);
     }
 
     /**

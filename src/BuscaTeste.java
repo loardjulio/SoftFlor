@@ -24,9 +24,9 @@ import java.util.List;
 public class BuscaTeste {
     
     public static void main(String[] args) {
-        ProdutoDAO pd = new ProdutoDAO(); 
-        ClienteDAO cd = new ClienteDAO();
-       
+        //ProdutoDAO pd = new ProdutoDAO(); 
+        //ClienteDAO cd = new ClienteDAO();
+        FornecedorDAO fd = new FornecedorDAO();
         
 //         Cliente cliente = cd.buscarPorId(Cliente.class, 1);      
 //        System.out.println("Nome: "+cliente.getNome());
@@ -60,7 +60,7 @@ public class BuscaTeste {
 //            
 //        }
         
- List<Cliente> clientesRetornados = cd.consultarPorNome("Jo");
+/* List<Cliente> clientesRetornados = cd.consultarPorNome("Jo");
 //       //percorrer a lista
 
 for (Cliente c :clientesRetornados) {
@@ -69,7 +69,7 @@ System.out.println("Nome do cliente: "+c.getNome());
 System.out.println("cpf: "+c.getCpf());
 System.out.println("Endereco: "+c.getEndereco().getLogradouro());
 
-}
+}*/
        
 
     }
