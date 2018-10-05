@@ -17,7 +17,7 @@ public class ListaProdutos extends javax.swing.JFrame {
     /**
      * Creates new form ListaClientes
      */
-    private ProdutoTableModel tableModel ;
+    public ProdutoTableModel tableModel ;
     ProdutoDAO produtodao = new ProdutoDAO();
     
     
@@ -63,6 +63,11 @@ public class ListaProdutos extends javax.swing.JFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
+        tableLista.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tableListaMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(tableLista);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -168,6 +173,15 @@ public class ListaProdutos extends javax.swing.JFrame {
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void tableListaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tableListaMouseClicked
+        
+        int linha = tableLista.getSelectedRow();
+          
+          System.out.println("Nome: "+tableLista.getValueAt(linha, 0).toString());
+        
+        
+    }//GEN-LAST:event_tableListaMouseClicked
 
     /**
      * @param args the command line arguments

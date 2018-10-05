@@ -260,7 +260,7 @@ public class Principal extends javax.swing.JFrame {
     private void btnProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnProdutoActionPerformed
         // TODO add your handling code here:  
                 
-         ListaProdutos listagemProduto = new ListaProdutos();
+        ListaProdutos listagemProduto = new ListaProdutos();
         // DeskPane.add(listagem);
         listagemProduto.setVisible(true);
 

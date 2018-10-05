@@ -17,7 +17,7 @@ import javax.swing.table.AbstractTableModel;
  */
 public class ProdutoTableModel extends AbstractTableModel{
     
-    private final List<String> cabecalho;
+    private  List<String> cabecalho;
     private List<Produto> listaProdutos;
 
       public ProdutoTableModel(List<Produto> listaProdutos,String quantidade, String ptotal) {
@@ -46,6 +46,10 @@ public class ProdutoTableModel extends AbstractTableModel{
         cabecalho.add("UNIDADE MEDIDA");  
     }
 
+    public ProdutoTableModel() {
+       
+    }
+
     public List<Produto> getListaProdutos() {
         return listaProdutos;
     }
@@ -54,6 +58,7 @@ public class ProdutoTableModel extends AbstractTableModel{
         this.listaProdutos = listaProdutos;
     }
 
+      
     
      @Override
     public String getColumnName(int column) {
@@ -64,11 +69,14 @@ public class ProdutoTableModel extends AbstractTableModel{
     public int getRowCount() {
         return listaProdutos.size();
     }
-
+    
+    
     @Override
     public int getColumnCount() {
        return cabecalho.size();
     }
+    
+    
     
     
     @Override
@@ -99,7 +107,7 @@ public class ProdutoTableModel extends AbstractTableModel{
     }
     
     
-    /*     @Override
+    /*    @Override
     public Object getValueAt(int rowIndex, int columnIndex) {
     switch (columnIndex) {
     case 0:

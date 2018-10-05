@@ -6,6 +6,7 @@
 package br.com.softflor.views;
 
 import br.com.softflor.controller.ClienteDAO;
+import br.com.softflor.controller.ProdutoTableModel;
 
 /**
  *
@@ -16,6 +17,8 @@ public class GeracaoOcamento extends javax.swing.JFrame {
     /**
      * Creates new form GeracaoOcamento
      */
+    
+    ProdutoTableModel tabelaProdutos = new ProdutoTableModel(); // para pegar o valor q ta na linha
     public GeracaoOcamento() {
         initComponents();
         setLocationRelativeTo(null);
@@ -49,7 +52,7 @@ public class GeracaoOcamento extends javax.swing.JFrame {
         jLabel8 = new javax.swing.JLabel();
         jTextField6 = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        produtosOrcamentoTable = new javax.swing.JTable();
         jButton4 = new javax.swing.JButton();
         jLabel9 = new javax.swing.JLabel();
         jTextField7 = new javax.swing.JTextField();
@@ -104,11 +107,11 @@ public class GeracaoOcamento extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, 36, Short.MAX_VALUE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                 .addComponent(jLabel1)
-                                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(16, 16, 16)))
                 .addGap(11, 11, 11))
         );
@@ -118,6 +121,11 @@ public class GeracaoOcamento extends javax.swing.JFrame {
         jLabel4.setText("PRODUTO:");
 
         jButton3.setText("BUSCAR PRODUTO");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
 
         jLabel5.setText("UNID.");
 
@@ -127,7 +135,7 @@ public class GeracaoOcamento extends javax.swing.JFrame {
 
         jLabel8.setText("TOTAL:");
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        produtosOrcamentoTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -138,9 +146,14 @@ public class GeracaoOcamento extends javax.swing.JFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(produtosOrcamentoTable);
 
         jButton4.setText("ADICIONAR");
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
+            }
+        });
 
         jLabel9.setText("TOTAL:");
 
@@ -216,6 +229,11 @@ public class GeracaoOcamento extends javax.swing.JFrame {
         );
 
         jButton5.setText("SALVAR");
+        jButton5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton5ActionPerformed(evt);
+            }
+        });
 
         jButton6.setText("GERAR ");
 
@@ -252,6 +270,31 @@ public class GeracaoOcamento extends javax.swing.JFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
        new ListaClientes().setVisible(true);
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+        // TODO add your handling code here:
+        
+        
+    }//GEN-LAST:event_jButton4ActionPerformed
+
+    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton5ActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        // TODO add your handling code here:
+        
+          new ListaProdutos().setVisible(true);  
+          ListaProdutos l = new ListaProdutos();
+          //int linha = l.tableModel.getSelectRow();
+          
+          //System.out.println("Nome: "+l.tableModel.getValueAt(linha, 1));
+          
+          //tabelaProdutos.getValueAt(WIDTH, ICONIFIED);
+          
+       
+
+    }//GEN-LAST:event_jButton3ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -306,7 +349,6 @@ public class GeracaoOcamento extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField2;
     private javax.swing.JTextField jTextField3;
@@ -314,5 +356,6 @@ public class GeracaoOcamento extends javax.swing.JFrame {
     private javax.swing.JTextField jTextField5;
     private javax.swing.JTextField jTextField6;
     private javax.swing.JTextField jTextField7;
+    private javax.swing.JTable produtosOrcamentoTable;
     // End of variables declaration//GEN-END:variables
 }
