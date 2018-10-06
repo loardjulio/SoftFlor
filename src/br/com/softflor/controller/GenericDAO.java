@@ -78,11 +78,11 @@ public class GenericDAO<T extends EntidadeBase> extends ConectaBD {
       T t = null;
             
       try {
+          System.out.println("Tentei buscar "+id);
           t = em.find(clazz, id);
-      } catch (Exception e) {
-          e.printStackTrace();
-      }finally{
-          em.close();
+      } catch (Exception e) { 
+          JOptionPane.showMessageDialog(null,"Erro ao buscar por ID");
+      }finally{          
            FechaConexao();
                 }
      return t;

@@ -7,6 +7,8 @@ package br.com.softflor.views;
 
 import br.com.softflor.controller.ProdutoDAO;
 import br.com.softflor.controller.ProdutoTableModel;
+import br.com.softflor.entidades.Produto;
+import java.io.Serializable;
 
 /**
  *
@@ -17,17 +19,17 @@ public class ListaProdutos extends javax.swing.JFrame {
     /**
      * Creates new form ListaClientes
      */
-    public ProdutoTableModel tableModel ;
+    public ProdutoTableModel tableModel;
     ProdutoDAO produtodao = new ProdutoDAO();
-    
-    
+    GeracaoOcamento geracaoOrcamento = new GeracaoOcamento();
+
     public ListaProdutos() {
         initComponents();
-         setLocationRelativeTo(null);          
-         
-         tableModel = new ProdutoTableModel(produtodao.consultarTodos());
-        
-      tableLista.setModel(tableModel);
+        setLocationRelativeTo(null);
+
+        tableModel = new ProdutoTableModel(produtodao.consultarTodos());
+
+        tableLista.setModel(tableModel);
     }
 
     /**
@@ -162,12 +164,9 @@ public class ListaProdutos extends javax.swing.JFrame {
         CadastroProduto cp = new CadastroProduto();
         //DeskPane.add(cp);
         cp.setVisible(true);
-        
+
         this.setVisible(false);
-               
-              
-   
-        
+
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
@@ -175,13 +174,14 @@ public class ListaProdutos extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void tableListaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tableListaMouseClicked
-        
-        int linha = tableLista.getSelectedRow();
-          
-          System.out.println("Nome: "+tableLista.getValueAt(linha, 0).toString());
-        
-        
+
+        if (evt.getClickCount() == 2) {
+            int linha = tableLista.getSelectedRow();
+            int idSelecionado = (int) tableModel.getValueAt(linha, 0);
+            geracaoOrcamento.retornaID(this, idSelecionado);
+            this.setVisible(false);
     }//GEN-LAST:event_tableListaMouseClicked
+    }
 
     /**
      * @param args the command line arguments

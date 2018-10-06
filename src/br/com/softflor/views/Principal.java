@@ -159,6 +159,11 @@ public class Principal extends javax.swing.JFrame {
         Fornecedor.setText("Fornecedor");
 
         jMenuItem3.setText("Cadastrar Fornecedor");
+        jMenuItem3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem3ActionPerformed(evt);
+            }
+        });
         Fornecedor.add(jMenuItem3);
 
         jMenuItem7.setText("Listar fornecedores");
@@ -269,9 +274,7 @@ public class Principal extends javax.swing.JFrame {
 
     private void btnFornecedorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFornecedorActionPerformed
         // TODO add your handling code here:
-        CadastroFornecedor cf = new CadastroFornecedor();
-        DeskPane.add(cf);
-        cf.setVisible(true);
+       
     }//GEN-LAST:event_btnFornecedorActionPerformed
 
     private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
@@ -298,6 +301,12 @@ public class Principal extends javax.swing.JFrame {
         cp.setVisible(true);
         
     }//GEN-LAST:event_jMenuItem4ActionPerformed
+
+    private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
+      CadastroFornecedor cf = new CadastroFornecedor();
+        //DeskPane.add(cf);
+        cf.setVisible(true);
+    }//GEN-LAST:event_jMenuItem3ActionPerformed
 
     /**
      * @param args the command line arguments
