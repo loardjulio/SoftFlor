@@ -273,7 +273,9 @@ public class Principal extends javax.swing.JFrame {
     }//GEN-LAST:event_btnProdutoActionPerformed
 
     private void btnFornecedorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFornecedorActionPerformed
-        // TODO add your handling code here:
+       ListaFornecedores listagem = new ListaFornecedores();
+        
+        listagem.setVisible(true);
        
     }//GEN-LAST:event_btnFornecedorActionPerformed
 
