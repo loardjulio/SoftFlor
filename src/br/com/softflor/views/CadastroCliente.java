@@ -5,18 +5,28 @@
  */
 package br.com.softflor.views;
 
+import br.com.softflor.controller.ClienteDAO;
+import br.com.softflor.controller.EnderecoDAO;
+import br.com.softflor.entidades.Cliente;
+import br.com.softflor.entidades.Contato;
+import br.com.softflor.entidades.Endereco;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author Julio
  */
-public class CadastroCliente extends javax.swing.JFrame {
+public class CadastroCliente extends javax.swing.JDialog {
+     ClienteDAO cd = new ClienteDAO();
+    
 
     /**
      * Creates new form CadastroCliente1
      */
-    public CadastroCliente() {
-        initComponents();
-        setVisible(true);
+    public CadastroCliente(java.awt.Frame parent, boolean modal) {
+        super(parent, modal);
+        initComponents();       
+       setLocationRelativeTo(null);
     }
 
     /**
@@ -31,7 +41,7 @@ public class CadastroCliente extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
-        txtNomeForn = new javax.swing.JTextField();
+        txtNome = new javax.swing.JTextField();
         txtCPF = new javax.swing.JTextField();
         jLabel8 = new javax.swing.JLabel();
         txtRUA = new javax.swing.JTextField();
@@ -52,10 +62,8 @@ public class CadastroCliente extends javax.swing.JFrame {
         txtTelefone = new javax.swing.JTextField();
         jLabel15 = new javax.swing.JLabel();
         txtEmail = new javax.swing.JTextField();
-        jLabel16 = new javax.swing.JLabel();
-        txtResp = new javax.swing.JTextField();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jLabel7.setText("NOME:");
 
@@ -75,7 +83,7 @@ public class CadastroCliente extends javax.swing.JFrame {
 
         jLabel3.setText("ESTADO:");
 
-        comboEstado.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "--SELECIONE--" }));
+        comboEstado.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "--SELECIONE--", "AC - Acre ", "AL - Alagoas ", "AP - Amapá", "AM - Amazonas", "BA - Bahia ", "CE - Ceará", "DF - Distrito Federal ", "ES - Espírito Santo ", "GO - Goiás", "MA - Maranhão", "MT - Mato Grosso ", "MS - Mato Grosso do Sul ", "MG - Minas Gerais ", "PA - Pará", "PB - Paraíba ", "PR - Paraná", "PE - Pernambuco ", "PI - Piauí ", "RJ - Rio de Janeiro", "RN - Rio Grande do Norte ", "RS - Rio Grande do Sul ", "RO - Rondônia ", "RR - Roraima ", "SC - Santa Catarina ", "SP - São Paulo ", "SE - Sergipe  ", "TO - Tocantins" }));
 
         btnSair.setText("SAIR");
 
@@ -94,8 +102,6 @@ public class CadastroCliente extends javax.swing.JFrame {
 
         jLabel15.setText("EMAIL:");
 
-        jLabel16.setText("RESPONSÁVEL:");
-
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -108,10 +114,7 @@ public class CadastroCliente extends javax.swing.JFrame {
                         .addComponent(jLabel15)
                         .addGap(32, 32, 32)
                         .addComponent(txtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 195, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(32, 32, 32)
-                        .addComponent(jLabel16)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtResp, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(255, 255, 255))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
@@ -150,7 +153,7 @@ public class CadastroCliente extends javax.swing.JFrame {
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(jLabel7)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(txtNomeForn, javax.swing.GroupLayout.PREFERRED_SIZE, 369, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(txtNome, javax.swing.GroupLayout.PREFERRED_SIZE, 369, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(72, 72, 72)
                                 .addComponent(jLabel8)))
                         .addGap(18, 18, 18)
@@ -171,7 +174,7 @@ public class CadastroCliente extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel7)
-                    .addComponent(txtNomeForn, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtNome, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel8)
                     .addComponent(txtCPF, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(33, 33, 33)
@@ -194,8 +197,6 @@ public class CadastroCliente extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel14)
                     .addComponent(txtTelefone, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel16)
-                    .addComponent(txtResp, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel15))
                 .addGap(36, 36, 36)
@@ -225,13 +226,52 @@ public class CadastroCliente extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void btnCadastrarFornActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadastrarFornActionPerformed
+
+        
+        Contato contato = new Contato();
+        contato.setEmail(txtEmail.getText());
+        contato.setNome(txtNome.getText());
+        contato.setTelefone(txtTelefone.getText());
+        
+        
+        Endereco end = new Endereco();
+        end.setBairro(txtBairro.getText());
+        end.setCep(txtCEP.getText());
+        end.setCidade(txtMunicipio.getText());
+        end.setEstado((String) comboEstado.getSelectedItem());
+        end.setLogradouro(txtRUA.getText());
+        end.setNumero(txtNumero.getText());
+               
+        
+        Cliente cliente = new Cliente();
+        cliente.setContato(contato);
+        cliente.setEndereco(end);
+        cliente.setCpf(txtCPF.getText());
+        cliente.setNome(txtNome.getText());
+        
+        if (end.ChecaEstado() == true) {
+            int resp = JOptionPane.showConfirmDialog(null,"Deseja salvar as informações?", "Aguardando resposta...",JOptionPane.YES_NO_CANCEL_OPTION);
+            if (resp==0) {                
+             cd.salvarOuAtualizar(cliente);
+             LimpaCampos();
+            } else if (resp==1){
+                JOptionPane.showMessageDialog(this, "Operação cancelada");
+                LimpaCampos();
+            }
+    
+           
+             
+        }
+       
+        
+        
+        
+    }//GEN-LAST:event_btnCadastrarFornActionPerformed
+
     private void txtNumeroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNumeroActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtNumeroActionPerformed
-
-    private void btnCadastrarFornActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadastrarFornActionPerformed
-
-    }//GEN-LAST:event_btnCadastrarFornActionPerformed
 
     /**
      * @param args the command line arguments
@@ -264,7 +304,14 @@ public class CadastroCliente extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new CadastroCliente().setVisible(true);
+                CadastroCliente dialog = new CadastroCliente(new javax.swing.JFrame(), true);
+                dialog.addWindowListener(new java.awt.event.WindowAdapter() {
+                    @Override
+                    public void windowClosing(java.awt.event.WindowEvent e) {
+                        System.exit(0);
+                    }
+                });
+                dialog.setVisible(true);
             }
         });
     }
@@ -280,7 +327,6 @@ public class CadastroCliente extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
-    private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
@@ -291,10 +337,21 @@ public class CadastroCliente extends javax.swing.JFrame {
     private javax.swing.JTextField txtCPF;
     private javax.swing.JTextField txtEmail;
     private javax.swing.JTextField txtMunicipio;
-    private javax.swing.JTextField txtNomeForn;
+    private javax.swing.JTextField txtNome;
     private javax.swing.JTextField txtNumero;
     private javax.swing.JTextField txtRUA;
-    private javax.swing.JTextField txtResp;
     private javax.swing.JTextField txtTelefone;
     // End of variables declaration//GEN-END:variables
+public void LimpaCampos(){
+txtBairro.setText("");
+txtCEP.setText("");
+txtCPF.setText("");
+txtEmail.setText("");
+txtMunicipio.setText("");
+txtNome.setText("");
+txtNumero.setText("");
+txtRUA.setText("");
+txtTelefone.setText("");
 }
+}
+

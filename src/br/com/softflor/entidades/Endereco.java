@@ -48,7 +48,7 @@ public class Endereco implements EntidadeBase, Serializable {
     public Endereco() {
     }
 
-    public boolean ChecaEstado(){
+    public boolean ChecaEstado(){ //SE RETORNAR TRUE ESTA CORRETO
         String padrao = "--SELECIONE--";
         if(estado == padrao){
         JOptionPane.showMessageDialog(null, "Selecione um estado");

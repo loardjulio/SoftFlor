@@ -29,15 +29,18 @@ public class Orcamento implements EntidadeBase, Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     // @Column
-    private Integer idorcamento;    
+    private Integer idorcamento;
+    private Integer numeroOrcamento;
+    
+  @OneToOne(cascade = CascadeType.PERSIST)    
+    private Cliente cliente;
     
     @OneToMany(cascade = CascadeType.PERSIST) 
     @JoinTable(name="orcamentos_produtos",  
                 joinColumns=@JoinColumn(name="idorcamento"),   
                 inverseJoinColumns=@JoinColumn(name="idproduto")) 
     private List<Produto> produtos;
-    @OneToOne(cascade = CascadeType.PERSIST)    
-    private Cliente cliente;
+    
 
     @Override
     public Serializable getId() {

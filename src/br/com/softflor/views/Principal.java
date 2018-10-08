@@ -14,7 +14,7 @@ import br.com.softflor.entidades.Produto;
  * @author Julio
  */
 public class Principal extends javax.swing.JFrame {
-
+   // GeracaoOcamento geracaoOrcamento =  new GeracaoOcamento();;
     /**
      * Creates new form Inicial
      */
@@ -22,7 +22,7 @@ public class Principal extends javax.swing.JFrame {
         initComponents();
         setLocationRelativeTo(null);
         MenuUsuários.setEnabled(false);
-
+       
     }
 
    
@@ -254,19 +254,15 @@ public class Principal extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnClienteActionPerformed
-        // TODO add your handling code here:
-        ListaClientes listagem = new ListaClientes();
-        // DeskPane.add(listagem);
-        listagem.setVisible(true);
+        ListaClientes lc = new ListaClientes(this, true);
+         lc.setVisible(true);
 
 
     }//GEN-LAST:event_btnClienteActionPerformed
 
     private void btnProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnProdutoActionPerformed
-        // TODO add your handling code here:  
-                
-        ListaProdutos listagemProduto = new ListaProdutos();
-        // DeskPane.add(listagem);
+                        
+        ListaProdutos listagemProduto = new ListaProdutos(this,true);        
         listagemProduto.setVisible(true);
 
 
@@ -281,10 +277,9 @@ public class Principal extends javax.swing.JFrame {
 
     private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
         // TODO add your handling code here:
-        CadastroCliente cc = new CadastroCliente();
+        CadastroCliente cc = new CadastroCliente(this,true);
 
-        DeskPane.add(cc);
-
+        cc.setVisible(true);
 
     }//GEN-LAST:event_jMenuItem2ActionPerformed
 

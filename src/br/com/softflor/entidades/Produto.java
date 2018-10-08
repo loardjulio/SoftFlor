@@ -41,6 +41,8 @@ public class Produto implements EntidadeBase, Serializable {
     //@Column
     private String nome;
     //@Column
+    private Double qntdOrc;
+    //@Column
     private Double quantidade;
     //@Column
     private Double preco_compra;
@@ -137,6 +139,14 @@ public Double CalculaValor(Double quantidade){
     return preco_venda * quantidade;
            
 };
+
+    public Double getQntdOrc() {
+        return qntdOrc;
+    }
+
+    public void setQntdOrc(Double qntdOrc) {
+        this.qntdOrc = qntdOrc;
+    }
     
    
 }

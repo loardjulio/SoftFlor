@@ -30,7 +30,7 @@ public class GenericDAO<T extends EntidadeBase> extends ConectaBD {
 
     EntityManager em = getEntityManager();
 
-    public T salvarOuAtualizar(T t) throws Exception {
+    public T salvarOuAtualizar(T t){
 
         try {
             em.getTransaction().begin();

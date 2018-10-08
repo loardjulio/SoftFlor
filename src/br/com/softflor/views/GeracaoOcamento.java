@@ -8,8 +8,14 @@ package br.com.softflor.views;
 import br.com.softflor.controller.ClienteDAO;
 import br.com.softflor.controller.ProdutoDAO;
 import br.com.softflor.controller.ProdutoTableModel;
+import br.com.softflor.entidades.Cliente;
 import br.com.softflor.entidades.Produto;
 import java.io.Serializable;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+import javax.swing.JDialog;
 import javax.swing.JOptionPane;
 
 /**
@@ -18,23 +24,24 @@ import javax.swing.JOptionPane;
  */
 public class GeracaoOcamento extends javax.swing.JFrame {
 
+  ProdutoDAO pd = new ProdutoDAO();
+  ClienteDAO cd = new ClienteDAO();
+    
+  SimpleDateFormat sdf = new SimpleDateFormat("yyyy");
+  SimpleDateFormat sdf2 = new SimpleDateFormat("MM");
+    SimpleDateFormat sdf3 = new SimpleDateFormat("dd");
+    int dia = Integer.valueOf(sdf3.format(new Date()));
+    int mes = Integer.valueOf(sdf2.format(new Date()));
+    int ano = Integer.valueOf(sdf.format(new Date()));
     /**
      * Creates new form GeracaoOcamento
      */
-    public GeracaoOcamento() {
+    public GeracaoOcamento() {        
         initComponents();
         setLocationRelativeTo(null);
-    }
-
-    public void retornaID(ListaProdutos frameProdutos, int idSelecionado) {
-        ProdutoDAO pd = new ProdutoDAO();
-        Produto produto = pd.buscarPorId(Produto.class, idSelecionado);
-
-        txtNomeProduto.setText(produto.getNome());
-        System.out.println(produto.getNome());
 
     }
-
+    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -42,12 +49,11 @@ public class GeracaoOcamento extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         jButton1 = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
-        jLabel2 = new javax.swing.JLabel();
+        txtNomeCliente = new javax.swing.JTextField();
+        lblNumero = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
-        txtNomeProduto = new javax.swing.JTextField();
         jButton3 = new javax.swing.JButton();
         jLabel5 = new javax.swing.JLabel();
         txtUnidade = new javax.swing.JTextField();
@@ -56,12 +62,13 @@ public class GeracaoOcamento extends javax.swing.JFrame {
         jLabel7 = new javax.swing.JLabel();
         txtQuantidade = new javax.swing.JTextField();
         jLabel8 = new javax.swing.JLabel();
-        jTextField6 = new javax.swing.JTextField();
+        totalOrcamento = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
         tableOrcamento = new javax.swing.JTable();
         btnAdicionar = new javax.swing.JButton();
         jLabel9 = new javax.swing.JLabel();
-        txtValorTotal = new javax.swing.JTextField();
+        totalProduto = new javax.swing.JTextField();
+        txtNomeProduto = new javax.swing.JTextField();
         jButton5 = new javax.swing.JButton();
         jButton6 = new javax.swing.JButton();
 
@@ -76,9 +83,7 @@ public class GeracaoOcamento extends javax.swing.JFrame {
 
         jLabel1.setText("NOME:");
 
-        jTextField1.setEditable(false);
-
-        jLabel2.setText("NUMERO");
+        txtNomeCliente.setEditable(false);
 
         jLabel3.setText("Numero:");
 
@@ -92,10 +97,10 @@ public class GeracaoOcamento extends javax.swing.JFrame {
                 .addGap(34, 34, 34)
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 360, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(txtNomeCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 360, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(77, 77, 77)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, 54, Short.MAX_VALUE)
+                    .addComponent(lblNumero, javax.swing.GroupLayout.DEFAULT_SIZE, 54, Short.MAX_VALUE)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel3)
                         .addGap(0, 0, Short.MAX_VALUE)))
@@ -109,12 +114,12 @@ public class GeracaoOcamento extends javax.swing.JFrame {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel3)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, 36, Short.MAX_VALUE))
+                        .addComponent(lblNumero, javax.swing.GroupLayout.DEFAULT_SIZE, 36, Short.MAX_VALUE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                 .addComponent(jLabel1)
-                                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(txtNomeCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(16, 16, 16)))
                 .addGap(11, 11, 11))
@@ -133,9 +138,19 @@ public class GeracaoOcamento extends javax.swing.JFrame {
 
         jLabel5.setText("UNID.");
 
+        txtUnidade.setEditable(false);
+
+        txtPreco.setEditable(false);
+
         jLabel6.setText("PREÇO:");
 
         jLabel7.setText("QUANTIDADE:");
+
+        txtQuantidade.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                txtQuantidadeFocusLost(evt);
+            }
+        });
 
         jLabel8.setText("TOTAL:");
 
@@ -161,6 +176,8 @@ public class GeracaoOcamento extends javax.swing.JFrame {
 
         jLabel9.setText("TOTAL:");
 
+        txtNomeProduto.setEditable(false);
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -177,9 +194,9 @@ public class GeracaoOcamento extends javax.swing.JFrame {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(jLabel4)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(txtNomeProduto)
                         .addGap(18, 18, 18)
-                        .addComponent(txtNomeProduto, javax.swing.GroupLayout.PREFERRED_SIZE, 251, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 52, Short.MAX_VALUE)
                         .addComponent(jLabel5)
                         .addGap(18, 18, 18)
                         .addComponent(txtUnidade, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -187,10 +204,10 @@ public class GeracaoOcamento extends javax.swing.JFrame {
                         .addComponent(jLabel7)
                         .addGap(18, 18, 18)
                         .addComponent(txtQuantidade, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 36, Short.MAX_VALUE)
                         .addComponent(jLabel9)
                         .addGap(18, 18, 18)
-                        .addComponent(txtValorTotal, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(totalProduto, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(btnAdicionar, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
@@ -198,7 +215,7 @@ public class GeracaoOcamento extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel8)
                 .addGap(18, 18, 18)
-                .addComponent(jTextField6, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(totalOrcamento, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(23, 23, 23))
             .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING)
         );
@@ -208,15 +225,15 @@ public class GeracaoOcamento extends javax.swing.JFrame {
                 .addGap(23, 23, 23)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
-                    .addComponent(txtNomeProduto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton3)
                     .addComponent(jLabel5)
-                    .addComponent(txtUnidade, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtUnidade, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtNomeProduto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(28, 28, 28)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jLabel9)
-                        .addComponent(txtValorTotal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(totalProduto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jLabel6)
                         .addComponent(txtPreco, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -228,7 +245,7 @@ public class GeracaoOcamento extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel8)
-                    .addComponent(jTextField6, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(totalOrcamento, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -272,11 +289,16 @@ public class GeracaoOcamento extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        new ListaClientes().setVisible(true);
+         ListaClientes lc = new ListaClientes(this, true);
+         lc.setVisible(true);
+         int id = lc.idSelecionado;
+         Cliente c = cd.buscarPorId(Cliente.class, id);
+         txtNomeCliente.setText(c.getNome().toUpperCase());
+        
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void btnAdicionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAdicionarActionPerformed
-        // TODO add your handling code here:           
+        // QUANDO CLICAR EM ADICIONAR. PEGARA O PRODUTO E SALVARA EM UMA LSITA PARA.        
     }//GEN-LAST:event_btnAdicionarActionPerformed
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
@@ -285,10 +307,34 @@ public class GeracaoOcamento extends javax.swing.JFrame {
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
 
-        new ListaProdutos().setVisible(true);
-        txtPreco.setText("valor");
+        
+         ListaProdutos jb = new ListaProdutos(this, true);
+         jb.setVisible(true);         
+         int id = jb.idSelecionado;
+         lblNumero.setText(id+"/"+ano+mes+dia);
+         Produto p = pd.buscarPorId(Produto.class, id);
+         txtNomeProduto.setText(p.getNome().toUpperCase());
+         txtUnidade.setText(p.getUnidade_medida());
+         txtPreco.setText( p.getPreco_venda().toString());
+         
+       
+       
+       
+      // lblNomeProduto.setText(nome);
+             
+//        lblNumero.setText(idSelecionado);
+//        txtUnidade.setText(unidadeMedida);
+//        txtPreco.setText(PrecoProduto);       
+       
 
     }//GEN-LAST:event_jButton3ActionPerformed
+
+    
+    
+    private void txtQuantidadeFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtQuantidadeFocusLost
+        Double valor = (Double.parseDouble(txtQuantidade.getText())*Double.parseDouble(txtPreco.getText())); 
+        totalProduto.setText(String.valueOf(valor));
+    }//GEN-LAST:event_txtQuantidadeFocusLost
 
     /**
      * @param args the command line arguments
@@ -332,7 +378,6 @@ public class GeracaoOcamento extends javax.swing.JFrame {
     private javax.swing.JButton jButton5;
     private javax.swing.JButton jButton6;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
@@ -343,14 +388,17 @@ public class GeracaoOcamento extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField6;
+    private javax.swing.JLabel lblNumero;
     private javax.swing.JTable tableOrcamento;
-    public javax.swing.JTextField txtNomeProduto;
+    private javax.swing.JTextField totalOrcamento;
+    private javax.swing.JTextField totalProduto;
+    private javax.swing.JTextField txtNomeCliente;
+    private javax.swing.JTextField txtNomeProduto;
     private javax.swing.JTextField txtPreco;
     private javax.swing.JTextField txtQuantidade;
     private javax.swing.JTextField txtUnidade;
-    private javax.swing.JTextField txtValorTotal;
     // End of variables declaration//GEN-END:variables
+
+    
 
 }

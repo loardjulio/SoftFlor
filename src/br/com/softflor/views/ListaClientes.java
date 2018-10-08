@@ -7,13 +7,14 @@ package br.com.softflor.views;
 
 import br.com.softflor.controller.ClienteDAO;
 import br.com.softflor.controller.ClienteTableModel;
+import br.com.softflor.entidades.Cliente;
 import javax.swing.JOptionPane;
 
 /**
  *
  * @author Julio
  */
-public class ListaClientes extends javax.swing.JFrame {
+public class ListaClientes extends javax.swing.JDialog {
 
     /**
      * Creates new form ListaClientes
@@ -21,8 +22,10 @@ public class ListaClientes extends javax.swing.JFrame {
     
     private ClienteDAO clienteDAO ;
     private ClienteTableModel tableModel;
+    public int idSelecionado;
     
-    public ListaClientes() {
+    public ListaClientes(java.awt.Frame parent, boolean modal) {
+        super(parent, modal);
         initComponents();
          setLocationRelativeTo(null);       
         
@@ -45,7 +48,7 @@ public class ListaClientes extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         tableLista = new javax.swing.JTable();
         jPanel2 = new javax.swing.JPanel();
-        jButton1 = new javax.swing.JButton();
+        btnEditar = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
@@ -65,6 +68,11 @@ public class ListaClientes extends javax.swing.JFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
+        tableLista.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tableListaMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(tableLista);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -86,7 +94,12 @@ public class ListaClientes extends javax.swing.JFrame {
 
         jPanel2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
-        jButton1.setText("EDITAR");
+        btnEditar.setText("EDITAR");
+        btnEditar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEditarActionPerformed(evt);
+            }
+        });
 
         jButton2.setText("VOLTAR");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
@@ -114,14 +127,14 @@ public class ListaClientes extends javax.swing.JFrame {
                     .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btnEditar, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(30, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(19, 19, 19)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnEditar, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(46, 46, 46)
                 .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 54, Short.MAX_VALUE)
@@ -158,8 +171,9 @@ public class ListaClientes extends javax.swing.JFrame {
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         // TODO add your handling code here:
         
-        CadastroCliente cc = new CadastroCliente();        
+        CadastroCliente cc = new CadastroCliente(null,true);        
         cc.setVisible(true);
+        this.setVisible(false);
         
        
    
@@ -170,6 +184,27 @@ public class ListaClientes extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton2ActionPerformed
 
+    private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarActionPerformed
+            int linha = tableLista.getSelectedRow();
+           //int idSelecionado = (int) tableModel.getValueAt(linha, 0);
+            
+          //  Cliente cliente = new Cliente();
+           
+            //new ClienteDAO().salvarOuAtualizar(t);
+            //CadastroCliente cc = new CadastroCliente();
+           
+
+        
+    }//GEN-LAST:event_btnEditarActionPerformed
+
+    private void tableListaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tableListaMouseClicked
+if ( evt.getClickCount() == 2) { 
+            int linha = tableLista.getSelectedRow();            
+            int id =  (int) tableLista.getValueAt(linha, 0);           
+            this.idSelecionado=id;
+            this.dispose(); 
+    }//GEN-LAST:event_tableListaMouseClicked
+    }
     /**
      * @param args the command line arguments
      */
@@ -200,13 +235,20 @@ public class ListaClientes extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new ListaClientes().setVisible(true);
+                 ListaClientes dialog = new ListaClientes(new javax.swing.JFrame(), true);
+                dialog.addWindowListener(new java.awt.event.WindowAdapter() {
+                    @Override
+                    public void windowClosing(java.awt.event.WindowEvent e) {
+                        System.exit(0);
+                    }
+                });
+                dialog.setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
+    private javax.swing.JButton btnEditar;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
