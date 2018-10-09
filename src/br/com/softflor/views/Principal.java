@@ -293,8 +293,8 @@ public class Principal extends javax.swing.JFrame {
     }//GEN-LAST:event_btnOrcamentoActionPerformed
 
     private void jMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem4ActionPerformed
-       CadastroProduto cp = new CadastroProduto();
-        DeskPane.add(cp);
+       CadastroProduto cp = new CadastroProduto(this,true);
+     
         cp.setVisible(true);
         
     }//GEN-LAST:event_jMenuItem4ActionPerformed

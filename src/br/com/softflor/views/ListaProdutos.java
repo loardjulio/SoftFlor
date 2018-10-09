@@ -7,7 +7,9 @@ package br.com.softflor.views;
 
 import br.com.softflor.controller.ProdutoDAO;
 import br.com.softflor.controller.ProdutoTableModel;
+import br.com.softflor.entidades.Produto;
 import javax.swing.JDialog;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -87,6 +89,11 @@ public class ListaProdutos extends javax.swing.JDialog {
         });
 
         jButton3.setText("EXCLUIR");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
 
         jButton4.setText("CADASTRAR ");
         jButton4.addActionListener(new java.awt.event.ActionListener() {
@@ -191,11 +198,11 @@ public class ListaProdutos extends javax.swing.JDialog {
     }//GEN-LAST:event_listaBuscaProdutoMouseClicked
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        // TODO add your handling code here:
+        this.dispose();
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-        CadastroProduto cp = new CadastroProduto();
+        CadastroProduto cp = new CadastroProduto(null,true);
         //DeskPane.add(cp);
         cp.setVisible(true);
 
@@ -205,6 +212,26 @@ public class ListaProdutos extends javax.swing.JDialog {
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_btnBuscarActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+       
+       
+        
+        switch (JOptionPane.showConfirmDialog(null, "Deseja Excluir o item selecionado?")) {
+            case 0:
+                 int linha = listaBuscaProduto.getSelectedRow();            
+                 int id =  (int) tableModel.getValueAt(linha, 0);
+                    produtodao.remover(Produto.class, id);                   
+                break;
+            case 1:
+                JOptionPane.showMessageDialog(null, "Operação cancelada");
+                break;
+            case 2:
+                System.out.println("botao cancel clicado");
+                break;
+        }
+        
+    }//GEN-LAST:event_jButton3ActionPerformed
 
     /**
      * @param args the command line arguments

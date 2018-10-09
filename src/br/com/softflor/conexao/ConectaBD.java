@@ -25,7 +25,8 @@ public class ConectaBD {
     }
 
     public void FechaConexao() {
-        factory.close();     
+        factory.close(); 
+        System.out.println("Conexão fechada");
     }
 
 }

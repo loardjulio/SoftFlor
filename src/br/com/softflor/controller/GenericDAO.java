@@ -18,15 +18,7 @@ import javax.swing.JOptionPane;
  * @author Julio
  */
 public class GenericDAO<T extends EntidadeBase> extends ConectaBD {
-//     EntityManagerFactory emf;
-//    EntityManager em;
-//
-//    public GenericDAO() {
-//        emf = Persistence.createEntityManagerFactory("tcc");
-//      em = emf.createEntityManager();
-//      
-//      emf.close();
-//    }
+
 
     EntityManager em = getEntityManager();
 
@@ -61,15 +53,15 @@ public class GenericDAO<T extends EntidadeBase> extends ConectaBD {
             em.getTransaction().begin();
             em.remove(t); //executa o delete
             em.getTransaction().commit();
-               
+              JOptionPane.showMessageDialog(null, "Excluido com sucesso."); 
         } catch (Exception e) {
-                System.out.println(e);
+                JOptionPane.showMessageDialog(null, "Erro ao remover o item");
+                FechaConexao();
         }finally{
-              //   FechaConexao();
+                FechaConexao();
  
             }
-        
-//emf.close();
+ 
         
     }
     
@@ -82,6 +74,7 @@ public class GenericDAO<T extends EntidadeBase> extends ConectaBD {
           t = em.find(clazz, id);
       } catch (Exception e) { 
           JOptionPane.showMessageDialog(null,"Erro ao buscar por ID");
+          FechaConexao();
       }finally{          
            FechaConexao();
                 }

@@ -9,17 +9,31 @@ import br.com.softflor.entidades.Produto;
 import java.io.Serializable;
 import java.util.List;
 import javax.persistence.Query;
+import javax.swing.JOptionPane;
 
 /**
  *
  * @author Julio
  */
-public class ProdutoDAO extends GenericDAO<Produto>{
-    private  Serializable id;
-    public List<Produto> consultarTodos(){       
-        Query q = em.createNamedQuery("Produto.consultarTodos");
-        List<Produto> produtos = q.getResultList();      
-        return produtos;
+public class ProdutoDAO extends GenericDAO<Produto> {
+
+    private Serializable id;
+
+    public List<Produto> consultarTodos() {
+
+        try {
+            Query q = em.createNamedQuery("Produto.consultarTodos");
+            List<Produto> produtos = q.getResultList();
+            return produtos;
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Erro buscar Produtos");
+            FechaConexao();
+        } finally {
+            // FechaConexao();
+        }
+
+        return null;
+
     }
 
     public Serializable getId() {
@@ -29,8 +43,5 @@ public class ProdutoDAO extends GenericDAO<Produto>{
     public void setId(Serializable id) {
         this.id = id;
     }
-    
-    
-    
-    
+
 }

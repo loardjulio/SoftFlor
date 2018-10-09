@@ -9,6 +9,8 @@ import br.com.softflor.controller.FornecedorDAO;
 import br.com.softflor.controller.ProdutoDAO;
 import br.com.softflor.entidades.Fornecedor;
 import br.com.softflor.entidades.Produto;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -16,14 +18,18 @@ import java.util.logging.Logger;
  *
  * @author Julio
  */
-public class CadastroProduto extends javax.swing.JFrame {
-
-    /**
-     * Creates new form CadastroProduto1
-     */
-    public CadastroProduto() {
+public class CadastroProduto extends javax.swing.JDialog {
+    
+    
+         Produto produto = new Produto();
+         Fornecedor fornecedor = new Fornecedor();
+         FornecedorDAO fdao = new FornecedorDAO();
+    String nomeForn;
+    public CadastroProduto(java.awt.Frame parent, boolean modal) {
+        super(parent, modal);
         initComponents();
          PreCombo();
+         this.setLocationRelativeTo(null);
     }
     
     
@@ -56,7 +62,7 @@ public class CadastroProduto extends javax.swing.JFrame {
         btnSair = new javax.swing.JButton();
         btnCadastrarPro = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jPanel1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
@@ -88,7 +94,12 @@ public class CadastroProduto extends javax.swing.JFrame {
             }
         });
 
-        btnSair.setText("SAIR");
+        btnSair.setText("VOLTAR");
+        btnSair.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSairActionPerformed(evt);
+            }
+        });
 
         btnCadastrarPro.setText("CADASTRAR");
         btnCadastrarPro.addActionListener(new java.awt.event.ActionListener() {
@@ -207,12 +218,27 @@ public class CadastroProduto extends javax.swing.JFrame {
     }//GEN-LAST:event_ComboFornecedorActionPerformed
 
     private void btnCadastrarProActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadastrarProActionPerformed
-        // TODO add your handling code here:
-        Produto produto = new Produto();
+        // TODO add your handling code here:       
+        
         produto.setNome(txtNomeProduto.getText());
-        // produto.setFornecedor(fornecedor.add);
+       
+         // consulta por nome e pega o fornecedor
+        // pega o fornecedor e coloca na lista
+        nomeForn = (String) ComboFornecedor.getSelectedItem();
+        
+//        Fornecedor fornecedor = fdao.consultarPorNome(nomeForn);
+//        List<Fornecedor> lista = new ArrayList<>();
+//        fornecedor.setIdfornecedor(null);
+//        fornecedor.getContato().setIdcontato(null);
+//        fornecedor.getEndereco().setIdendereco(null);
+//        lista.add(fornecedor);   
+        produto.setFornecedor(fdao.fornecedorProduto(nomeForn));
+        
+        
+        
         produto.setEstoque_minimo(Double.parseDouble(txtEstoqueMin.getText()));
         produto.setPreco_compra(Double.parseDouble(txtPrecoCompra.getText()));
+        produto.setPreco_venda(Double.parseDouble(txtPrecoVenda.getText()));
         produto.setQuantidade(Double.parseDouble(txtQuantidadeProduto.getText()));
         produto.setUnidade_medida((String) ComboMedida.getSelectedItem());
 
@@ -224,6 +250,10 @@ public class CadastroProduto extends javax.swing.JFrame {
         }
 
     }//GEN-LAST:event_btnCadastrarProActionPerformed
+
+    private void btnSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSairActionPerformed
+        this.dispose();
+    }//GEN-LAST:event_btnSairActionPerformed
 
     /**
      * @param args the command line arguments
@@ -256,7 +286,15 @@ public class CadastroProduto extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new CadastroProduto().setVisible(true);
+               
+                CadastroProduto dialog = new CadastroProduto(new javax.swing.JFrame(), true);
+                dialog.addWindowListener(new java.awt.event.WindowAdapter() {
+                    @Override
+                    public void windowClosing(java.awt.event.WindowEvent e) {
+                        System.exit(0);
+                    }
+                });
+                dialog.setVisible(true);
             }
         });
     }

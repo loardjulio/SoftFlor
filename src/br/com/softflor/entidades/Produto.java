@@ -14,11 +14,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import org.hibernate.annotations.Cascade;
-import org.hibernate.annotations.CascadeType;
 import org.hibernate.annotations.NamedQueries;
 import org.hibernate.annotations.NamedQuery;
 
@@ -37,11 +33,11 @@ public class Produto implements EntidadeBase, Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     // @Column
-    private Integer idproduto;
+   private Integer idproduto;
     //@Column
-    private String nome;
+   private String nome;
     //@Column
-    private Double qntdOrc;
+   private Double qntdOrc;
     //@Column
     private Double quantidade;
     //@Column
@@ -49,14 +45,13 @@ public class Produto implements EntidadeBase, Serializable {
     //@Column
     private Double preco_venda;
     //@Column
-    private Double estoque_minimo;
+    private Double estoque_minimo;   
     //@Column
     private String unidade_medida;
     
-   //  private Double quantidade_produto;
-      //private Double valor_total;
+   
        
-    @ManyToMany(cascade = javax.persistence.CascadeType.PERSIST)
+    @ManyToMany(cascade = javax.persistence.CascadeType.ALL)
     @JoinTable(name = "Produto_Fornecedor", joinColumns = @JoinColumn(name = "idproduto"),
             inverseJoinColumns = @JoinColumn(name = "idfornecedor"))
     private List<Fornecedor> fornecedor;
@@ -134,11 +129,7 @@ public class Produto implements EntidadeBase, Serializable {
         this.unidade_medida = unidade_medida;
     }
   
-public Double CalculaValor(Double quantidade){
-    
-    return preco_venda * quantidade;
-           
-};
+
 
     public Double getQntdOrc() {
         return qntdOrc;
@@ -147,6 +138,9 @@ public Double CalculaValor(Double quantidade){
     public void setQntdOrc(Double qntdOrc) {
         this.qntdOrc = qntdOrc;
     }
+
+  
+    
     
    
 }

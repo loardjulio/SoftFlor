@@ -6,17 +6,12 @@
 package br.com.softflor.views;
 
 import br.com.softflor.controller.ClienteDAO;
+import br.com.softflor.controller.OrcamentoTableModel;
 import br.com.softflor.controller.ProdutoDAO;
-import br.com.softflor.controller.ProdutoTableModel;
 import br.com.softflor.entidades.Cliente;
 import br.com.softflor.entidades.Produto;
-import java.io.Serializable;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
-import javax.swing.JDialog;
-import javax.swing.JOptionPane;
 
 /**
  *
@@ -33,14 +28,16 @@ public class GeracaoOcamento extends javax.swing.JFrame {
     int dia = Integer.valueOf(sdf3.format(new Date()));
     int mes = Integer.valueOf(sdf2.format(new Date()));
     int ano = Integer.valueOf(sdf.format(new Date()));
+    
+      OrcamentoTableModel tableModel = new OrcamentoTableModel();
     /**
      * Creates new form GeracaoOcamento
      */
     public GeracaoOcamento() {        
         initComponents();
-        setLocationRelativeTo(null);
-
-    }
+        setLocationRelativeTo(null);        
+         tableOrcamento.setModel(tableModel);           
+          }
     
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -176,6 +173,13 @@ public class GeracaoOcamento extends javax.swing.JFrame {
 
         jLabel9.setText("TOTAL:");
 
+        totalProduto.setEditable(false);
+        totalProduto.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                totalProdutoActionPerformed(evt);
+            }
+        });
+
         txtNomeProduto.setEditable(false);
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
@@ -298,7 +302,19 @@ public class GeracaoOcamento extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void btnAdicionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAdicionarActionPerformed
-        // QUANDO CLICAR EM ADICIONAR. PEGARA O PRODUTO E SALVARA EM UMA LSITA PARA.        
+      Produto produto = new Produto();              
+              produto.setNome(txtNomeProduto.getText());
+              produto.setUnidade_medida(txtUnidade.getText());
+              produto.setPreco_venda(Double.parseDouble(txtPreco.getText()));
+              produto.setQntdOrc(Double.parseDouble(txtQuantidade.getText()));            
+              tableModel.total = Double.parseDouble(totalProduto.getText());
+              tableModel.addRow(produto);
+             
+             
+             
+              
+              
+           
     }//GEN-LAST:event_btnAdicionarActionPerformed
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
@@ -316,7 +332,7 @@ public class GeracaoOcamento extends javax.swing.JFrame {
          txtNomeProduto.setText(p.getNome().toUpperCase());
          txtUnidade.setText(p.getUnidade_medida());
          txtPreco.setText( p.getPreco_venda().toString());
-         
+         LimpaCampo();
        
        
        
@@ -335,6 +351,10 @@ public class GeracaoOcamento extends javax.swing.JFrame {
         Double valor = (Double.parseDouble(txtQuantidade.getText())*Double.parseDouble(txtPreco.getText())); 
         totalProduto.setText(String.valueOf(valor));
     }//GEN-LAST:event_txtQuantidadeFocusLost
+
+    private void totalProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_totalProdutoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_totalProdutoActionPerformed
 
     /**
      * @param args the command line arguments
@@ -399,6 +419,12 @@ public class GeracaoOcamento extends javax.swing.JFrame {
     private javax.swing.JTextField txtUnidade;
     // End of variables declaration//GEN-END:variables
 
-    
+    public void LimpaCampo(){
+        
+        txtNomeProduto.setText("");
+        txtPreco.setText("");
+        txtQuantidade.setText("");
+        txtUnidade.setText("");
+    }
 
 }

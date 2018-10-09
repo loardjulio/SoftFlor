@@ -29,9 +29,11 @@ import org.hibernate.annotations.NamedQuery;
  */
  @Entity
 @Table(name = "fornecedores")
- @NamedQueries(
-        @NamedQuery(name = "Fornecedor.consultarTodos", query = "SELECT f FROM Fornecedor f")  //consulta nomeada
-)
+ @NamedQueries({
+        @NamedQuery(name = "Fornecedor.consultarTodos", query = "SELECT f FROM Fornecedor f"), //consulta nomeada
+        @NamedQuery(name = "Fornecedor.consultarPorNome",query = "SELECT f from Fornecedor f WHERE f.nome LIKE :nome")//consulta nomeada
+ 
+ })
 public class Fornecedor implements Serializable,EntidadeBase {
       
    @Id
