@@ -20,7 +20,7 @@ public class OrcamentoTableModel extends AbstractTableModel{
     
     private final  List<String> cabecalho;   
    private List<Produto> listaProdutos = new ArrayList<>();;
-    public Double total;
+   
 
        
 
@@ -85,7 +85,7 @@ public class OrcamentoTableModel extends AbstractTableModel{
             case 4:
                return listaProdutos.get(rowIndex).getPreco_venda();
             case 5:
-               return this.total;
+               return listaProdutos.get(rowIndex).getPrecoTotal();
             
             default:
                 JOptionPane.showMessageDialog(null, "Algo deu errado na geração da tabela orçamento");

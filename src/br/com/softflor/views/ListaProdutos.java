@@ -48,10 +48,10 @@ public class ListaProdutos extends javax.swing.JDialog {
         jScrollPane3 = new javax.swing.JScrollPane();
         listaBuscaProduto = new javax.swing.JTable();
         jPanel2 = new javax.swing.JPanel();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
+        btEDITAR = new javax.swing.JButton();
+        btVoltar = new javax.swing.JButton();
+        btEXCLUIR = new javax.swing.JButton();
+        btCADASTRAR = new javax.swing.JButton();
         btnBuscar = new javax.swing.JButton();
         txtNomeBusca = new javax.swing.JTextField();
 
@@ -79,26 +79,26 @@ public class ListaProdutos extends javax.swing.JDialog {
 
         jPanel2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
-        jButton1.setText("EDITAR");
+        btEDITAR.setText("EDITAR");
 
-        jButton2.setText("VOLTAR");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        btVoltar.setText("VOLTAR");
+        btVoltar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                btVoltarActionPerformed(evt);
             }
         });
 
-        jButton3.setText("EXCLUIR");
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
+        btEXCLUIR.setText("EXCLUIR");
+        btEXCLUIR.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
+                btEXCLUIRActionPerformed(evt);
             }
         });
 
-        jButton4.setText("CADASTRAR ");
-        jButton4.addActionListener(new java.awt.event.ActionListener() {
+        btCADASTRAR.setText("CADASTRAR ");
+        btCADASTRAR.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton4ActionPerformed(evt);
+                btCADASTRARActionPerformed(evt);
             }
         });
 
@@ -108,13 +108,13 @@ public class ListaProdutos extends javax.swing.JDialog {
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(41, 41, 41)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btEDITAR, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(78, 78, 78)
-                .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btEXCLUIR, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(80, 80, 80)
-                .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btCADASTRAR, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btVoltar, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(20, 20, 20))
         );
         jPanel2Layout.setVerticalGroup(
@@ -122,10 +122,10 @@ public class ListaProdutos extends javax.swing.JDialog {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap(18, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btVoltar, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btCADASTRAR, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btEXCLUIR, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btEDITAR, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
         );
 
@@ -197,31 +197,28 @@ public class ListaProdutos extends javax.swing.JDialog {
     } 
     }//GEN-LAST:event_listaBuscaProdutoMouseClicked
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    private void btVoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btVoltarActionPerformed
         this.dispose();
-    }//GEN-LAST:event_jButton2ActionPerformed
+    }//GEN-LAST:event_btVoltarActionPerformed
 
-    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-        CadastroProduto cp = new CadastroProduto(null,true);
-        //DeskPane.add(cp);
+    private void btCADASTRARActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btCADASTRARActionPerformed
+        CadastroProduto cp = new CadastroProduto(null,true);       
         cp.setVisible(true);
-
-        this.setVisible(false);
-    }//GEN-LAST:event_jButton4ActionPerformed
+        this.dispose();
+    }//GEN-LAST:event_btCADASTRARActionPerformed
 
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_btnBuscarActionPerformed
 
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-       
-       
-        
-        switch (JOptionPane.showConfirmDialog(null, "Deseja Excluir o item selecionado?")) {
+    private void btEXCLUIRActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btEXCLUIRActionPerformed
+               switch (JOptionPane.showConfirmDialog(null, "Deseja Excluir o item selecionado?")) {
             case 0:
                  int linha = listaBuscaProduto.getSelectedRow();            
                  int id =  (int) tableModel.getValueAt(linha, 0);
-                    produtodao.remover(Produto.class, id);                   
+                    produtodao.remover(Produto.class, id);  
+                    tableModel.removeRow(linha);
+                    
                 break;
             case 1:
                 JOptionPane.showMessageDialog(null, "Operação cancelada");
@@ -229,9 +226,8 @@ public class ListaProdutos extends javax.swing.JDialog {
             case 2:
                 System.out.println("botao cancel clicado");
                 break;
-        }
-        
-    }//GEN-LAST:event_jButton3ActionPerformed
+        }        
+    }//GEN-LAST:event_btEXCLUIRActionPerformed
 
     /**
      * @param args the command line arguments
@@ -277,11 +273,11 @@ public class ListaProdutos extends javax.swing.JDialog {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btCADASTRAR;
+    private javax.swing.JButton btEDITAR;
+    private javax.swing.JButton btEXCLUIR;
+    private javax.swing.JButton btVoltar;
     private javax.swing.JButton btnBuscar;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane3;

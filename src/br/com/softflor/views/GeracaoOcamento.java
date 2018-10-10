@@ -307,7 +307,7 @@ public class GeracaoOcamento extends javax.swing.JFrame {
               produto.setUnidade_medida(txtUnidade.getText());
               produto.setPreco_venda(Double.parseDouble(txtPreco.getText()));
               produto.setQntdOrc(Double.parseDouble(txtQuantidade.getText()));            
-              tableModel.total = Double.parseDouble(totalProduto.getText());
+             produto.setPrecoTotal(Double.parseDouble(totalProduto.getText()));
               tableModel.addRow(produto);
              
              

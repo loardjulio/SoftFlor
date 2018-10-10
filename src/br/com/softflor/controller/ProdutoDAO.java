@@ -20,7 +20,6 @@ public class ProdutoDAO extends GenericDAO<Produto> {
     private Serializable id;
 
     public List<Produto> consultarTodos() {
-
         try {
             Query q = em.createNamedQuery("Produto.consultarTodos");
             List<Produto> produtos = q.getResultList();
@@ -31,9 +30,7 @@ public class ProdutoDAO extends GenericDAO<Produto> {
         } finally {
             // FechaConexao();
         }
-
         return null;
-
     }
 
     public Serializable getId() {

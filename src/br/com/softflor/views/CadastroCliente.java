@@ -86,6 +86,11 @@ public class CadastroCliente extends javax.swing.JDialog {
         comboEstado.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "--SELECIONE--", "AC - Acre ", "AL - Alagoas ", "AP - Amapá", "AM - Amazonas", "BA - Bahia ", "CE - Ceará", "DF - Distrito Federal ", "ES - Espírito Santo ", "GO - Goiás", "MA - Maranhão", "MT - Mato Grosso ", "MS - Mato Grosso do Sul ", "MG - Minas Gerais ", "PA - Pará", "PB - Paraíba ", "PR - Paraná", "PE - Pernambuco ", "PI - Piauí ", "RJ - Rio de Janeiro", "RN - Rio Grande do Norte ", "RS - Rio Grande do Sul ", "RO - Rondônia ", "RR - Roraima ", "SC - Santa Catarina ", "SP - São Paulo ", "SE - Sergipe  ", "TO - Tocantins" }));
 
         btnSair.setText("SAIR");
+        btnSair.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSairActionPerformed(evt);
+            }
+        });
 
         btnCadastrarForn.setText("CADASTRAR");
         btnCadastrarForn.addActionListener(new java.awt.event.ActionListener() {
@@ -260,18 +265,17 @@ public class CadastroCliente extends javax.swing.JDialog {
                 LimpaCampos();
             }
     
-           
-             
         }
        
-        
-        
-        
     }//GEN-LAST:event_btnCadastrarFornActionPerformed
 
     private void txtNumeroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNumeroActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtNumeroActionPerformed
+
+    private void btnSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSairActionPerformed
+       this.dispose();
+    }//GEN-LAST:event_btnSairActionPerformed
 
     /**
      * @param args the command line arguments

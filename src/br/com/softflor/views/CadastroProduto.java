@@ -19,20 +19,18 @@ import java.util.logging.Logger;
  * @author Julio
  */
 public class CadastroProduto extends javax.swing.JDialog {
-    
-    
-         Produto produto = new Produto();
-         Fornecedor fornecedor = new Fornecedor();
-         FornecedorDAO fdao = new FornecedorDAO();
+
+    Produto produto = new Produto();
+    Fornecedor fornecedor = new Fornecedor();
+    FornecedorDAO fdao = new FornecedorDAO();
     String nomeForn;
+
     public CadastroProduto(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
-         PreCombo();
-         this.setLocationRelativeTo(null);
+        PreCombo();
+        this.setLocationRelativeTo(null);
     }
-    
-    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -137,7 +135,7 @@ public class CadastroProduto extends javax.swing.JDialog {
                                 .addComponent(jLabel11)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(txtEstoqueMin, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 44, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                 .addGroup(jPanel1Layout.createSequentialGroup()
@@ -218,24 +216,9 @@ public class CadastroProduto extends javax.swing.JDialog {
     }//GEN-LAST:event_ComboFornecedorActionPerformed
 
     private void btnCadastrarProActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadastrarProActionPerformed
-        // TODO add your handling code here:       
-        
         produto.setNome(txtNomeProduto.getText());
-       
-         // consulta por nome e pega o fornecedor
-        // pega o fornecedor e coloca na lista
         nomeForn = (String) ComboFornecedor.getSelectedItem();
-        
-//        Fornecedor fornecedor = fdao.consultarPorNome(nomeForn);
-//        List<Fornecedor> lista = new ArrayList<>();
-//        fornecedor.setIdfornecedor(null);
-//        fornecedor.getContato().setIdcontato(null);
-//        fornecedor.getEndereco().setIdendereco(null);
-//        lista.add(fornecedor);   
         produto.setFornecedor(fdao.fornecedorProduto(nomeForn));
-        
-        
-        
         produto.setEstoque_minimo(Double.parseDouble(txtEstoqueMin.getText()));
         produto.setPreco_compra(Double.parseDouble(txtPrecoCompra.getText()));
         produto.setPreco_venda(Double.parseDouble(txtPrecoVenda.getText()));
@@ -245,6 +228,8 @@ public class CadastroProduto extends javax.swing.JDialog {
         ProdutoDAO pd = new ProdutoDAO();
         try {
             pd.salvarOuAtualizar(produto);
+            LimpaTela();
+            this.dispose();
         } catch (Exception ex) {
             Logger.getLogger(CadastroProduto.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -286,7 +271,7 @@ public class CadastroProduto extends javax.swing.JDialog {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-               
+
                 CadastroProduto dialog = new CadastroProduto(new javax.swing.JFrame(), true);
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                     @Override
@@ -321,9 +306,17 @@ public class CadastroProduto extends javax.swing.JDialog {
     // End of variables declaration//GEN-END:variables
 
     private void PreCombo() {
-       FornecedorDAO fd = new FornecedorDAO();
-         for (Fornecedor f : fd.consultarTodos()) {              
-              ComboFornecedor.addItem(f.getNome());
+        FornecedorDAO fd = new FornecedorDAO();
+        for (Fornecedor f : fd.consultarTodos()) {                       
+               ComboFornecedor.addItem(f.getNome()); 
+        }
     }
+
+    private void LimpaTela() {
+        txtEstoqueMin.setText("");
+        txtNomeProduto.setText("");
+        txtPrecoCompra.setText("");
+        txtPrecoVenda.setText("");
+        txtQuantidadeProduto.setText("");
     }
 }

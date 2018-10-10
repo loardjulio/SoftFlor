@@ -36,7 +36,13 @@ public class ProdutoTableModel extends AbstractTableModel{
     public ProdutoTableModel() {
        
     }
-
+    
+    
+      public void removeRow(int linha) {
+        this.listaProdutos.remove(linha);
+        this.fireTableRowsDeleted(linha, linha);
+    }
+    
     public List<Produto> getListaProdutos() {
         return listaProdutos;
     }

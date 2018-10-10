@@ -54,7 +54,11 @@ public class ClienteTableModel extends AbstractTableModel{
     public int getColumnCount() {
        return cabecalho.size();
     }
-
+      public void removeRow(int linha) {
+        this.listaClientes.remove(linha);
+        this.fireTableRowsDeleted(linha, linha);
+    }
+      
     @Override
     public Object getValueAt(int rowIndex, int columnIndex) {
         switch (columnIndex) {

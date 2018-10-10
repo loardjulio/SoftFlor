@@ -7,6 +7,8 @@ package br.com.softflor.views;
 
 import br.com.softflor.controller.FornecedorDAO;
 import br.com.softflor.controller.FornecedorTableModel;
+import br.com.softflor.entidades.Fornecedor;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -59,6 +61,11 @@ public class ListaFornecedores extends javax.swing.JFrame {
         });
 
         btnExcluir.setText("EXCLUIR");
+        btnExcluir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnExcluirActionPerformed(evt);
+            }
+        });
 
         btnCadastrar.setText("CADASTRAR ");
         btnCadastrar.addActionListener(new java.awt.event.ActionListener() {
@@ -168,6 +175,27 @@ public class ListaFornecedores extends javax.swing.JFrame {
         cf.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_btnCadastrarActionPerformed
+
+    private void btnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcluirActionPerformed
+       
+         switch (JOptionPane.showConfirmDialog(null, "Deseja Excluir o item selecionado?")) {
+            case 0:
+                 int linha = tabela.getSelectedRow();            
+                 int id =  (int) tableModel.getValueAt(linha, 0);                  
+                    fornecedordao.remover(Fornecedor.class, id);
+                   tableModel.removeRow(linha);
+                break;
+            case 1:
+                JOptionPane.showMessageDialog(null, "Operação cancelada");
+                break;
+            case 2:
+                System.out.println("botao cancel clicado");
+                break;
+                
+                
+        }
+       
+    }//GEN-LAST:event_btnExcluirActionPerformed
 
     /**
      * @param args the command line arguments

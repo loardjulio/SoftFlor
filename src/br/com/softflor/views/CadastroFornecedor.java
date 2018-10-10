@@ -254,7 +254,7 @@ public class CadastroFornecedor extends javax.swing.JFrame {
     }//GEN-LAST:event_txtNumeroActionPerformed
 
     private void btnSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSairActionPerformed
-        // TODO add your handling code here:
+       
         this.setVisible(false);
     }//GEN-LAST:event_btnSairActionPerformed
 
@@ -262,7 +262,7 @@ public class CadastroFornecedor extends javax.swing.JFrame {
         // TODO add your handling code here:
         Contato contato = new Contato(txtTelefone.getText(), txtEmail.getText(), txtResp.getText());
         Endereco endereco = new Endereco(txtRUA.getText(), txtNumero.getText(), txtBairro.getText(), txtCEP.getText(), comboEstado.getSelectedItem().toString(), txtMunicipio.getText());
-        //endereco.ChecaEstado();
+        
         Fornecedor fornecedor = new Fornecedor(comboStatus.getSelectedItem().toString(), txtCNPJ.getText(), txtNomeForn.getText(), contato, endereco);
 
         FornecedorDAO fDao = new FornecedorDAO();
@@ -271,6 +271,7 @@ public class CadastroFornecedor extends javax.swing.JFrame {
         if ((endereco.ChecaEstado() && fornecedor.ChecaStatus()) == true) {
             try {
                 fDao.salvarOuAtualizar(fornecedor);
+                limpaTela();               
             } catch (Exception ex) {
                 Logger.getLogger(CadastroFornecedor.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -344,4 +345,18 @@ public class CadastroFornecedor extends javax.swing.JFrame {
     private javax.swing.JTextField txtResp;
     private javax.swing.JTextField txtTelefone;
     // End of variables declaration//GEN-END:variables
+
+    public void limpaTela(){
+        txtBairro.setText("");
+        txtCEP.setText("");
+        txtCNPJ.setText("");
+        txtEmail.setText("");
+        txtMunicipio.setText("");
+        txtNomeForn.setText("");
+        txtNumero.setText("");
+        txtRUA.setText("");
+        txtResp.setText("");
+        txtTelefone.setText("");
+    }
+    
 }

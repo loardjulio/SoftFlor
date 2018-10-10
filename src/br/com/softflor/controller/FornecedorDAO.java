@@ -27,10 +27,9 @@ public class FornecedorDAO extends GenericDAO<Fornecedor> {
 
         } catch (Exception e) {
             System.out.println("Erro FornecedorDAO: " + e);
-
+        //FechaConexao(); 
         } finally {
-            FechaConexao();
-            System.out.println("Consultas realizadas");
+            //FechaConexao();            
 
         }
         return fornecedores;

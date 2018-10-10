@@ -49,6 +49,8 @@ public class Produto implements EntidadeBase, Serializable {
     //@Column
     private String unidade_medida;
     
+    private Double precoTotal;
+    
    
        
     @ManyToMany(cascade = javax.persistence.CascadeType.ALL)
@@ -127,6 +129,14 @@ public class Produto implements EntidadeBase, Serializable {
 
     public void setUnidade_medida(String unidade_medida) {
         this.unidade_medida = unidade_medida;
+    }
+
+    public Double getPrecoTotal() {
+        return precoTotal;
+    }
+
+    public void setPrecoTotal(Double precoTotal) {
+        this.precoTotal = precoTotal;
     }
   
 

@@ -17,11 +17,9 @@ import javax.swing.SwingWorker;
 public class ConectaBD {
 
     public  EntityManagerFactory factory;
-
     public  EntityManager getEntityManager() {
         factory = Persistence.createEntityManagerFactory("tcc");
         return factory.createEntityManager();
-
     }
 
     public void FechaConexao() {

@@ -19,14 +19,12 @@ public class ClienteDAO extends GenericDAO<Cliente> {
 
         List<Cliente> clientes = null;
         try {
-             Query q = em.createQuery("SELECT c FROM Cliente c");
+            Query q = em.createQuery("SELECT c FROM Cliente c");
             clientes = q.getResultList();
         } catch (Exception e) {
             System.out.println("Erro clienteDAO: " + e);
         } finally {
-            FechaConexao();
-                      
-            System.out.println("Consultas realizadas");
+            // FechaConexao();
         }
 
         return clientes;
@@ -36,8 +34,8 @@ public class ClienteDAO extends GenericDAO<Cliente> {
 
         List<Cliente> clientes = null;
         try {
-             Query q = em.createNamedQuery("Cliente.consultarPorNome");         
-            q.setParameter("nome", nome+ "%");
+            Query q = em.createNamedQuery("Cliente.consultarPorNome");
+            q.setParameter("nome", nome + "%");
             clientes = q.getResultList();
         } catch (Exception e) {
             System.out.println("Erro clienteDAO: " + e);

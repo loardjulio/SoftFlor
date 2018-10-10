@@ -8,6 +8,7 @@ package br.com.softflor.views;
 import br.com.softflor.controller.ClienteDAO;
 import br.com.softflor.controller.ClienteTableModel;
 import br.com.softflor.entidades.Cliente;
+import br.com.softflor.entidades.Fornecedor;
 import javax.swing.JOptionPane;
 
 /**
@@ -109,6 +110,11 @@ public class ListaClientes extends javax.swing.JDialog {
         });
 
         jButton3.setText("EXCLUIR");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
 
         jButton4.setText("CADASTRAR ");
         jButton4.addActionListener(new java.awt.event.ActionListener() {
@@ -205,6 +211,25 @@ if ( evt.getClickCount() == 2) {
             this.dispose(); 
     }//GEN-LAST:event_tableListaMouseClicked
     }
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+       switch (JOptionPane.showConfirmDialog(null, "Deseja Excluir o item selecionado?")) {
+            case 0:
+                 int linha = tableLista.getSelectedRow();            
+                 int id =  (int) tableModel.getValueAt(linha, 0);
+                    clienteDAO.remover(Cliente.class, id);  
+                  tableModel.removeRow(linha);
+                    
+                    
+                break;
+            case 1:
+                JOptionPane.showMessageDialog(null, "Operação cancelada");
+                break;
+            case 2:
+                System.out.println("botao cancel clicado");
+                break;
+        }
+    }//GEN-LAST:event_jButton3ActionPerformed
+    
     /**
      * @param args the command line arguments
      */

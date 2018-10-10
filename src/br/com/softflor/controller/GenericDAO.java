@@ -28,6 +28,7 @@ public class GenericDAO<T extends EntidadeBase> extends ConectaBD {
             em.getTransaction().begin();
             if (t.getId() == null) { //verifica se é nulo ou não
                 em.persist(t); // executa o insert
+                JOptionPane.showMessageDialog(null, "Salvo!");
             } else { //se nao for nulo ele salva
                 if (!em.contains(t)) {
                     if (em.find(t.getClass(), t.getId()) == null) {
@@ -35,6 +36,7 @@ public class GenericDAO<T extends EntidadeBase> extends ConectaBD {
                     }
                 }
                 t = em.merge(t); //executa o update
+                JOptionPane.showMessageDialog(null, "Atualizado!");
             }
             em.getTransaction().commit();
         } catch (Exception e) {
@@ -47,8 +49,7 @@ public class GenericDAO<T extends EntidadeBase> extends ConectaBD {
     }
 
     public void remover(Class<T> clazz, Serializable id) { //clazz é so pra diferenciar da palavra reservada
-        T t = em.find(clazz, id);
-        
+        T t = em.find(clazz, id);        
             try {
             em.getTransaction().begin();
             em.remove(t); //executa o delete
