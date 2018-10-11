@@ -25,3 +25,4 @@ log4j-1.2.16.jar
 
 # virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
 hs_err_pid*
+/dist/

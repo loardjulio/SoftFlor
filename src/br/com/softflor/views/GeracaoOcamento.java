@@ -12,6 +12,7 @@ import br.com.softflor.entidades.Cliente;
 import br.com.softflor.entidades.Produto;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -328,11 +329,19 @@ public class GeracaoOcamento extends javax.swing.JFrame {
          jb.setVisible(true);         
          int id = jb.idSelecionado;
          lblNumero.setText(id+"/"+ano+mes+dia);
+         
          Produto p = pd.buscarPorId(Produto.class, id);
-         txtNomeProduto.setText(p.getNome().toUpperCase());
+         if (p != null) {
+            txtNomeProduto.setText(p.getNome().toUpperCase());
          txtUnidade.setText(p.getUnidade_medida());
          txtPreco.setText( p.getPreco_venda().toString());
-         LimpaCampo();
+         
+         LimpaCampo(); 
+        } else{
+             JOptionPane.showMessageDialog(null, "Nenhum produto inserido no orçamento");
+         }
+         
+        
        
        
        
@@ -426,5 +435,6 @@ public class GeracaoOcamento extends javax.swing.JFrame {
         txtQuantidade.setText("");
         txtUnidade.setText("");
     }
+    
 
 }

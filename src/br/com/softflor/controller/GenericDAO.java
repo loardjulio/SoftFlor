@@ -41,8 +41,9 @@ public class GenericDAO<T extends EntidadeBase> extends ConectaBD {
             em.getTransaction().commit();
         } catch (Exception e) {
             System.out.println(e);
+            FechaConexao();
         } 
-        FechaConexao();
+        
         
         return t;
         
@@ -77,7 +78,7 @@ public class GenericDAO<T extends EntidadeBase> extends ConectaBD {
           JOptionPane.showMessageDialog(null,"Erro ao buscar por ID");
           FechaConexao();
       }finally{          
-           FechaConexao();
+           
                 }
      return t;
  }

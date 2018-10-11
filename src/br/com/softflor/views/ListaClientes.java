@@ -24,7 +24,7 @@ public class ListaClientes extends javax.swing.JDialog {
     private ClienteDAO clienteDAO ;
     private ClienteTableModel tableModel;
     public int idSelecionado;
-    
+    CadastroCliente cc = new CadastroCliente(null,true);    
     public ListaClientes(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
@@ -177,7 +177,7 @@ public class ListaClientes extends javax.swing.JDialog {
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         // TODO add your handling code here:
         
-        CadastroCliente cc = new CadastroCliente(null,true);        
+            
         cc.setVisible(true);
         this.setVisible(false);
         
@@ -187,20 +187,14 @@ public class ListaClientes extends javax.swing.JDialog {
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        // TODO add your handling code here:
+        this.setVisible(false);
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarActionPerformed
             int linha = tableLista.getSelectedRow();
-           //int idSelecionado = (int) tableModel.getValueAt(linha, 0);
-            
-          //  Cliente cliente = new Cliente();
-           
-            //new ClienteDAO().salvarOuAtualizar(t);
-            //CadastroCliente cc = new CadastroCliente();
-           
-
-        
+            int idSelecionado = (int) tableModel.getValueAt(linha, 0);
+            cc.Atualiza(clienteDAO.buscarPorId(Cliente.class, idSelecionado));
+             this.setVisible(false);        
     }//GEN-LAST:event_btnEditarActionPerformed
 
     private void tableListaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tableListaMouseClicked
