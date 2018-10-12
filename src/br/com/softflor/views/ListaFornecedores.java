@@ -8,6 +8,7 @@ package br.com.softflor.views;
 import br.com.softflor.controller.FornecedorDAO;
 import br.com.softflor.controller.FornecedorTableModel;
 import br.com.softflor.entidades.Fornecedor;
+import br.com.softflor.entidades.Produto;
 import javax.swing.JOptionPane;
 
 /**
@@ -19,13 +20,13 @@ public class ListaFornecedores extends javax.swing.JFrame {
     /**
      * Creates new form ListaFornecedores1
      */
-    
-     public FornecedorTableModel tableModel;
+    public FornecedorTableModel tableModel;
     FornecedorDAO fornecedordao = new FornecedorDAO();
+    CadastroFornecedor cf = new CadastroFornecedor(this, true);
 
     public ListaFornecedores() {
         initComponents();
-         tableModel = new FornecedorTableModel(fornecedordao.consultarTodos());//realizo a consulta e coloco na tabela
+        tableModel = new FornecedorTableModel(fornecedordao.consultarTodos());//realizo a consulta e coloco na tabela
 
         tabela.setModel(tableModel);
         setLocationRelativeTo(null);
@@ -52,6 +53,11 @@ public class ListaFornecedores extends javax.swing.JFrame {
         jPanel2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
         btnEditar.setText("EDITAR");
+        btnEditar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEditarActionPerformed(evt);
+            }
+        });
 
         bntVoltar.setText("VOLTAR");
         bntVoltar.addActionListener(new java.awt.event.ActionListener() {
@@ -167,23 +173,23 @@ public class ListaFornecedores extends javax.swing.JFrame {
     }//GEN-LAST:event_tabelaMouseClicked
 
     private void bntVoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bntVoltarActionPerformed
-        // TODO add your handling code here:
+        this.setVisible(false);
     }//GEN-LAST:event_bntVoltarActionPerformed
 
     private void btnCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadastrarActionPerformed
-        CadastroFornecedor cf = new CadastroFornecedor();      
+
         cf.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_btnCadastrarActionPerformed
 
     private void btnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcluirActionPerformed
-       
-         switch (JOptionPane.showConfirmDialog(null, "Deseja Excluir o item selecionado?")) {
+
+        switch (JOptionPane.showConfirmDialog(null, "Deseja Excluir o item selecionado?")) {
             case 0:
-                 int linha = tabela.getSelectedRow();            
-                 int id =  (int) tableModel.getValueAt(linha, 0);                  
-                    fornecedordao.remover(Fornecedor.class, id);
-                   tableModel.removeRow(linha);
+                int linha = tabela.getSelectedRow();
+                int id = (int) tableModel.getValueAt(linha, 0);
+                fornecedordao.remover(Fornecedor.class, id);
+                tableModel.removeRow(linha);
                 break;
             case 1:
                 JOptionPane.showMessageDialog(null, "Operação cancelada");
@@ -191,11 +197,25 @@ public class ListaFornecedores extends javax.swing.JFrame {
             case 2:
                 System.out.println("botao cancel clicado");
                 break;
-                
-                
+
         }
-       
+
     }//GEN-LAST:event_btnExcluirActionPerformed
+
+    private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarActionPerformed
+        int linha = tabela.getSelectedRow();
+       
+        if (linha == -1) {
+            JOptionPane.showMessageDialog(this,"Selecione um fornecedor");
+        }else{
+             int id = (int) tableModel.getValueAt(linha, 0);
+             cf.Atualiza(fornecedordao.buscarPorId(Fornecedor.class, id));
+             this.setVisible(false);
+        }
+        
+        
+       
+    }//GEN-LAST:event_btnEditarActionPerformed
 
     /**
      * @param args the command line arguments

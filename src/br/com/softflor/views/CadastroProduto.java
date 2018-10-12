@@ -7,12 +7,14 @@ package br.com.softflor.views;
 
 import br.com.softflor.controller.FornecedorDAO;
 import br.com.softflor.controller.ProdutoDAO;
+import br.com.softflor.entidades.Cliente;
 import br.com.softflor.entidades.Fornecedor;
 import br.com.softflor.entidades.Produto;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -21,15 +23,58 @@ import java.util.logging.Logger;
 public class CadastroProduto extends javax.swing.JDialog {
 
     Produto produto = new Produto();
+    ProdutoDAO pd = new ProdutoDAO();
     Fornecedor fornecedor = new Fornecedor();
     FornecedorDAO fdao = new FornecedorDAO();
-    String nomeForn;
+    String nomeForn; //USADO PARA BUSCAR O FORNECEDOR DE UM DETERMINADO PRODUTO
 
     public CadastroProduto(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
-        PreCombo();
+        PreCombo(); //CARREGA O COMBOBOX COM OS FORNECEDORES
         this.setLocationRelativeTo(null);
+    }
+
+    //--------METODO QUE PREENCHE O COMBOX COM FORNECEDORES--------------//
+    private void PreCombo() {
+
+        for (Fornecedor f : fdao.consultarTodos()) {
+            ComboFornecedor.addItem(f.getNome());
+        }
+    }
+
+    private void LimpaTela() {
+        txtEstoqueMin.setText("");
+        txtNomeProduto.setText("");
+        txtPrecoCompra.setText("");
+        txtPrecoVenda.setText("");
+        txtQuantidadeProduto.setText("");
+    }
+
+    //-------------SETA OS DADOS DO PRODUTO NA TELA PARA REALIZAR A EDICAO-------///
+    public void Atualiza(Produto produto) {
+        try {
+
+            if (produto == null) { //verifa se tem produto, se nao tiver exibe mensagem
+                JOptionPane.showMessageDialog(this, "Erro ao retornar cliente");
+            } else {
+                // SE EXISTIR O OBJETIVO SETA OS DADOS
+                lblID.setText(produto.getId().toString());
+                txtEstoqueMin.setText(produto.getEstoque_minimo().toString());
+                txtNomeProduto.setText(produto.getNome());
+                txtPrecoVenda.setText(produto.getPreco_venda().toString());
+                txtPrecoCompra.setText(produto.getPreco_compra().toString());
+                txtQuantidadeProduto.setText(produto.getQuantidade().toString());
+                ComboFornecedor.addItem("<<Atual>> " + produto.getFornecedor().get(0).getNome());
+                ComboMedida.addItem("<<Atual>> " + produto.getUnidade_medida());
+                this.setVisible(true);
+            }
+
+        } catch (Exception e) {
+            // CASO OCORRA ALGUM ERRO INESPERADO
+            JOptionPane.showMessageDialog(this, "Erro inesperado :(" + e);
+        }
+
     }
 
     /**
@@ -59,6 +104,7 @@ public class CadastroProduto extends javax.swing.JDialog {
         ComboFornecedor = new javax.swing.JComboBox<>();
         btnSair = new javax.swing.JButton();
         btnCadastrarPro = new javax.swing.JButton();
+        lblID = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -79,18 +125,6 @@ public class CadastroProduto extends javax.swing.JDialog {
         jLabel11.setText("ESTOQUE MÍNIMO:");
 
         jLabel3.setText("FORNECEDOR:");
-
-        ComboFornecedor.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "--SELECIONE--", " " }));
-        ComboFornecedor.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                ComboFornecedorMouseClicked(evt);
-            }
-        });
-        ComboFornecedor.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                ComboFornecedorActionPerformed(evt);
-            }
-        });
 
         btnSair.setText("VOLTAR");
         btnSair.addActionListener(new java.awt.event.ActionListener() {
@@ -153,8 +187,13 @@ public class CadastroProduto extends javax.swing.JDialog {
                                 .addGap(10, 10, 10)))))
                 .addGap(90, 90, 90))
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(217, 217, 217)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(217, 217, 217)
+                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(lblID, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -162,7 +201,7 @@ public class CadastroProduto extends javax.swing.JDialog {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addGap(41, 41, 41)
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 45, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 59, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel7)
                     .addComponent(txtNomeProduto, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -188,7 +227,9 @@ public class CadastroProduto extends javax.swing.JDialog {
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jLabel11)
                         .addComponent(txtEstoqueMin, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(65, 65, 65))
+                .addGap(40, 40, 40)
+                .addComponent(lblID)
+                .addContainerGap())
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -205,16 +246,6 @@ public class CadastroProduto extends javax.swing.JDialog {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void ComboFornecedorMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ComboFornecedorMouseClicked
-        // TODO add your handling code here:
-
-    }//GEN-LAST:event_ComboFornecedorMouseClicked
-
-    private void ComboFornecedorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ComboFornecedorActionPerformed
-        // TODO add your handling code here:
-
-    }//GEN-LAST:event_ComboFornecedorActionPerformed
-
     private void btnCadastrarProActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadastrarProActionPerformed
         produto.setNome(txtNomeProduto.getText());
         nomeForn = (String) ComboFornecedor.getSelectedItem();
@@ -225,7 +256,6 @@ public class CadastroProduto extends javax.swing.JDialog {
         produto.setQuantidade(Double.parseDouble(txtQuantidadeProduto.getText()));
         produto.setUnidade_medida((String) ComboMedida.getSelectedItem());
 
-        ProdutoDAO pd = new ProdutoDAO();
         try {
             pd.salvarOuAtualizar(produto);
             LimpaTela();
@@ -298,6 +328,7 @@ public class CadastroProduto extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JLabel lblID;
     private javax.swing.JTextField txtEstoqueMin;
     private javax.swing.JTextField txtNomeProduto;
     private javax.swing.JTextField txtPrecoCompra;
@@ -305,18 +336,4 @@ public class CadastroProduto extends javax.swing.JDialog {
     private javax.swing.JTextField txtQuantidadeProduto;
     // End of variables declaration//GEN-END:variables
 
-    private void PreCombo() {
-        FornecedorDAO fd = new FornecedorDAO();
-        for (Fornecedor f : fd.consultarTodos()) {                       
-               ComboFornecedor.addItem(f.getNome()); 
-        }
-    }
-
-    private void LimpaTela() {
-        txtEstoqueMin.setText("");
-        txtNomeProduto.setText("");
-        txtPrecoCompra.setText("");
-        txtPrecoVenda.setText("");
-        txtQuantidadeProduto.setText("");
-    }
 }

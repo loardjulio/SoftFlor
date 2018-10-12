@@ -19,10 +19,9 @@ import javax.swing.JOptionPane;
  */
 public class GenericDAO<T extends EntidadeBase> extends ConectaBD {
 
-
     EntityManager em = getEntityManager();
 
-    public T salvarOuAtualizar(T t){
+    public T salvarOuAtualizar(T t) {
 
         try {
             em.getTransaction().begin();
@@ -42,44 +41,42 @@ public class GenericDAO<T extends EntidadeBase> extends ConectaBD {
         } catch (Exception e) {
             System.out.println(e);
             FechaConexao();
-        } 
-        
-        
+        }
+
         return t;
-        
+
     }
 
     public void remover(Class<T> clazz, Serializable id) { //clazz é so pra diferenciar da palavra reservada
-        T t = em.find(clazz, id);        
-            try {
+        T t = em.find(clazz, id);
+        try {
             em.getTransaction().begin();
             em.remove(t); //executa o delete
             em.getTransaction().commit();
-              JOptionPane.showMessageDialog(null, "Excluido com sucesso."); 
+            JOptionPane.showMessageDialog(null, "Excluido com sucesso.");
         } catch (Exception e) {
-                JOptionPane.showMessageDialog(null, "Erro ao remover o item");
-                FechaConexao();
-        }finally{
-                FechaConexao();
- 
-            }
- 
-        
+            JOptionPane.showMessageDialog(null, "Erro ao remover o item");
+            FechaConexao();
+        } finally {
+            FechaConexao();
+
+        }
+
     }
-    
-  public T buscarPorId(Class<T> clazz, Serializable id){
-        
-      T t = null;
-            
-      try {
-          System.out.println("Tentei buscar "+id);
-          t = em.find(clazz, id);
-      } catch (Exception e) { 
-          JOptionPane.showMessageDialog(null,"Erro ao buscar por ID");
-          FechaConexao();
-      }finally{          
-           
-                }
-     return t;
- }
+
+    public T buscarPorId(Class<T> clazz, Serializable id) {
+
+        T t = null;
+
+        try {
+            System.out.println("Tentei buscar " + id);
+            t = em.find(clazz, id);
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Erro ao buscar por ID");
+            FechaConexao();
+        } finally {
+
+        }
+        return t;
+    }
 }

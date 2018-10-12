@@ -9,20 +9,69 @@ import br.com.softflor.controller.FornecedorDAO;
 import br.com.softflor.entidades.Contato;
 import br.com.softflor.entidades.Endereco;
 import br.com.softflor.entidades.Fornecedor;
+import java.awt.HeadlessException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author Julio
  */
-public class CadastroFornecedor extends javax.swing.JFrame {
+public class CadastroFornecedor extends javax.swing.JDialog {
+
+    FornecedorDAO fDao = new FornecedorDAO();
+    Fornecedor fornecedor = new Fornecedor();
+    Contato contato = new Contato();
+    Endereco endereco = new Endereco();
 
     /**
      * Creates new form CadastroFornecedor
      */
-    public CadastroFornecedor() {
+    public CadastroFornecedor(java.awt.Frame parent, boolean modal) {
+        super(parent, modal);
         initComponents();
         setLocationRelativeTo(null);
+    }
+
+    public void limpaTela() {
+        txtBairro.setText("");
+        txtCEP.setText("");
+        txtCNPJ.setText("");
+        txtEmail.setText("");
+        txtMunicipio.setText("");
+        txtNomeForn.setText("");
+        txtNumero.setText("");
+        txtRUA.setText("");
+        txtResp.setText("");
+        txtTelefone.setText("");
+    }
+
+    void Atualiza(Fornecedor fornecedor) {
+
+        try {
+            if (fornecedor == null) { //verifa se tem fornecedor, se nao tiver exibe mensagem
+                JOptionPane.showMessageDialog(this, "Erro ao retornar fornecedor");
+            } else {
+                // se ebjetivo existir seta na interface grafica
+                lblID.setText(fornecedor.getIdfornecedor().toString());
+                txtBairro.setText(fornecedor.getEndereco().getBairro());
+                txtCEP.setText(fornecedor.getEndereco().getCep());
+                txtCNPJ.setText(fornecedor.getCnpj());
+                txtEmail.setText(fornecedor.getContato().getEmail());
+                txtMunicipio.setText(fornecedor.getEndereco().getCidade());
+                txtNomeForn.setText(fornecedor.getNome());
+                txtNumero.setText(fornecedor.getEndereco().getNumero());
+                txtRUA.setText(fornecedor.getEndereco().getLogradouro());
+                txtResp.setText(fornecedor.getContato().getNome());
+                txtTelefone.setText(fornecedor.getContato().getTelefone());
+                this.setVisible(true);
+            }
+        } catch (Exception e) {
+            //CASO ACONTECA ALGUM ERRO INESPERADO
+            JOptionPane.showMessageDialog(this, "Erro inesperado :(" + e);
+        }
+
     }
 
     /**
@@ -62,8 +111,9 @@ public class CadastroFornecedor extends javax.swing.JFrame {
         txtEmail = new javax.swing.JTextField();
         jLabel16 = new javax.swing.JLabel();
         txtResp = new javax.swing.JTextField();
+        lblID = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jLabel7.setText("NOME:");
 
@@ -187,8 +237,13 @@ public class CadastroFornecedor extends javax.swing.JFrame {
                                 .addGap(0, 0, Short.MAX_VALUE)))))
                 .addGap(22, 22, 22))
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(287, 287, 287)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(287, 287, 287)
+                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(lblID)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -232,7 +287,9 @@ public class CadastroFornecedor extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnCadastrarForn, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnSair, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(25, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(lblID)
+                .addContainerGap())
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -254,24 +311,34 @@ public class CadastroFornecedor extends javax.swing.JFrame {
     }//GEN-LAST:event_txtNumeroActionPerformed
 
     private void btnSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSairActionPerformed
-       
+
         this.setVisible(false);
     }//GEN-LAST:event_btnSairActionPerformed
 
     private void btnCadastrarFornActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadastrarFornActionPerformed
         // TODO add your handling code here:
-        Contato contato = new Contato(txtTelefone.getText(), txtEmail.getText(), txtResp.getText());
-        Endereco endereco = new Endereco(txtRUA.getText(), txtNumero.getText(), txtBairro.getText(), txtCEP.getText(), comboEstado.getSelectedItem().toString(), txtMunicipio.getText());
-        
-        Fornecedor fornecedor = new Fornecedor(comboStatus.getSelectedItem().toString(), txtCNPJ.getText(), txtNomeForn.getText(), contato, endereco);
 
-        FornecedorDAO fDao = new FornecedorDAO();
-        System.out.println(endereco.ChecaEstado());
-        System.out.println(fornecedor.ChecaStatus());
+        contato.setTelefone(txtTelefone.getText());
+        contato.setEmail(txtEmail.getText());
+        contato.setNome(txtResp.getText());
+
+        endereco.setBairro(txtBairro.getText());
+        endereco.setLogradouro(txtRUA.getText());
+        endereco.setNumero(txtNumero.getText());
+        endereco.setCep(txtCEP.getText());
+        endereco.setEstado(comboEstado.getSelectedItem().toString());
+        endereco.setCidade(txtMunicipio.getText());
+
+        fornecedor.setCnpj(txtCNPJ.getText());
+        fornecedor.setNome(txtNomeForn.getText());
+        fornecedor.setStatus(comboStatus.getSelectedItem().toString());
+        fornecedor.setContato(contato);
+        fornecedor.setEndereco(endereco);
+        //---Se Estado e Fornecedor for TRUE ele salva ou atualiza senão exibe mensagens--/////
         if ((endereco.ChecaEstado() && fornecedor.ChecaStatus()) == true) {
             try {
                 fDao.salvarOuAtualizar(fornecedor);
-                limpaTela();               
+                limpaTela();
             } catch (Exception ex) {
                 Logger.getLogger(CadastroFornecedor.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -310,7 +377,15 @@ public class CadastroFornecedor extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new CadastroFornecedor().setVisible(true);
+
+                CadastroFornecedor dialog = new CadastroFornecedor(new javax.swing.JFrame(), true);
+                dialog.addWindowListener(new java.awt.event.WindowAdapter() {
+                    @Override
+                    public void windowClosing(java.awt.event.WindowEvent e) {
+                        System.exit(0);
+                    }
+                });
+                dialog.setVisible(true);
             }
         });
     }
@@ -334,6 +409,7 @@ public class CadastroFornecedor extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JLabel lblID;
     private javax.swing.JTextField txtBairro;
     private javax.swing.JTextField txtCEP;
     private javax.swing.JTextField txtCNPJ;
@@ -346,17 +422,4 @@ public class CadastroFornecedor extends javax.swing.JFrame {
     private javax.swing.JTextField txtTelefone;
     // End of variables declaration//GEN-END:variables
 
-    public void limpaTela(){
-        txtBairro.setText("");
-        txtCEP.setText("");
-        txtCNPJ.setText("");
-        txtEmail.setText("");
-        txtMunicipio.setText("");
-        txtNomeForn.setText("");
-        txtNumero.setText("");
-        txtRUA.setText("");
-        txtResp.setText("");
-        txtTelefone.setText("");
-    }
-    
 }

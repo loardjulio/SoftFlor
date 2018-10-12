@@ -9,6 +9,7 @@ import br.com.softflor.controller.ClienteDAO;
 import br.com.softflor.controller.ClienteTableModel;
 import br.com.softflor.entidades.Cliente;
 import br.com.softflor.entidades.Fornecedor;
+import br.com.softflor.entidades.Produto;
 import javax.swing.JOptionPane;
 
 /**
@@ -20,20 +21,20 @@ public class ListaClientes extends javax.swing.JDialog {
     /**
      * Creates new form ListaClientes
      */
-    
-    private ClienteDAO clienteDAO ;
+    private ClienteDAO clienteDAO;
     private ClienteTableModel tableModel;
     public int idSelecionado;
-    CadastroCliente cc = new CadastroCliente(null,true);    
+    CadastroCliente cc = new CadastroCliente(null, true);
+
     public ListaClientes(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
-         setLocationRelativeTo(null);       
-        
-     clienteDAO = new ClienteDAO();
-     tableModel = new ClienteTableModel(clienteDAO.consultarTodos());
-        
-      tableLista.setModel(tableModel);
+        setLocationRelativeTo(null);
+
+        clienteDAO = new ClienteDAO();
+        tableModel = new ClienteTableModel(clienteDAO.consultarTodos());
+
+        tableLista.setModel(tableModel);
     }
 
     /**
@@ -176,14 +177,11 @@ public class ListaClientes extends javax.swing.JDialog {
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         // TODO add your handling code here:
-        
-            
+
         cc.setVisible(true);
         this.setVisible(false);
-        
-       
-   
-        
+
+
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
@@ -191,29 +189,35 @@ public class ListaClientes extends javax.swing.JDialog {
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarActionPerformed
-            int linha = tableLista.getSelectedRow();
+        int linha = tableLista.getSelectedRow();
+
+        if (linha == -1) {
+            JOptionPane.showMessageDialog(this, "Selecione um produto");
+        } else {
             int idSelecionado = (int) tableModel.getValueAt(linha, 0);
             cc.Atualiza(clienteDAO.buscarPorId(Cliente.class, idSelecionado));
-             this.setVisible(false);        
+            this.setVisible(false);
+        }
+
+
     }//GEN-LAST:event_btnEditarActionPerformed
 
     private void tableListaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tableListaMouseClicked
-if ( evt.getClickCount() == 2) { 
-            int linha = tableLista.getSelectedRow();            
-            int id =  (int) tableLista.getValueAt(linha, 0);           
-            this.idSelecionado=id;
-            this.dispose(); 
+        if (evt.getClickCount() == 2) {
+            int linha = tableLista.getSelectedRow();
+            int id = (int) tableLista.getValueAt(linha, 0);
+            this.idSelecionado = id;
+            this.dispose();
     }//GEN-LAST:event_tableListaMouseClicked
     }
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-       switch (JOptionPane.showConfirmDialog(null, "Deseja Excluir o item selecionado?")) {
+        switch (JOptionPane.showConfirmDialog(null, "Deseja Excluir o item selecionado?")) {
             case 0:
-                 int linha = tableLista.getSelectedRow();            
-                 int id =  (int) tableModel.getValueAt(linha, 0);
-                    clienteDAO.remover(Cliente.class, id);  
-                  tableModel.removeRow(linha);
-                    
-                    
+                int linha = tableLista.getSelectedRow();
+                int id = (int) tableModel.getValueAt(linha, 0);
+                clienteDAO.remover(Cliente.class, id);
+                tableModel.removeRow(linha);
+
                 break;
             case 1:
                 JOptionPane.showMessageDialog(null, "Operação cancelada");
@@ -223,7 +227,7 @@ if ( evt.getClickCount() == 2) {
                 break;
         }
     }//GEN-LAST:event_jButton3ActionPerformed
-    
+
     /**
      * @param args the command line arguments
      */
@@ -254,7 +258,7 @@ if ( evt.getClickCount() == 2) {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                 ListaClientes dialog = new ListaClientes(new javax.swing.JFrame(), true);
+                ListaClientes dialog = new ListaClientes(new javax.swing.JFrame(), true);
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                     @Override
                     public void windowClosing(java.awt.event.WindowEvent e) {

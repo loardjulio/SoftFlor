@@ -59,6 +59,7 @@ public class FornecedorDAO extends GenericDAO<Fornecedor> {
         return fornecedor;
     }
 
+    //--------- PARA PEGAR O FORNECEDOR DE UM DETERMINADO PRODUTO-------------
      public List<Fornecedor> fornecedorProduto(String nome) {
         List<Fornecedor> fornecedores = new ArrayList<>();
         Fornecedor fornecedor = consultarPorNome(nome);

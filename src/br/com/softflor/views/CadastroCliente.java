@@ -18,7 +18,11 @@ import javax.swing.JOptionPane;
  */
 public class CadastroCliente extends javax.swing.JDialog {
 
+    //----- OBJETO USADO PARA MANIPULAR UM CLIENTE------------//
     ClienteDAO cd = new ClienteDAO();
+    Contato contato = new Contato();
+    Endereco end = new Endereco();
+    Cliente cliente = new Cliente();
 
     /**
      * Creates new form CadastroCliente1
@@ -27,6 +31,48 @@ public class CadastroCliente extends javax.swing.JDialog {
         super(parent, modal);
         initComponents();
         setLocationRelativeTo(null);
+    }
+
+    //LIMPA OS CAMPOS DO FRAME APOS CADASTRAR OU EDITAR
+    public void LimpaCampos() {
+        txtBairro.setText("");
+        txtCEP.setText("");
+        txtCPF.setText("");
+        txtEmail.setText("");
+        txtMunicipio.setText("");
+        txtNome.setText("");
+        txtNumero.setText("");
+        txtRUA.setText("");
+        txtTelefone.setText("");
+    }
+
+    //SETA OS DADOS NO FRAME QUANTO FOR ATUALIZAR 
+    public void Atualiza(Cliente cliente) {
+
+        try {
+            if (cliente == null) { //verifa se tem cliente, se nao tiver exibe mensagem
+                JOptionPane.showMessageDialog(this, "Erro ao retornar cliente");
+            } else {
+                // SE O OBJETO EXISTIR SETA OS DADOS
+                lblID.setText(cliente.getId().toString());
+                txtNome.setText(cliente.getNome());
+                txtBairro.setText(cliente.getEndereco().getBairro());
+                txtCEP.setText(cliente.getEndereco().getCep());
+                txtCPF.setText(cliente.getCpf());
+                txtEmail.setText(cliente.getContato().getEmail());
+                txtMunicipio.setText(cliente.getEndereco().getCidade());
+                txtNumero.setText(cliente.getEndereco().getNumero());
+                txtRUA.setText(cliente.getEndereco().getLogradouro());
+                txtTelefone.setText(cliente.getContato().getTelefone());
+
+                this.setVisible(true);
+            }
+
+        } catch (Exception e) {
+            //CASO OCORRA ERRO INESPERADO
+            JOptionPane.showMessageDialog(this, "Erro inesperado :(" + e);
+        }
+
     }
 
     /**
@@ -190,12 +236,13 @@ public class CadastroCliente extends javax.swing.JDialog {
                         .addComponent(lblID, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel7)
-                    .addComponent(txtNome, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jLabel8)
-                        .addComponent(txtCPF, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(txtCPF, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel7)
+                        .addComponent(txtNome, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(35, 35, 35)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel9)
@@ -247,26 +294,23 @@ public class CadastroCliente extends javax.swing.JDialog {
 
     private void btnCadastrarFornActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadastrarFornActionPerformed
 
-        Contato contato = new Contato();
         contato.setEmail(txtEmail.getText());
         contato.setNome(txtNome.getText());
         contato.setTelefone(txtTelefone.getText());
 
-        Endereco end = new Endereco();
         end.setBairro(txtBairro.getText());
         end.setCep(txtCEP.getText());
         end.setCidade(txtMunicipio.getText());
         end.setEstado((String) comboEstado.getSelectedItem());
         end.setLogradouro(txtRUA.getText());
         end.setNumero(txtNumero.getText());
-        
-        Cliente cliente = new Cliente();
+
         cliente.setContato(contato);
         cliente.setEndereco(end);
-       cliente.setIdCliente(Integer.parseInt(lblID.getText()));
+        cliente.setIdCliente(Integer.parseInt(lblID.getText()));
         cliente.setCpf(txtCPF.getText());
         cliente.setNome(txtNome.getText());
-        
+
         if (end.ChecaEstado() == true) {
             int resp = JOptionPane.showConfirmDialog(null, "Deseja salvar as informações?", "Aguardando resposta...", JOptionPane.YES_NO_CANCEL_OPTION);
             if (resp == 0) {
@@ -359,44 +403,5 @@ public class CadastroCliente extends javax.swing.JDialog {
     private javax.swing.JTextField txtRUA;
     private javax.swing.JTextField txtTelefone;
     // End of variables declaration//GEN-END:variables
-public void LimpaCampos() {
-        txtBairro.setText("");
-        txtCEP.setText("");
-        txtCPF.setText("");
-        txtEmail.setText("");
-        txtMunicipio.setText("");
-        txtNome.setText("");
-        txtNumero.setText("");
-        txtRUA.setText("");
-        txtTelefone.setText("");
-    }
 
-
-    public void Atualiza(Cliente cliente){
-        
-        try {
-            
-            
-            if (cliente == null) {
-                JOptionPane.showMessageDialog(this, "Erro ao retornar cliente");
-            }else{
-                lblID.setText(cliente.getId().toString());
-                txtNome.setText(cliente.getNome());
-            txtBairro.setText(cliente.getEndereco().getBairro());
-            txtCEP.setText(cliente.getEndereco().getCep());
-            txtCPF.setText(cliente.getCpf());
-            txtEmail.setText(cliente.getContato().getEmail());
-            txtMunicipio.setText(cliente.getEndereco().getCidade());
-            txtNumero.setText(cliente.getEndereco().getNumero());
-            txtRUA.setText(cliente.getEndereco().getLogradouro());
-            txtTelefone.setText(cliente.getContato().getTelefone());
-            
-            this.setVisible(true);
-            }
-            
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(this,"Erro inesperado :(" +e);
-        }
-        
-    }
 }

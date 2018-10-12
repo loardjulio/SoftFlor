@@ -7,6 +7,8 @@ package br.com.softflor.views;
 
 import br.com.softflor.controller.ProdutoDAO;
 import br.com.softflor.controller.ProdutoTableModel;
+import br.com.softflor.entidades.Cliente;
+import br.com.softflor.entidades.Fornecedor;
 import br.com.softflor.entidades.Produto;
 import javax.swing.JDialog;
 import javax.swing.JOptionPane;
@@ -21,10 +23,10 @@ public class ListaProdutos extends javax.swing.JDialog {
      * Creates new form BuscaProdutos
      */
     public int idSelecionado;
-     public ProdutoTableModel tableModel;
+    public ProdutoTableModel tableModel;
     ProdutoDAO produtodao = new ProdutoDAO();
-    
-    
+    CadastroProduto cp = new CadastroProduto(null, true);
+
     public ListaProdutos(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
@@ -32,8 +34,6 @@ public class ListaProdutos extends javax.swing.JDialog {
         tableModel = new ProdutoTableModel(produtodao.consultarTodos());
         listaBuscaProduto.setModel(tableModel);
     }
-    
-    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -80,6 +80,11 @@ public class ListaProdutos extends javax.swing.JDialog {
         jPanel2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
         btEDITAR.setText("EDITAR");
+        btEDITAR.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btEDITARActionPerformed(evt);
+            }
+        });
 
         btVoltar.setText("VOLTAR");
         btVoltar.addActionListener(new java.awt.event.ActionListener() {
@@ -189,12 +194,12 @@ public class ListaProdutos extends javax.swing.JDialog {
 
     private void listaBuscaProdutoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_listaBuscaProdutoMouseClicked
 
-           if (evt.getClickCount() == 2) { 
-            int linha = listaBuscaProduto.getSelectedRow();            
-            int id =  (int) tableModel.getValueAt(linha, 0);           
-            this.idSelecionado=id;
+        if (evt.getClickCount() == 2) {
+            int linha = listaBuscaProduto.getSelectedRow();
+            int id = (int) tableModel.getValueAt(linha, 0);
+            this.idSelecionado = id;
             this.dispose();
-    } 
+        }
     }//GEN-LAST:event_listaBuscaProdutoMouseClicked
 
     private void btVoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btVoltarActionPerformed
@@ -202,7 +207,7 @@ public class ListaProdutos extends javax.swing.JDialog {
     }//GEN-LAST:event_btVoltarActionPerformed
 
     private void btCADASTRARActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btCADASTRARActionPerformed
-        CadastroProduto cp = new CadastroProduto(null,true);       
+//        CadastroProduto cp = new CadastroProduto(null,true);       
         cp.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_btCADASTRARActionPerformed
@@ -212,13 +217,13 @@ public class ListaProdutos extends javax.swing.JDialog {
     }//GEN-LAST:event_btnBuscarActionPerformed
 
     private void btEXCLUIRActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btEXCLUIRActionPerformed
-               switch (JOptionPane.showConfirmDialog(null, "Deseja Excluir o item selecionado?")) {
+        switch (JOptionPane.showConfirmDialog(null, "Deseja Excluir o item selecionado?")) {
             case 0:
-                 int linha = listaBuscaProduto.getSelectedRow();            
-                 int id =  (int) tableModel.getValueAt(linha, 0);
-                    produtodao.remover(Produto.class, id);  
-                    tableModel.removeRow(linha);
-                    
+                int linha = listaBuscaProduto.getSelectedRow();
+                int id = (int) tableModel.getValueAt(linha, 0);
+                produtodao.remover(Produto.class, id);
+                tableModel.removeRow(linha);
+
                 break;
             case 1:
                 JOptionPane.showMessageDialog(null, "Operação cancelada");
@@ -226,8 +231,22 @@ public class ListaProdutos extends javax.swing.JDialog {
             case 2:
                 System.out.println("botao cancel clicado");
                 break;
-        }        
+        }
     }//GEN-LAST:event_btEXCLUIRActionPerformed
+
+    private void btEDITARActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btEDITARActionPerformed
+        int linha = listaBuscaProduto.getSelectedRow();
+
+        if (linha == -1) {
+            JOptionPane.showMessageDialog(this, "Selecione um produto");
+        } else {
+            int idSelecionado = (int) tableModel.getValueAt(linha, 0);
+            cp.Atualiza(produtodao.buscarPorId(Produto.class, idSelecionado));
+            this.setVisible(false);
+        }
+
+
+    }//GEN-LAST:event_btEDITARActionPerformed
 
     /**
      * @param args the command line arguments
