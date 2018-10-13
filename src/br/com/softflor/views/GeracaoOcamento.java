@@ -68,6 +68,7 @@ public class GeracaoOcamento extends javax.swing.JFrame {
         jLabel9 = new javax.swing.JLabel();
         totalProduto = new javax.swing.JTextField();
         txtNomeProduto = new javax.swing.JTextField();
+        btnExcluir = new javax.swing.JButton();
         jButton5 = new javax.swing.JButton();
         jButton6 = new javax.swing.JButton();
 
@@ -186,6 +187,13 @@ public class GeracaoOcamento extends javax.swing.JFrame {
 
         txtNomeProduto.setEditable(false);
 
+        btnExcluir.setText("Excluir Item");
+        btnExcluir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnExcluirActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -220,7 +228,9 @@ public class GeracaoOcamento extends javax.swing.JFrame {
                         .addComponent(btnAdicionar, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap()
+                .addComponent(btnExcluir)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel8)
                 .addGap(18, 18, 18)
                 .addComponent(totalOrcamento, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -251,9 +261,11 @@ public class GeracaoOcamento extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel8)
-                    .addComponent(totalOrcamento, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel8)
+                        .addComponent(totalOrcamento, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btnExcluir))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -370,6 +382,33 @@ public class GeracaoOcamento extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_totalProdutoActionPerformed
 
+    private void btnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcluirActionPerformed
+
+        int linha = tableOrcamento.getSelectedRow();
+
+        switch (JOptionPane.showConfirmDialog(null, "Deseja Excluir o item selecionado?")) {
+            case 0:
+                if (linha == -1) {
+                    JOptionPane.showMessageDialog(this, "Selecione um item");
+                } else {
+                    double a = Double.parseDouble(totalOrcamento.getText());
+                    double b = (double) tableOrcamento.getValueAt(linha, 5);
+                    totalOrcamento.setText(String.valueOf(a - b));
+                    tableModel.removeRow(linha);
+                }
+
+                break;
+            case 1:
+                JOptionPane.showMessageDialog(null, "Operação cancelada");
+                break;
+            case 2:
+                System.out.println("botao cancel clicado");
+                break;
+        }
+
+
+    }//GEN-LAST:event_btnExcluirActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -407,6 +446,7 @@ public class GeracaoOcamento extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAdicionar;
+    private javax.swing.JButton btnExcluir;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton5;
