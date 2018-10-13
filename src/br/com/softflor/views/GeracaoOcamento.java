@@ -20,26 +20,27 @@ import javax.swing.JOptionPane;
  */
 public class GeracaoOcamento extends javax.swing.JFrame {
 
-  ProdutoDAO pd = new ProdutoDAO();
-  ClienteDAO cd = new ClienteDAO();
-    
-  SimpleDateFormat sdf = new SimpleDateFormat("yyyy");
-  SimpleDateFormat sdf2 = new SimpleDateFormat("MM");
+    ProdutoDAO pd = new ProdutoDAO();
+    ClienteDAO cd = new ClienteDAO();
+
+    SimpleDateFormat sdf = new SimpleDateFormat("yyyy");
+    SimpleDateFormat sdf2 = new SimpleDateFormat("MM");
     SimpleDateFormat sdf3 = new SimpleDateFormat("dd");
     int dia = Integer.valueOf(sdf3.format(new Date()));
     int mes = Integer.valueOf(sdf2.format(new Date()));
     int ano = Integer.valueOf(sdf.format(new Date()));
-    
-      OrcamentoTableModel tableModel = new OrcamentoTableModel();
+
+    OrcamentoTableModel tableModel = new OrcamentoTableModel();
+
     /**
      * Creates new form GeracaoOcamento
      */
-    public GeracaoOcamento() {        
+    public GeracaoOcamento() {
         initComponents();
-        setLocationRelativeTo(null);        
-         tableOrcamento.setModel(tableModel);           
-          }
-    
+        setLocationRelativeTo(null);
+        tableOrcamento.setModel(tableModel);
+    }
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -151,6 +152,8 @@ public class GeracaoOcamento extends javax.swing.JFrame {
         });
 
         jLabel8.setText("TOTAL:");
+
+        totalOrcamento.setEditable(false);
 
         tableOrcamento.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -294,28 +297,37 @@ public class GeracaoOcamento extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-         ListaClientes lc = new ListaClientes(this, true);
-         lc.setVisible(true);
-         int id = lc.idSelecionado;
-         Cliente c = cd.buscarPorId(Cliente.class, id);
-         txtNomeCliente.setText(c.getNome().toUpperCase());
-        
+        ListaClientes lc = new ListaClientes(this, true);
+        lc.setVisible(true);
+        int id = lc.idSelecionado;
+        Cliente c = cd.buscarPorId(Cliente.class, id);
+        txtNomeCliente.setText(c.getNome().toUpperCase());
+
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void btnAdicionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAdicionarActionPerformed
-      Produto produto = new Produto();              
-              produto.setNome(txtNomeProduto.getText());
-              produto.setUnidade_medida(txtUnidade.getText());
-              produto.setPreco_venda(Double.parseDouble(txtPreco.getText()));
-              produto.setQntdOrc(Double.parseDouble(txtQuantidade.getText()));            
-             produto.setPrecoTotal(Double.parseDouble(totalProduto.getText()));
-              tableModel.addRow(produto);
-             
-             
-             
-              
-              
-           
+
+        try {
+            Produto produto = new Produto();
+            produto.setNome(txtNomeProduto.getText());
+            produto.setUnidade_medida(txtUnidade.getText());
+            produto.setPreco_venda(Double.parseDouble(txtPreco.getText()));
+            produto.setQntdOrc(Double.parseDouble(txtQuantidade.getText()));
+            produto.setPrecoTotal(Double.parseDouble(totalProduto.getText()));
+            tableModel.addRow(produto);
+            LimpaCampo();
+
+            double somaTotal = 0;
+            for (int i = 0; i < tableOrcamento.getRowCount(); i++) {
+                somaTotal += Double.parseDouble(tableOrcamento.getValueAt(i, 5).toString());
+                totalOrcamento.setText(String.valueOf(somaTotal));
+            }
+
+        } catch (NumberFormatException numberFormatException) {
+            JOptionPane.showMessageDialog(this, "Ops. Ocorreu um erro. Verifique se os campos obrigatórios foram preenchidos");
+        }
+
+
     }//GEN-LAST:event_btnAdicionarActionPerformed
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
@@ -324,40 +336,33 @@ public class GeracaoOcamento extends javax.swing.JFrame {
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
 
-        
-         ListaProdutos jb = new ListaProdutos(this, true);
-         jb.setVisible(true);         
-         int id = jb.idSelecionado;
-         lblNumero.setText(id+"/"+ano+mes+dia);
-         
-         Produto p = pd.buscarPorId(Produto.class, id);
-         if (p != null) {
-            txtNomeProduto.setText(p.getNome().toUpperCase());
-         txtUnidade.setText(p.getUnidade_medida());
-         txtPreco.setText( p.getPreco_venda().toString());
-         
-         LimpaCampo(); 
-        } else{
-             JOptionPane.showMessageDialog(null, "Nenhum produto inserido no orçamento");
-         }
-         
-        
-       
-       
-       
-      // lblNomeProduto.setText(nome);
-             
-//        lblNumero.setText(idSelecionado);
-//        txtUnidade.setText(unidadeMedida);
-//        txtPreco.setText(PrecoProduto);       
-       
+        ListaProdutos jb = new ListaProdutos(this, true);
+        jb.setVisible(true);
+        int id = jb.idSelecionado;
+        lblNumero.setText(id + "/" + ano + mes + dia);
+
+        Produto p = pd.buscarPorId(Produto.class, id);
+
+        try {
+
+            if (p == null) {
+                JOptionPane.showMessageDialog(this, "Erro ao retornar objeto");
+            } else {
+                txtNomeProduto.setText(p.getNome().toUpperCase());
+                txtUnidade.setText(p.getUnidade_medida());
+                txtPreco.setText(p.getPreco_venda().toString());
+            }
+
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Erro inesperado");
+        }
+
 
     }//GEN-LAST:event_jButton3ActionPerformed
 
-    
-    
+
     private void txtQuantidadeFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtQuantidadeFocusLost
-        Double valor = (Double.parseDouble(txtQuantidade.getText())*Double.parseDouble(txtPreco.getText())); 
+        Double valor = (Double.parseDouble(txtQuantidade.getText()) * Double.parseDouble(txtPreco.getText()));
         totalProduto.setText(String.valueOf(valor));
     }//GEN-LAST:event_txtQuantidadeFocusLost
 
@@ -428,13 +433,13 @@ public class GeracaoOcamento extends javax.swing.JFrame {
     private javax.swing.JTextField txtUnidade;
     // End of variables declaration//GEN-END:variables
 
-    public void LimpaCampo(){
-        
+    public void LimpaCampo() {
+
         txtNomeProduto.setText("");
         txtPreco.setText("");
         txtQuantidade.setText("");
         txtUnidade.setText("");
+        totalProduto.setText("");
     }
-    
 
 }
