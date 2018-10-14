@@ -302,7 +302,7 @@ public class CadastroCliente extends javax.swing.JDialog {
         end.setEstado((String) comboEstado.getSelectedItem());
         end.setLogradouro(txtRUA.getText());
         end.setNumero(txtNumero.getText());
-
+        
         cliente.setContato(contato);
         cliente.setEndereco(end);
         cliente.setIdCliente(Integer.parseInt(lblID.getText()));

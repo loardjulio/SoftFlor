@@ -63,9 +63,9 @@ public class FornecedorDAO extends GenericDAO<Fornecedor> {
      public List<Fornecedor> fornecedorProduto(String nome) {
         List<Fornecedor> fornecedores = new ArrayList<>();
         Fornecedor fornecedor = consultarPorNome(nome);
-        fornecedor.setIdfornecedor(null);
-        fornecedor.getContato().setIdcontato(null);
-        fornecedor.getEndereco().setIdendereco(null);        
+        //fornecedor.setIdfornecedor(null);
+        //fornecedor.getContato().setIdcontato(null);
+        //fornecedor.getEndereco().setIdendereco(null);        
          fornecedores.add(fornecedor);  
          
         return fornecedores;

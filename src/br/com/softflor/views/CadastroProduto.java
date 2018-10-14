@@ -27,11 +27,12 @@ public class CadastroProduto extends javax.swing.JDialog {
     Fornecedor fornecedor = new Fornecedor();
     FornecedorDAO fdao = new FornecedorDAO();
     String nomeForn; //USADO PARA BUSCAR O FORNECEDOR DE UM DETERMINADO PRODUTO
+  
 
     public CadastroProduto(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
-        PreCombo(); //CARREGA O COMBOBOX COM OS FORNECEDORES
+       PreCombo(); //CARREGA O COMBOBOX COM OS FORNECEDORES
         this.setLocationRelativeTo(null);
     }
 
@@ -58,14 +59,14 @@ public class CadastroProduto extends javax.swing.JDialog {
             if (produto == null) { //verifa se tem produto, se nao tiver exibe mensagem
                 JOptionPane.showMessageDialog(this, "Erro ao retornar cliente");
             } else {
-                // SE EXISTIR O OBJETIVO SETA OS DADOS
+                // SE EXISTIR O OBJETO SETA OS DADOS
                 lblID.setText(produto.getId().toString());
                 txtEstoqueMin.setText(produto.getEstoque_minimo().toString());
                 txtNomeProduto.setText(produto.getNome());
                 txtPrecoVenda.setText(produto.getPreco_venda().toString());
                 txtPrecoCompra.setText(produto.getPreco_compra().toString());
                 txtQuantidadeProduto.setText(produto.getQuantidade().toString());
-                ComboFornecedor.addItem("<<Atual>> " + produto.getFornecedor().get(0).getNome());
+                ComboFornecedor.addItem("<<Atual>> " +produto.getFornecedor().get(0).getNome());
                 ComboMedida.addItem("<<Atual>> " + produto.getUnidade_medida());
                 this.setVisible(true);
             }
@@ -125,6 +126,8 @@ public class CadastroProduto extends javax.swing.JDialog {
         jLabel11.setText("ESTOQUE MÍNIMO:");
 
         jLabel3.setText("FORNECEDOR:");
+
+        ComboFornecedor.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "--SELECIONE--" }));
 
         btnSair.setText("VOLTAR");
         btnSair.addActionListener(new java.awt.event.ActionListener() {
@@ -200,8 +203,8 @@ public class CadastroProduto extends javax.swing.JDialog {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addGap(41, 41, 41)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 59, Short.MAX_VALUE)
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 55, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel7)
                     .addComponent(txtNomeProduto, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -247,7 +250,8 @@ public class CadastroProduto extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnCadastrarProActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadastrarProActionPerformed
-        produto.setNome(txtNomeProduto.getText());
+        produto.setIdproduto(Integer.parseInt(lblID.getText()));
+        produto.setNome(txtNomeProduto.getText());        
         nomeForn = (String) ComboFornecedor.getSelectedItem();
         produto.setFornecedor(fdao.fornecedorProduto(nomeForn));
         produto.setEstoque_minimo(Double.parseDouble(txtEstoqueMin.getText()));
@@ -256,18 +260,16 @@ public class CadastroProduto extends javax.swing.JDialog {
         produto.setQuantidade(Double.parseDouble(txtQuantidadeProduto.getText()));
         produto.setUnidade_medida((String) ComboMedida.getSelectedItem());
 
-        try {
+        
             pd.salvarOuAtualizar(produto);
             LimpaTela();
             this.dispose();
-        } catch (Exception ex) {
-            Logger.getLogger(CadastroProduto.class.getName()).log(Level.SEVERE, null, ex);
-        }
-
+        
     }//GEN-LAST:event_btnCadastrarProActionPerformed
 
     private void btnSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSairActionPerformed
         this.dispose();
+        pd.FechaConexao();
     }//GEN-LAST:event_btnSairActionPerformed
 
     /**

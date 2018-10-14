@@ -7,10 +7,7 @@ package br.com.softflor.views;
 
 import br.com.softflor.controller.ProdutoDAO;
 import br.com.softflor.controller.ProdutoTableModel;
-import br.com.softflor.entidades.Cliente;
-import br.com.softflor.entidades.Fornecedor;
 import br.com.softflor.entidades.Produto;
-import javax.swing.JDialog;
 import javax.swing.JOptionPane;
 
 /**
@@ -208,7 +205,8 @@ public class ListaProdutos extends javax.swing.JDialog {
 
     private void btCADASTRARActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btCADASTRARActionPerformed
 //        CadastroProduto cp = new CadastroProduto(null,true);       
-        cp.setVisible(true);
+
+cp.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_btCADASTRARActionPerformed
 
@@ -236,11 +234,11 @@ public class ListaProdutos extends javax.swing.JDialog {
 
     private void btEDITARActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btEDITARActionPerformed
         int linha = listaBuscaProduto.getSelectedRow();
-
         if (linha == -1) {
             JOptionPane.showMessageDialog(this, "Selecione um produto");
         } else {
             int idSelecionado = (int) tableModel.getValueAt(linha, 0);
+            
             cp.Atualiza(produtodao.buscarPorId(Produto.class, idSelecionado));
             this.setVisible(false);
         }

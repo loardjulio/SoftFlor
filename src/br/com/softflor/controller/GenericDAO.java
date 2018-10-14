@@ -38,8 +38,10 @@ public class GenericDAO<T extends EntidadeBase> extends ConectaBD {
                 JOptionPane.showMessageDialog(null, "Atualizado!");
             }
             em.getTransaction().commit();
+             FechaConexao();
         } catch (Exception e) {
             System.out.println(e);
+            JOptionPane.showMessageDialog(null, "Erro ao Salvar/Atualizar");
             FechaConexao();
         }
 
@@ -56,9 +58,9 @@ public class GenericDAO<T extends EntidadeBase> extends ConectaBD {
             JOptionPane.showMessageDialog(null, "Excluido com sucesso.");
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Erro ao remover o item");
-            FechaConexao();
+            
         } finally {
-            FechaConexao();
+           // FechaConexao();
 
         }
 

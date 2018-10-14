@@ -26,6 +26,7 @@ public class ProdutoTableModel extends AbstractTableModel{
         cabecalho = new ArrayList<>();
         cabecalho.add("CODIGO");        
         cabecalho.add("NOME");
+        cabecalho.add("FORNECEDOR");  
         cabecalho.add("EM ESTOQUE");
         cabecalho.add("PREÇO COMPRA");        
         cabecalho.add("PREÇO VENDA");              
@@ -80,18 +81,17 @@ public class ProdutoTableModel extends AbstractTableModel{
             case 1:
                  return listaProdutos.get(rowIndex).getNome();
             case 2:
-                 return listaProdutos.get(rowIndex).getQuantidade();
+                return listaProdutos.get(rowIndex).getFornecedor().get(rowIndex).getNome();
             case 3:
-                 return listaProdutos.get(rowIndex).getPreco_compra();
+                  return listaProdutos.get(rowIndex).getQuantidade();
             case 4:
-                return listaProdutos.get(rowIndex).getPreco_venda();
+                return listaProdutos.get(rowIndex).getPreco_compra();
             case 5:
-                 return listaProdutos.get(rowIndex).getEstoque_minimo();
+                   return listaProdutos.get(rowIndex).getPreco_venda();
             case 6:
+                return listaProdutos.get(rowIndex).getEstoque_minimo();
+            case 7:
                  return listaProdutos.get(rowIndex).getUnidade_medida();
-//            case 7:
-//                 return listaProdutos.get(rowIndex).getQuantidade();   
-            
             default:
                 System.out.println("retornarei nulo");
                 return null;

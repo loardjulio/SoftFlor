@@ -328,7 +328,7 @@ public class CadastroFornecedor extends javax.swing.JDialog {
         endereco.setCep(txtCEP.getText());
         endereco.setEstado(comboEstado.getSelectedItem().toString());
         endereco.setCidade(txtMunicipio.getText());
-
+       fornecedor.setIdfornecedor(Integer.parseInt(lblID.getText()));
         fornecedor.setCnpj(txtCNPJ.getText());
         fornecedor.setNome(txtNomeForn.getText());
         fornecedor.setStatus(comboStatus.getSelectedItem().toString());
@@ -336,12 +336,10 @@ public class CadastroFornecedor extends javax.swing.JDialog {
         fornecedor.setEndereco(endereco);
         //---Se Estado e Fornecedor for TRUE ele salva ou atualiza senão exibe mensagens--/////
         if ((endereco.ChecaEstado() && fornecedor.ChecaStatus()) == true) {
-            try {
+           
                 fDao.salvarOuAtualizar(fornecedor);
                 limpaTela();
-            } catch (Exception ex) {
-                Logger.getLogger(CadastroFornecedor.class.getName()).log(Level.SEVERE, null, ex);
-            }
+            
 
         }
 
