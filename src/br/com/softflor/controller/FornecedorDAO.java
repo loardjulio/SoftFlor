@@ -21,17 +21,14 @@ public class FornecedorDAO extends GenericDAO<Fornecedor> {
     public List<Fornecedor> consultarTodos() {
 
         List<Fornecedor> fornecedores = null;
-        try {
+        try {            
             Query q = em.createNamedQuery("Fornecedor.consultarTodos");
             fornecedores = q.getResultList();
 
         } catch (Exception e) {
             System.out.println("Erro FornecedorDAO: " + e);
-        //FechaConexao(); 
-        } finally {
-            //FechaConexao();            
-
-        }
+        FechaConexao(); 
+        } 
         return fornecedores;
 
     }
@@ -40,6 +37,7 @@ public class FornecedorDAO extends GenericDAO<Fornecedor> {
 
         Fornecedor fornecedor = null;
         try {
+             em.getTransaction().begin();
             Query q = em.createNamedQuery("Fornecedor.consultarPorNome");
             q.setParameter("nome", nome + "%");
             fornecedor = (Fornecedor) q.getSingleResult();
@@ -51,9 +49,7 @@ public class FornecedorDAO extends GenericDAO<Fornecedor> {
 //            }
         } catch (Exception e) {
             System.out.println("Erro fornecedorDAO: " + e);
-        } finally {
-            FechaConexao();
-            System.out.println("Consultas realizadas");
+             FechaConexao();
         }
 
         return fornecedor;
@@ -63,6 +59,10 @@ public class FornecedorDAO extends GenericDAO<Fornecedor> {
      public List<Fornecedor> fornecedorProduto(String nome) {
         List<Fornecedor> fornecedores = new ArrayList<>();
         Fornecedor fornecedor = consultarPorNome(nome);
+        
+         if (fornecedor==null) {
+             System.out.println("erro ao buscar fornecedor");
+         }
         //fornecedor.setIdfornecedor(null);
         //fornecedor.getContato().setIdcontato(null);
         //fornecedor.getEndereco().setIdendereco(null);        

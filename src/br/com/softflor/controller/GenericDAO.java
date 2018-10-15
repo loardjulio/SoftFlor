@@ -38,7 +38,7 @@ public class GenericDAO<T extends EntidadeBase> extends ConectaBD {
                 JOptionPane.showMessageDialog(null, "Atualizado!");
             }
             em.getTransaction().commit();
-             FechaConexao();
+            
         } catch (Exception e) {
             System.out.println(e);
             JOptionPane.showMessageDialog(null, "Erro ao Salvar/Atualizar");
@@ -48,37 +48,32 @@ public class GenericDAO<T extends EntidadeBase> extends ConectaBD {
         return t;
 
     }
+    
+    
 
     public void remover(Class<T> clazz, Serializable id) { //clazz é so pra diferenciar da palavra reservada
         T t = em.find(clazz, id);
-        try {
-            em.getTransaction().begin();
+        try {           
             em.remove(t); //executa o delete
             em.getTransaction().commit();
             JOptionPane.showMessageDialog(null, "Excluido com sucesso.");
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Erro ao remover o item");
-            
-        } finally {
-           // FechaConexao();
-
-        }
-
+             FechaConexao();
+        } 
     }
 
     public T buscarPorId(Class<T> clazz, Serializable id) {
 
         T t = null;
 
-        try {
+        try {           
             System.out.println("Tentei buscar " + id);
             t = em.find(clazz, id);
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Erro ao buscar por ID");
             FechaConexao();
-        } finally {
-
-        }
+        } 
         return t;
     }
 }

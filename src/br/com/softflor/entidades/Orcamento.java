@@ -14,6 +14,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
@@ -26,19 +27,22 @@ import javax.persistence.Table;
 @Table(name = "orcamentos")
 public class Orcamento implements EntidadeBase, Serializable {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Id  
     // @Column
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer idorcamento;
-    private Integer numeroOrcamento;
     
-  @OneToOne(cascade = CascadeType.PERSIST)    
+    private Double valorTotal;
+    
+    @OneToOne(cascade = CascadeType.REFRESH)    
     private Cliente cliente;
+        
     
-    @OneToMany(cascade = CascadeType.PERSIST) 
-    @JoinTable(name="orcamentos_produtos",  
-                joinColumns=@JoinColumn(name="idorcamento"),   
-                inverseJoinColumns=@JoinColumn(name="idproduto")) 
+    @ManyToMany(cascade = CascadeType.ALL)
+    @JoinTable(name = "orcamento_produtos", 
+            joinColumns = @JoinColumn(name = "idorcamento"),
+            inverseJoinColumns = @JoinColumn(name = "idproduto"))
+    
     private List<Produto> produtos;
     
 
@@ -75,6 +79,14 @@ public class Orcamento implements EntidadeBase, Serializable {
 
     public void setCliente(Cliente cliente) {
         this.cliente = cliente;
+    }
+
+    public Double getValorTotal() {
+        return valorTotal;
+    }
+
+    public void setValorTotal(Double valorTotal) {
+        this.valorTotal = valorTotal;
     }
 
     

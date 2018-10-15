@@ -27,12 +27,11 @@ public class CadastroProduto extends javax.swing.JDialog {
     Fornecedor fornecedor = new Fornecedor();
     FornecedorDAO fdao = new FornecedorDAO();
     String nomeForn; //USADO PARA BUSCAR O FORNECEDOR DE UM DETERMINADO PRODUTO
-  
 
     public CadastroProduto(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
-       PreCombo(); //CARREGA O COMBOBOX COM OS FORNECEDORES
+        PreCombo(); //CARREGA O COMBOBOX COM OS FORNECEDORES
         this.setLocationRelativeTo(null);
     }
 
@@ -55,9 +54,8 @@ public class CadastroProduto extends javax.swing.JDialog {
     //-------------SETA OS DADOS DO PRODUTO NA TELA PARA REALIZAR A EDICAO-------///
     public void Atualiza(Produto produto) {
         try {
-
             if (produto == null) { //verifa se tem produto, se nao tiver exibe mensagem
-                JOptionPane.showMessageDialog(this, "Erro ao retornar cliente");
+                JOptionPane.showMessageDialog(this, "Erro ao retornar produto");
             } else {
                 // SE EXISTIR O OBJETO SETA OS DADOS
                 lblID.setText(produto.getId().toString());
@@ -66,7 +64,7 @@ public class CadastroProduto extends javax.swing.JDialog {
                 txtPrecoVenda.setText(produto.getPreco_venda().toString());
                 txtPrecoCompra.setText(produto.getPreco_compra().toString());
                 txtQuantidadeProduto.setText(produto.getQuantidade().toString());
-                ComboFornecedor.addItem("<<Atual>> " +produto.getFornecedor().get(0).getNome());
+                ComboFornecedor.addItem("<<Atual>> " + produto.getFornecedor().get(0).getNome());
                 ComboMedida.addItem("<<Atual>> " + produto.getUnidade_medida());
                 this.setVisible(true);
             }
@@ -196,7 +194,7 @@ public class CadastroProduto extends javax.swing.JDialog {
                         .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(lblID, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(lblID, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -230,8 +228,8 @@ public class CadastroProduto extends javax.swing.JDialog {
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jLabel11)
                         .addComponent(txtEstoqueMin, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(40, 40, 40)
-                .addComponent(lblID)
+                .addGap(16, 16, 16)
+                .addComponent(lblID, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
 
@@ -250,21 +248,25 @@ public class CadastroProduto extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnCadastrarProActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadastrarProActionPerformed
-        produto.setIdproduto(Integer.parseInt(lblID.getText()));
-        produto.setNome(txtNomeProduto.getText());        
+
+        produto.setNome(txtNomeProduto.getText());
         nomeForn = (String) ComboFornecedor.getSelectedItem();
         produto.setFornecedor(fdao.fornecedorProduto(nomeForn));
+        
+        if (lblID.getText().equals("") == false) {  //SE O CAMPO ID NÃO ESTIVER VAZIO ELE PEGA O DADO         
+               produto.setIdproduto(Integer.parseInt(lblID.getText()));
+        } 
         produto.setEstoque_minimo(Double.parseDouble(txtEstoqueMin.getText()));
         produto.setPreco_compra(Double.parseDouble(txtPrecoCompra.getText()));
         produto.setPreco_venda(Double.parseDouble(txtPrecoVenda.getText()));
         produto.setQuantidade(Double.parseDouble(txtQuantidadeProduto.getText()));
         produto.setUnidade_medida((String) ComboMedida.getSelectedItem());
 
+        pd.salvarOuAtualizar(produto);
+        LimpaTela();
+        this.dispose();
         
-            pd.salvarOuAtualizar(produto);
-            LimpaTela();
-            this.dispose();
-        
+
     }//GEN-LAST:event_btnCadastrarProActionPerformed
 
     private void btnSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSairActionPerformed

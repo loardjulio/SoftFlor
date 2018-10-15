@@ -26,6 +26,7 @@ public class ListaFornecedores extends javax.swing.JFrame {
 
     public ListaFornecedores() {
         initComponents();
+        
         tableModel = new FornecedorTableModel(fornecedordao.consultarTodos());//realizo a consulta e coloco na tabela
 
         tabela.setModel(tableModel);

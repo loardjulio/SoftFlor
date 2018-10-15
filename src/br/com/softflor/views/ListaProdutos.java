@@ -7,6 +7,7 @@ package br.com.softflor.views;
 
 import br.com.softflor.controller.ProdutoDAO;
 import br.com.softflor.controller.ProdutoTableModel;
+import br.com.softflor.entidades.Fornecedor;
 import br.com.softflor.entidades.Produto;
 import javax.swing.JOptionPane;
 
@@ -28,8 +29,12 @@ public class ListaProdutos extends javax.swing.JDialog {
         super(parent, modal);
         initComponents();
         setLocationRelativeTo(null);
-        tableModel = new ProdutoTableModel(produtodao.consultarTodos());
-        listaBuscaProduto.setModel(tableModel);
+        loadTable();
+    }
+    
+    public void loadTable(){
+      tableModel = new ProdutoTableModel(produtodao.consultarTodos());
+        listaBuscaProduto.setModel(tableModel);  
     }
 
     /**
@@ -221,7 +226,7 @@ cp.setVisible(true);
                 int id = (int) tableModel.getValueAt(linha, 0);
                 produtodao.remover(Produto.class, id);
                 tableModel.removeRow(linha);
-
+               
                 break;
             case 1:
                 JOptionPane.showMessageDialog(null, "Operação cancelada");
@@ -237,9 +242,11 @@ cp.setVisible(true);
         if (linha == -1) {
             JOptionPane.showMessageDialog(this, "Selecione um produto");
         } else {
-            int idSelecionado = (int) tableModel.getValueAt(linha, 0);
+            int id = (int) tableModel.getValueAt(linha, 0);
             
-            cp.Atualiza(produtodao.buscarPorId(Produto.class, idSelecionado));
+            cp.Atualiza(produtodao.buscarPorId(Produto.class, id));
+            
+           
             this.setVisible(false);
         }
 

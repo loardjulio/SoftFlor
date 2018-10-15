@@ -7,8 +7,10 @@ package br.com.softflor.controller;
 
 import br.com.softflor.entidades.Cliente;
 import br.com.softflor.entidades.Produto;
+import br.com.softflor.views.ListaProdutos;
 import java.util.ArrayList;
 import java.util.List;
+import javax.swing.JOptionPane;
 import javax.swing.table.AbstractTableModel;
 
 /**
@@ -26,7 +28,7 @@ public class ProdutoTableModel extends AbstractTableModel{
         cabecalho = new ArrayList<>();
         cabecalho.add("CODIGO");        
         cabecalho.add("NOME");
-        cabecalho.add("FORNECEDOR");  
+        
         cabecalho.add("EM ESTOQUE");
         cabecalho.add("PREÇO COMPRA");        
         cabecalho.add("PREÇO VENDA");              
@@ -81,16 +83,14 @@ public class ProdutoTableModel extends AbstractTableModel{
             case 1:
                  return listaProdutos.get(rowIndex).getNome();
             case 2:
-                return listaProdutos.get(rowIndex).getFornecedor().get(rowIndex).getNome();
-            case 3:
                   return listaProdutos.get(rowIndex).getQuantidade();
-            case 4:
+            case 3:
                 return listaProdutos.get(rowIndex).getPreco_compra();
-            case 5:
+            case 4:
                    return listaProdutos.get(rowIndex).getPreco_venda();
-            case 6:
+            case 5:
                 return listaProdutos.get(rowIndex).getEstoque_minimo();
-            case 7:
+            case 6:
                  return listaProdutos.get(rowIndex).getUnidade_medida();
             default:
                 System.out.println("retornarei nulo");

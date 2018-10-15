@@ -75,19 +75,11 @@ public class Fornecedor implements Serializable,EntidadeBase {
         this.contato = contato;
         this.endereco = endereco;
     }
-      
-      
-      
      
-    
     @Override
     public Serializable getId() {
        return idfornecedor;
     }
-
-   
-  
-   
 
     public Integer getIdfornecedor() {
         return idfornecedor;

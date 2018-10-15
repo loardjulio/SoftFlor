@@ -7,6 +7,7 @@ package br.com.softflor.entidades;
 
 import java.io.Serializable;
 import java.util.List;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -53,8 +54,9 @@ public class Produto implements EntidadeBase, Serializable {
     
    
        
-    @ManyToMany(cascade = javax.persistence.CascadeType.ALL)
-    @JoinTable(name = "Produto_Fornecedor", joinColumns = @JoinColumn(name = "idproduto"),
+    @ManyToMany(cascade = CascadeType.REFRESH)
+    @JoinTable(name = "Produto_Fornecedor", 
+            joinColumns = @JoinColumn(name = "idproduto"),
             inverseJoinColumns = @JoinColumn(name = "idfornecedor"))
     private List<Fornecedor> fornecedor;
    
