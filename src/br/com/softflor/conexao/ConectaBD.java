@@ -22,8 +22,9 @@ public class ConectaBD {
         return factory.createEntityManager();
     }
 
-    public void FechaConexao() {
-        factory.close(); 
+    public void FechaConexao() {   
+        getEntityManager().close();
+        //factory.close();        
         System.out.println("Conexão fechada");
     }
 

@@ -7,16 +7,33 @@ package br.com.softflor.views;
 
 import br.com.softflor.controller.ClienteDAO;
 import br.com.softflor.controller.OrcamentoDAO;
-import br.com.softflor.controller.OrcamentoTableModel;
+import br.com.softflor.controller.tableModel.OrcamentoTableModel;
 import br.com.softflor.controller.ProdutoDAO;
 import br.com.softflor.entidades.Cliente;
 import br.com.softflor.entidades.Orcamento;
 import br.com.softflor.entidades.Produto;
+import java.awt.Dialog.ModalityType;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JDialog;
 import javax.swing.JOptionPane;
+import net.sf.jasperreports.engine.JRException;
+import net.sf.jasperreports.engine.JasperExportManager;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
+import net.sf.jasperreports.engine.data.JRTableModelDataSource;
+import net.sf.jasperreports.swing.JRViewer;
+import net.sf.jasperreports.view.JasperViewer;
 
 /**
  *
@@ -287,6 +304,11 @@ public class GeracaoOcamento extends javax.swing.JFrame {
         });
 
         jButton6.setText("GERAR ");
+        jButton6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton6ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -330,7 +352,7 @@ public class GeracaoOcamento extends javax.swing.JFrame {
     private void btnAdicionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAdicionarActionPerformed
 
         try {
-           // Produto produto = new Produto();
+             Produto produto = new Produto();
             produto.setNome(txtNomeProduto.getText());
             produto.setUnidade_medida(txtUnidade.getText());
             produto.setPreco_venda(Double.parseDouble(txtPreco.getText()));
@@ -355,19 +377,19 @@ public class GeracaoOcamento extends javax.swing.JFrame {
 
     private void btnSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarActionPerformed
         orcamento.setCliente(cliente);
-       // orcamento.setIdorcamento(Integer.parseInt(lblNumero.getText()));
-       
-        for (int i = 0; i < tableOrcamento.getRowCount(); i++) {        
-         
-            produto.setNome((String)tableModel.getValueAt(i, 1));
-          produto.setUnidade_medida((String)tableModel.getValueAt(i, 2));
-          produto.setQuantidade((Double) tableModel.getValueAt(i, 3));
-          produto.setPreco_venda((Double) tableModel.getValueAt(i, 4));
-          produto.setPrecoTotal((Double) tableModel.getValueAt(i, 5));      
-         listProdutoOrcamento.add(produto);
+        // orcamento.setIdorcamento(Integer.parseInt(lblNumero.getText()));
+
+        for (int i = 0; i < tableOrcamento.getRowCount(); i++) {
+
+            produto.setNome((String) tableModel.getValueAt(i, 1));
+            produto.setUnidade_medida((String) tableModel.getValueAt(i, 2));
+            produto.setQuantidade((Double) tableModel.getValueAt(i, 3));
+            produto.setPreco_venda((Double) tableModel.getValueAt(i, 4));
+            produto.setPrecoTotal((Double) tableModel.getValueAt(i, 5));
+            listProdutoOrcamento.add(produto);
         }
         orcamento.setProdutos(listProdutoOrcamento);
-        orcamento.setValorTotal(Double.parseDouble(totalOrcamento.getText()));        
+        orcamento.setValorTotal(Double.parseDouble(totalOrcamento.getText()));
         od.salvarOuAtualizar(orcamento);
 
     }//GEN-LAST:event_btnSalvarActionPerformed
@@ -377,7 +399,7 @@ public class GeracaoOcamento extends javax.swing.JFrame {
         ListaProdutos jb = new ListaProdutos(this, true);
         jb.setVisible(true);
         int id = jb.idSelecionado;
-        lblNumero.setText(""+id+ mes + dia);
+        lblNumero.setText("" + id + mes + dia);
 
         Produto p = pd.buscarPorId(Produto.class, id);
 
@@ -433,6 +455,50 @@ public class GeracaoOcamento extends javax.swing.JFrame {
 
 
     }//GEN-LAST:event_btnExcluirActionPerformed
+
+    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
+
+        for (int i = 0; i < tableOrcamento.getRowCount(); i++) {
+            produto.setIdproduto((Integer) tableModel.getValueAt(i, 0));
+            produto.setNome((String) tableModel.getValueAt(i, 1));
+            produto.setUnidade_medida((String) tableModel.getValueAt(i, 2));
+            produto.setQuantidade((Double) tableModel.getValueAt(i, 3));
+            produto.setPreco_venda((Double) tableModel.getValueAt(i, 4));
+            produto.setPrecoTotal((Double) tableModel.getValueAt(i, 5));
+            listProdutoOrcamento.add(produto);
+        }
+
+        String arquivo = "relatorio/relatorioOrc.jasper";
+        String nome = txtNomeCliente.getText();
+        String total =totalOrcamento.getText();
+        //cria datasource a partir da collection
+        JRBeanCollectionDataSource jrds = new JRBeanCollectionDataSource(listProdutoOrcamento);
+        Map <String, Object> parametros = new HashMap<>();
+       // Map parametros = new HashMap();
+        parametros.put("parameter1", nome);
+       parametros.put("parameter2",total);
+       
+        JasperPrint printer = null;
+        try {
+            printer = JasperFillManager.fillReport(arquivo, parametros, jrds);
+            JasperViewer jv = new JasperViewer(printer, false);
+            jv.setTitle("Orçamento - " + nome);
+            jv.setVisible(true);
+
+            //grava relatorio pdf em disco
+            FileOutputStream fos = new FileOutputStream("C:/Users/Julio/Documents/Orçamentos-SoftFlor/Orçamento-" + nome + ".pdf");
+            JasperExportManager.exportReportToPdfStream(printer, fos);
+            fos.flush();
+            fos.close();
+
+        } catch (JRException ex) {
+            Logger.getLogger(GeracaoOcamento.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(GeracaoOcamento.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(GeracaoOcamento.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jButton6ActionPerformed
 
     /**
      * @param args the command line arguments

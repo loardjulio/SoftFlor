@@ -12,13 +12,13 @@ package br.com.softflor.views;
 public class Principal extends javax.swing.JFrame {
 
     //----------- INSTANCIA DOS JDIALOG PARA UTILIZAR NAS ACOES DOS BOTOES----------------//
-    CadastroFornecedor cf = new CadastroFornecedor(this, true);
-    CadastroCliente cc = new CadastroCliente(this, true);
-    CadastroProduto cp = new CadastroProduto(this, true);
-    ListaFornecedores listagem = new ListaFornecedores();
-    ListaProdutos listagemProduto = new ListaProdutos(this, true);
-    ListaClientes lc = new ListaClientes(this, true);
-    GeracaoOcamento go = new GeracaoOcamento();
+    
+    
+   
+    
+    
+   
+    
 
     public Principal() {
         initComponents();
@@ -243,20 +243,23 @@ public class Principal extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnClienteActionPerformed
-        lc.setVisible(true);
+         ListaClientes lc = new ListaClientes(this, true);
+           lc.setVisible(true);
     }//GEN-LAST:event_btnClienteActionPerformed
 
     private void btnProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnProdutoActionPerformed
-      
+      ListaProdutos listagemProduto = new ListaProdutos(this, true);
         listagemProduto.setVisible(true);
         
     }//GEN-LAST:event_btnProdutoActionPerformed
 
     private void btnFornecedorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFornecedorActionPerformed
+        ListaFornecedores listagem = new ListaFornecedores();
         listagem.setVisible(true);
     }//GEN-LAST:event_btnFornecedorActionPerformed
 
     private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
+        CadastroCliente cc = new CadastroCliente(this, true);
         cc.setVisible(true);
     }//GEN-LAST:event_jMenuItem2ActionPerformed
 
@@ -265,16 +268,18 @@ public class Principal extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItem13ActionPerformed
 
     private void btnOrcamentoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOrcamentoActionPerformed
+        GeracaoOcamento go = new GeracaoOcamento();
         go.setVisible(true);
     }//GEN-LAST:event_btnOrcamentoActionPerformed
 
     private void jMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem4ActionPerformed
-       
+        CadastroProduto cp = new CadastroProduto(this, true);
         cp.setVisible(true);
         
     }//GEN-LAST:event_jMenuItem4ActionPerformed
 
     private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
+       CadastroFornecedor cf = new CadastroFornecedor(this, true);
         cf.setVisible(true);
     }//GEN-LAST:event_jMenuItem3ActionPerformed
 

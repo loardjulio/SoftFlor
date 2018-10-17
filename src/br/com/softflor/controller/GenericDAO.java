@@ -52,14 +52,17 @@ public class GenericDAO<T extends EntidadeBase> extends ConectaBD {
     
 
     public void remover(Class<T> clazz, Serializable id) { //clazz é so pra diferenciar da palavra reservada
-        T t = em.find(clazz, id);
-        try {           
+        T t = em.find(clazz, id); 
+        
+        try {             
+            em.getTransaction().begin();
             em.remove(t); //executa o delete
             em.getTransaction().commit();
             JOptionPane.showMessageDialog(null, "Excluido com sucesso.");
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "Erro ao remover o item");
+            JOptionPane.showMessageDialog(null, "(GenericDao) Erro ao remover o item: "+e);            
              FechaConexao();
+             throw e;
         } 
     }
 

@@ -6,8 +6,7 @@
 package br.com.softflor.views;
 
 import br.com.softflor.controller.ProdutoDAO;
-import br.com.softflor.controller.ProdutoTableModel;
-import br.com.softflor.entidades.Fornecedor;
+import br.com.softflor.controller.tableModel.ProdutoTableModel;
 import br.com.softflor.entidades.Produto;
 import javax.swing.JOptionPane;
 
@@ -22,8 +21,7 @@ public class ListaProdutos extends javax.swing.JDialog {
      */
     public int idSelecionado;
     public ProdutoTableModel tableModel;
-    ProdutoDAO produtodao = new ProdutoDAO();
-    CadastroProduto cp = new CadastroProduto(null, true);
+    
 
     public ListaProdutos(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
@@ -31,10 +29,11 @@ public class ListaProdutos extends javax.swing.JDialog {
         setLocationRelativeTo(null);
         loadTable();
     }
-    
-    public void loadTable(){
-      tableModel = new ProdutoTableModel(produtodao.consultarTodos());
-        listaBuscaProduto.setModel(tableModel);  
+
+    public void loadTable() {
+        ProdutoDAO pd = new ProdutoDAO();
+        tableModel = new ProdutoTableModel(pd.consultarTodos());
+        listaBuscaProduto.setModel(tableModel);
     }
 
     /**
@@ -210,8 +209,8 @@ public class ListaProdutos extends javax.swing.JDialog {
 
     private void btCADASTRARActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btCADASTRARActionPerformed
 //        CadastroProduto cp = new CadastroProduto(null,true);       
-
-cp.setVisible(true);
+        CadastroProduto cp = new CadastroProduto(null, true);
+        cp.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_btCADASTRARActionPerformed
 
@@ -220,13 +219,14 @@ cp.setVisible(true);
     }//GEN-LAST:event_btnBuscarActionPerformed
 
     private void btEXCLUIRActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btEXCLUIRActionPerformed
+
         switch (JOptionPane.showConfirmDialog(null, "Deseja Excluir o item selecionado?")) {
             case 0:
                 int linha = listaBuscaProduto.getSelectedRow();
                 int id = (int) tableModel.getValueAt(linha, 0);
-                produtodao.remover(Produto.class, id);
+                ProdutoDAO pd = new ProdutoDAO();
+                pd.remover(Produto.class, id);
                 tableModel.removeRow(linha);
-               
                 break;
             case 1:
                 JOptionPane.showMessageDialog(null, "Operação cancelada");
@@ -234,7 +234,9 @@ cp.setVisible(true);
             case 2:
                 System.out.println("botao cancel clicado");
                 break;
+
         }
+
     }//GEN-LAST:event_btEXCLUIRActionPerformed
 
     private void btEDITARActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btEDITARActionPerformed
@@ -242,11 +244,11 @@ cp.setVisible(true);
         if (linha == -1) {
             JOptionPane.showMessageDialog(this, "Selecione um produto");
         } else {
+            ProdutoDAO pd = new ProdutoDAO();
             int id = (int) tableModel.getValueAt(linha, 0);
-            
-            cp.Atualiza(produtodao.buscarPorId(Produto.class, id));
-            
-           
+            CadastroProduto cp = new CadastroProduto(null, true);
+            cp.Atualiza(pd.buscarPorId(Produto.class, id));
+
             this.setVisible(false);
         }
 

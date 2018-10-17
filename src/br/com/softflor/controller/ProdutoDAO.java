@@ -23,10 +23,11 @@ public class ProdutoDAO extends GenericDAO<Produto> {
         try {
              em.getTransaction().begin();
             Query q = em.createNamedQuery("Produto.consultarTodos");
-            List<Produto> produtos = q.getResultList();
+            List<Produto> produtos = q.getResultList();            
             return produtos;
+           
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "Erro buscar Produtos");
+            JOptionPane.showMessageDialog(null, "Erro buscar Produtos"+ e);
             FechaConexao();
         }
         return null;

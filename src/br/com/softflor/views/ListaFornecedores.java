@@ -6,7 +6,7 @@
 package br.com.softflor.views;
 
 import br.com.softflor.controller.FornecedorDAO;
-import br.com.softflor.controller.FornecedorTableModel;
+import br.com.softflor.controller.tableModel.FornecedorTableModel;
 import br.com.softflor.entidades.Fornecedor;
 import br.com.softflor.entidades.Produto;
 import javax.swing.JOptionPane;

@@ -23,14 +23,14 @@ public class FornecedorDAO extends GenericDAO<Fornecedor> {
         List<Fornecedor> fornecedores = null;
         try {            
             Query q = em.createNamedQuery("Fornecedor.consultarTodos");
-            fornecedores = q.getResultList();
-
+            fornecedores = q.getResultList();            
+            return fornecedores;
         } catch (Exception e) {
             System.out.println("Erro FornecedorDAO: " + e);
         FechaConexao(); 
         } 
-        return fornecedores;
-
+        
+return null;
     }
 
     public Fornecedor consultarPorNome(String nome) {
