@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="relatorioOrc" language="groovy" pageWidth="595" pageHeight="842" whenNoDataType="NoDataSection" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="4f5c00da-9102-45a6-8229-1fc18f3ba470">
-	<property name="ireport.zoom" value="1.4641000000000206"/>
-	<property name="ireport.x" value="22"/>
+	<property name="ireport.zoom" value="1.771561000000026"/>
+	<property name="ireport.x" value="0"/>
 	<property name="ireport.y" value="0"/>
 	<style name="Title" forecolor="#FFFFFF" fontName="Times New Roman" fontSize="50" isBold="false" pdfFontName="Times-Bold"/>
 	<style name="SubTitle" forecolor="#666666" fontName="Times New Roman" fontSize="18" isBold="false" pdfFontName="Times-Roman"/>
@@ -66,17 +66,6 @@
 	</title>
 	<pageHeader>
 		<band height="31">
-			<textField>
-				<reportElement isPrintRepeatedValues="false" x="82" y="0" width="319" height="29" uuid="d8d729d7-a8be-4abc-892f-ab9a84cf8b5f"/>
-				<textFieldExpression><![CDATA[$P{parameter1}]]></textFieldExpression>
-			</textField>
-			<staticText>
-				<reportElement style="Column header" positionType="Float" x="0" y="0" width="82" height="29" forecolor="#000000" uuid="48c41359-e1fa-4cda-8816-ee6c54224455"/>
-				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font fontName="Arial" size="10" isBold="true" pdfFontName="Helvetica"/>
-				</textElement>
-				<text><![CDATA[CLIENTE:]]></text>
-			</staticText>
 			<staticText>
 				<reportElement style="SubTitle" x="402" y="0" width="153" height="29" uuid="f82ef0c0-98d7-43bf-9d71-a6d56a89b52e"/>
 				<textElement textAlignment="Center">
@@ -84,52 +73,69 @@
 				</textElement>
 				<text><![CDATA[Lista de produtos]]></text>
 			</staticText>
+			<frame>
+				<reportElement x="0" y="0" width="401" height="29" uuid="7f11ee60-ff8b-41e4-9087-129817556118"/>
+				<staticText>
+					<reportElement style="Column header" positionType="Float" x="0" y="0" width="82" height="29" forecolor="#000000" uuid="48c41359-e1fa-4cda-8816-ee6c54224455"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font fontName="Arial" size="10" isBold="true" pdfFontName="Helvetica"/>
+					</textElement>
+					<text><![CDATA[CLIENTE:]]></text>
+				</staticText>
+				<textField>
+					<reportElement isPrintRepeatedValues="false" x="82" y="0" width="319" height="29" uuid="d8d729d7-a8be-4abc-892f-ab9a84cf8b5f"/>
+					<textFieldExpression><![CDATA[$P{parameter1}]]></textFieldExpression>
+				</textField>
+			</frame>
 		</band>
 	</pageHeader>
 	<columnHeader>
-		<band height="20" splitType="Stretch">
-			<staticText>
-				<reportElement style="Detail" isPrintRepeatedValues="false" x="42" y="0" width="236" height="20" uuid="0ddd4c92-9a50-452a-b86c-bf5e5b595b90"/>
-				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font size="10" isBold="true"/>
-				</textElement>
-				<text><![CDATA[PRODUTO]]></text>
-			</staticText>
-			<staticText>
-				<reportElement style="Detail" isPrintRepeatedValues="false" x="454" y="0" width="58" height="20" backcolor="#330033" uuid="e7271eea-2d4c-40eb-baf8-5dbb79bb45de"/>
-				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font size="10" isBold="true"/>
-				</textElement>
-				<text><![CDATA[PREÇO UNITÁRIO]]></text>
-			</staticText>
-			<staticText>
-				<reportElement style="Detail" isPrintRepeatedValues="false" x="278" y="0" width="101" height="20" uuid="ff048603-610d-4144-8c1e-634b5b240a8e"/>
-				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font size="10" isBold="true"/>
-				</textElement>
-				<text><![CDATA[UNIDADE MEDIDA]]></text>
-			</staticText>
-			<staticText>
-				<reportElement style="Detail" isPrintRepeatedValues="false" x="0" y="0" width="42" height="20" uuid="3bd2d78e-50d3-413e-b3cf-31e4db70f92b"/>
-				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font size="10" isBold="true"/>
-				</textElement>
-				<text><![CDATA[ITEM]]></text>
-			</staticText>
-			<staticText>
-				<reportElement style="Detail" isPrintRepeatedValues="false" x="512" y="0" width="43" height="20" uuid="7194ac68-77a2-4fb4-8987-fa0f23c75ad6"/>
-				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font size="10" isBold="true"/>
-				</textElement>
-				<text><![CDATA[PREÇO TOTAL]]></text>
-			</staticText>
-			<staticText>
-				<reportElement style="Detail" isPrintRepeatedValues="false" x="379" y="0" width="75" height="20" uuid="91319c5e-378b-4d6d-ae5c-09d70979604d"/>
-				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font size="10" isBold="true"/>
-				</textElement>
-				<text><![CDATA[QUANTIDADE]]></text>
-			</staticText>
+		<band height="29" splitType="Stretch">
+			<frame>
+				<reportElement x="1" y="2" width="554" height="27" uuid="0197eb2f-6ad3-4501-be5a-5402d59780a7"/>
+				<staticText>
+					<reportElement style="Detail" isPrintRepeatedValues="false" x="379" y="0" width="75" height="20" uuid="91319c5e-378b-4d6d-ae5c-09d70979604d"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="10" isBold="true"/>
+					</textElement>
+					<text><![CDATA[QUANTIDADE]]></text>
+				</staticText>
+				<staticText>
+					<reportElement style="Detail" isPrintRepeatedValues="false" x="511" y="0" width="43" height="20" uuid="7194ac68-77a2-4fb4-8987-fa0f23c75ad6"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="10" isBold="true"/>
+					</textElement>
+					<text><![CDATA[PREÇO TOTAL]]></text>
+				</staticText>
+				<staticText>
+					<reportElement style="Detail" isPrintRepeatedValues="false" x="0" y="0" width="42" height="20" uuid="3bd2d78e-50d3-413e-b3cf-31e4db70f92b"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="10" isBold="true"/>
+					</textElement>
+					<text><![CDATA[ITEM]]></text>
+				</staticText>
+				<staticText>
+					<reportElement style="Detail" isPrintRepeatedValues="false" x="278" y="0" width="101" height="20" uuid="ff048603-610d-4144-8c1e-634b5b240a8e"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="10" isBold="true"/>
+					</textElement>
+					<text><![CDATA[UNIDADE MEDIDA]]></text>
+				</staticText>
+				<staticText>
+					<reportElement style="Detail" isPrintRepeatedValues="false" x="454" y="0" width="58" height="20" backcolor="#330033" uuid="e7271eea-2d4c-40eb-baf8-5dbb79bb45de"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="10" isBold="true"/>
+					</textElement>
+					<text><![CDATA[PREÇO UNITÁRIO]]></text>
+				</staticText>
+				<staticText>
+					<reportElement style="Detail" isPrintRepeatedValues="false" x="42" y="0" width="236" height="20" uuid="0ddd4c92-9a50-452a-b86c-bf5e5b595b90"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="10" isBold="true"/>
+					</textElement>
+					<text><![CDATA[PRODUTO]]></text>
+				</staticText>
+			</frame>
 		</band>
 	</columnHeader>
 	<detail>

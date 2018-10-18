@@ -376,21 +376,21 @@ public class GeracaoOcamento extends javax.swing.JFrame {
     }//GEN-LAST:event_btnAdicionarActionPerformed
 
     private void btnSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarActionPerformed
-        orcamento.setCliente(cliente);
-        // orcamento.setIdorcamento(Integer.parseInt(lblNumero.getText()));
-
-        for (int i = 0; i < tableOrcamento.getRowCount(); i++) {
-
-            produto.setNome((String) tableModel.getValueAt(i, 1));
-            produto.setUnidade_medida((String) tableModel.getValueAt(i, 2));
-            produto.setQuantidade((Double) tableModel.getValueAt(i, 3));
-            produto.setPreco_venda((Double) tableModel.getValueAt(i, 4));
-            produto.setPrecoTotal((Double) tableModel.getValueAt(i, 5));
-            listProdutoOrcamento.add(produto);
-        }
-        orcamento.setProdutos(listProdutoOrcamento);
-        orcamento.setValorTotal(Double.parseDouble(totalOrcamento.getText()));
-        od.salvarOuAtualizar(orcamento);
+//        orcamento.setCliente(cliente);
+//        // orcamento.setIdorcamento(Integer.parseInt(lblNumero.getText()));
+//
+//        for (int i = 0; i < tableOrcamento.getRowCount(); i++) {
+//
+//            produto.setNome((String) tableModel.getValueAt(i, 1));
+//            produto.setUnidade_medida((String) tableModel.getValueAt(i, 2));
+//            produto.setQuantidade((Double) tableModel.getValueAt(i, 3));
+//            produto.setPreco_venda((Double) tableModel.getValueAt(i, 4));
+//            produto.setPrecoTotal((Double) tableModel.getValueAt(i, 5));
+//            listProdutoOrcamento.add(produto);
+//        }
+//        orcamento.setProdutos(listProdutoOrcamento);
+//        orcamento.setValorTotal(Double.parseDouble(totalOrcamento.getText()));
+//        od.salvarOuAtualizar(orcamento);
 
     }//GEN-LAST:event_btnSalvarActionPerformed
 
@@ -457,24 +457,25 @@ public class GeracaoOcamento extends javax.swing.JFrame {
     }//GEN-LAST:event_btnExcluirActionPerformed
 
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
-
+         List<Produto> po = new ArrayList<>();            
         for (int i = 0; i < tableOrcamento.getRowCount(); i++) {
-            produto.setIdproduto((Integer) tableModel.getValueAt(i, 0));
-            produto.setNome((String) tableModel.getValueAt(i, 1));
-            produto.setUnidade_medida((String) tableModel.getValueAt(i, 2));
-            produto.setQuantidade((Double) tableModel.getValueAt(i, 3));
-            produto.setPreco_venda((Double) tableModel.getValueAt(i, 4));
-            produto.setPrecoTotal((Double) tableModel.getValueAt(i, 5));
-            listProdutoOrcamento.add(produto);
+            Produto produto2 = new Produto();
+            produto2.setIdproduto((Integer) tableOrcamento.getValueAt(i, 0));
+            produto2.setNome((String) tableOrcamento.getValueAt(i, 1));
+            produto2.setUnidade_medida((String) tableOrcamento.getValueAt(i, 2));
+            produto2.setQuantidade((Double) tableOrcamento.getValueAt(i, 3));
+            produto2.setPreco_venda((Double) tableOrcamento.getValueAt(i, 4));
+            produto2.setPrecoTotal((Double) tableOrcamento.getValueAt(i, 5));
+            po.add(produto2);
         }
 
-        String arquivo = "relatorio/relatorioOrc.jasper";
+        String arquivo = "relatorio/orcamento.jasper";
         String nome = txtNomeCliente.getText();
         String total =totalOrcamento.getText();
         //cria datasource a partir da collection
-        JRBeanCollectionDataSource jrds = new JRBeanCollectionDataSource(listProdutoOrcamento);
+        JRBeanCollectionDataSource jrds = new JRBeanCollectionDataSource(po);
         Map <String, Object> parametros = new HashMap<>();
-       // Map parametros = new HashMap();
+       
         parametros.put("parameter1", nome);
        parametros.put("parameter2",total);
        
