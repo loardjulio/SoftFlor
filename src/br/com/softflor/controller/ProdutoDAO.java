@@ -32,6 +32,24 @@ public class ProdutoDAO extends GenericDAO<Produto> {
         }
         return null;
     }
+    
+//     public List<Produto> consultarPorFornecedor(Integer id) {
+//        try {
+//             em.getTransaction().begin();            
+//            //Query q = em.createNamedQuery("Produto.consultarPorFornecedor");
+//            Query q = em.createQuery("select rd.produto from RefeicaoDia as rd "
+//                    + "where rd.diaSemana = :diaDaSemana "
+//                    + "and rd.tipoRefeicao = :tipoRefeicao and rd.graduacao = :graduacao");
+//            q.setParameter("idfornecedor", id );
+//            List<Produto> produtos = q.getResultList();            
+//            return produtos;
+//           
+//        } catch (Exception e) {
+//            JOptionPane.showMessageDialog(null, "Erro buscar Produtos"+ e);
+//            FechaConexao();
+//        }
+//        return null;
+//    }
 
     public Serializable getId() {
         return id;

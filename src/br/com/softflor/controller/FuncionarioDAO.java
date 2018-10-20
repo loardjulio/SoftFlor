@@ -20,7 +20,6 @@ import javax.swing.JOptionPane;
 public class FuncionarioDAO extends GenericDAO<Funcionario> {
 
     private boolean acesso;
-    private boolean ativador;
     public boolean FecharJanela;
 
     public boolean InfoAcesso(String nome, String senha) {

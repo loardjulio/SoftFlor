@@ -24,9 +24,9 @@ import java.util.List;
 public class BuscaTeste {
     
     public static void main(String[] args) {
-        //ProdutoDAO pd = new ProdutoDAO(); 
+        ProdutoDAO pd = new ProdutoDAO(); 
         //ClienteDAO cd = new ClienteDAO();
-        FornecedorDAO fd = new FornecedorDAO();
+       // FornecedorDAO fd = new FornecedorDAO();
         
 //         Cliente cliente = cd.buscarPorId(Cliente.class, 1);      
 //        System.out.println("Nome: "+cliente.getNome());
@@ -48,14 +48,14 @@ public class BuscaTeste {
         
        /*TESTE CONSULTAS NOMEADAS*/
        
-//      
-      // List<Produto> produtosRetornados = pd.consultarTodos();
-       //percorrer a lista
-//       FornecedorDAO fd = new FornecedorDAO();
-//        for (Fornecedor f : fd.consultarTodos()) {
+       
+       //List<Produto> produtosRetornados = pd.consultarPorFornecedor(3);
+      // percorrer a lista
+//       
+//        for (Produto f : produtosRetornados) {
 //            System.out.println("Id: "+f.getId());
 //            System.out.println("Nome: "+f.getNome());
-//            System.out.println("CNPJ: "+f.getCnpj());
+//         // System.out.println("CNPJ: "+f.getCnpj());
 //            //System.out.println("Fornecedor: "+p.getFornecedor().get(2).getNome());
 //            
 //        }
@@ -70,7 +70,7 @@ System.out.println("cpf: "+c.getCpf());
 System.out.println("Endereco: "+c.getEndereco().getLogradouro());
 
 }*/
-       
+       //pd.consultarPorFornecedor(3);
 
     }
     

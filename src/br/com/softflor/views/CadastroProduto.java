@@ -64,8 +64,8 @@ public class CadastroProduto extends javax.swing.JDialog {
                 txtPrecoVenda.setText(produto.getPreco_venda().toString());
                 txtPrecoCompra.setText(produto.getPreco_compra().toString());
                 txtQuantidadeProduto.setText(produto.getQuantidade().toString());
-                ComboFornecedor.addItem("<<Atual>> " + produto.getFornecedor().get(0).getNome());
-                ComboMedida.addItem("<<Atual>> " + produto.getUnidade_medida());
+                ComboFornecedor.addItem(produto.getFornecedor().get(0).getNome());
+                ComboMedida.addItem(produto.getUnidade_medida());
                 this.setVisible(true);
             }
 
@@ -202,7 +202,7 @@ public class CadastroProduto extends javax.swing.JDialog {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addGap(41, 41, 41)
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 55, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 54, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel7)
                     .addComponent(txtNomeProduto, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -249,22 +249,29 @@ public class CadastroProduto extends javax.swing.JDialog {
 
     private void btnCadastrarProActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadastrarProActionPerformed
 
-        produto.setNome(txtNomeProduto.getText());
-        nomeForn = (String) ComboFornecedor.getSelectedItem();
-        produto.setFornecedor(fdao.fornecedorProduto(nomeForn));
+        produto.setNome(txtNomeProduto.getText()); //PEGA P NOME DO PRODUTO NO CAMPO       
         
         if (lblID.getText().equals("") == false) {  //SE O CAMPO ID NÃO ESTIVER VAZIO ELE PEGA O DADO         
                produto.setIdproduto(Integer.parseInt(lblID.getText()));
         } 
-        produto.setEstoque_minimo(Double.parseDouble(txtEstoqueMin.getText()));
-        produto.setPreco_compra(Double.parseDouble(txtPrecoCompra.getText()));
+        produto.setEstoque_minimo(Double.parseDouble(txtEstoqueMin.getText())); //SETA O ESTOQUE
+        produto.setPreco_compra(Double.parseDouble(txtPrecoCompra.getText())); //SETA PRECO COMPRA
         produto.setPreco_venda(Double.parseDouble(txtPrecoVenda.getText()));
         produto.setQuantidade(Double.parseDouble(txtQuantidadeProduto.getText()));
-        produto.setUnidade_medida((String) ComboMedida.getSelectedItem());
+        
+        nomeForn = (String) ComboFornecedor.getSelectedItem(); //PEGA O NOME DO FORN QUE TA NO COMBO       
+        produto.setUnidade_medida((String) ComboMedida.getSelectedItem());   //SETA A UNIDADE DE MEDIDA     
+        
 
-        pd.salvarOuAtualizar(produto);
+        if (produto.ChecaFornecedor(nomeForn) && produto.ChecaUnidade() == true) { //VERIFICA OS COMBOS
+            produto.setFornecedor(fdao.fornecedorProduto(nomeForn)); //PEGA O FORNECEDOR JA CADASTRADO E SETA ELE NO PRODUTO
+            pd.salvarOuAtualizar(produto); //SALVA O PRODUTO
         LimpaTela();
-        this.dispose();
+        this.dispose(); 
+        }
+        
+        
+       
         
 
     }//GEN-LAST:event_btnCadastrarProActionPerformed

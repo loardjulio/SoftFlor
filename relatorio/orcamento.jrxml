@@ -2,7 +2,7 @@
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="orcamento" language="groovy" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="250b4a09-18c7-4e2c-aba9-a4e944880933">
 	<property name="ireport.zoom" value="1.610510000000007"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="59"/>
+	<property name="ireport.y" value="48"/>
 	<style name="Title" forecolor="#FFFFFF" fontName="Times New Roman" fontSize="50" isBold="false" pdfFontName="Times-Bold"/>
 	<style name="SubTitle" forecolor="#666666" fontName="Times New Roman" fontSize="18" isBold="false" pdfFontName="Times-Roman"/>
 	<style name="Column header" forecolor="#666666" fontName="Times New Roman" fontSize="14" isBold="true" pdfFontName="Times-Roman"/>
@@ -110,12 +110,9 @@
 		</band>
 	</columnHeader>
 	<detail>
-		<band height="19" splitType="Stretch">
-			<line>
-				<reportElement positionType="FixRelativeToBottom" x="2" y="17" width="553" height="1" uuid="dcb9b7de-bddc-4370-898c-967a07abb943"/>
-			</line>
+		<band height="27" splitType="Stretch">
 			<frame>
-				<reportElement x="0" y="0" width="557" height="18" uuid="a9db8631-08a6-4839-8739-9be83d9daf0a"/>
+				<reportElement x="0" y="6" width="557" height="18" uuid="a9db8631-08a6-4839-8739-9be83d9daf0a"/>
 				<textField>
 					<reportElement x="42" y="0" width="236" height="17" uuid="ed1b32ee-7e66-4a54-93cb-c5a1e159e245"/>
 					<textElement textAlignment="Center">
@@ -162,7 +159,7 @@
 		</band>
 	</detail>
 	<columnFooter>
-		<band height="23" splitType="Stretch">
+		<band height="39" splitType="Stretch">
 			<line>
 				<reportElement positionType="FixRelativeToBottom" x="0" y="0" width="555" height="4" uuid="11253f06-1d66-4a9a-b11f-376762471e71"/>
 				<graphicElement>
@@ -170,16 +167,19 @@
 				</graphicElement>
 			</line>
 			<textField>
-				<reportElement style="Detail" isPrintRepeatedValues="false" x="318" y="5" width="110" height="17" forecolor="#000000" uuid="a3bed632-7286-4ac9-9868-a1611cc24804"/>
+				<reportElement style="Detail" isPrintRepeatedValues="false" x="372" y="10" width="110" height="17" forecolor="#000000" uuid="a3bed632-7286-4ac9-9868-a1611cc24804"/>
 				<textElement textAlignment="Center" markup="none">
 					<font size="10" isBold="true"/>
 				</textElement>
 				<textFieldExpression><![CDATA["VALOR TOTAL.....:"]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement isPrintRepeatedValues="false" x="428" y="4" width="125" height="18" uuid="94cbbfe3-e320-400d-9d2d-1591b4df5598"/>
+				<reportElement isPrintRepeatedValues="false" x="482" y="10" width="72" height="18" uuid="94cbbfe3-e320-400d-9d2d-1591b4df5598"/>
 				<textFieldExpression><![CDATA[$P{parameter2}]]></textFieldExpression>
 			</textField>
+			<line>
+				<reportElement positionType="FixRelativeToBottom" x="2" y="0" width="553" height="1" uuid="dcb9b7de-bddc-4370-898c-967a07abb943"/>
+			</line>
 		</band>
 	</columnFooter>
 	<pageFooter>

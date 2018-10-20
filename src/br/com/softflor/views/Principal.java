@@ -11,19 +11,11 @@ package br.com.softflor.views;
  */
 public class Principal extends javax.swing.JFrame {
 
-    //----------- INSTANCIA DOS JDIALOG PARA UTILIZAR NAS ACOES DOS BOTOES----------------//
-    
-    
-   
-    
-    
-   
-    
-
     public Principal() {
         initComponents();
         setLocationRelativeTo(null);
         MenuUsuários.setEnabled(false);
+        lblNome.setText("Olá, Bem vindo");
     }
 
     @SuppressWarnings("unchecked")
@@ -35,6 +27,7 @@ public class Principal extends javax.swing.JFrame {
         btnCliente = new javax.swing.JButton();
         btnFornecedor = new javax.swing.JButton();
         btnOrcamento = new javax.swing.JButton();
+        lblNome = new javax.swing.JLabel();
         DeskPane = new javax.swing.JDesktopPane();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
@@ -49,9 +42,6 @@ public class Principal extends javax.swing.JFrame {
         jMenu4 = new javax.swing.JMenu();
         jMenuItem5 = new javax.swing.JMenuItem();
         jMenuItem9 = new javax.swing.JMenuItem();
-        jMenu5 = new javax.swing.JMenu();
-        jMenuItem10 = new javax.swing.JMenuItem();
-        jMenuItem11 = new javax.swing.JMenuItem();
         MenuUsuários = new javax.swing.JMenu();
         jMenuItem13 = new javax.swing.JMenuItem();
         jMenu6 = new javax.swing.JMenu();
@@ -95,18 +85,25 @@ public class Principal extends javax.swing.JFrame {
             }
         });
 
+        lblNome.setText("Olá");
+
         javax.swing.GroupLayout PainelAcoesLayout = new javax.swing.GroupLayout(PainelAcoes);
         PainelAcoes.setLayout(PainelAcoesLayout);
         PainelAcoesLayout.setHorizontalGroup(
             PainelAcoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(PainelAcoesLayout.createSequentialGroup()
-                .addGap(30, 30, 30)
-                .addGroup(PainelAcoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(btnOrcamento, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnProduto, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnFornecedor, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(30, Short.MAX_VALUE))
+                .addGroup(PainelAcoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(PainelAcoesLayout.createSequentialGroup()
+                        .addGap(30, 30, 30)
+                        .addGroup(PainelAcoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(btnOrcamento, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnProduto, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnFornecedor, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(PainelAcoesLayout.createSequentialGroup()
+                        .addGap(23, 23, 23)
+                        .addComponent(lblNome, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(21, Short.MAX_VALUE))
         );
         PainelAcoesLayout.setVerticalGroup(
             PainelAcoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -119,7 +116,9 @@ public class Principal extends javax.swing.JFrame {
                 .addComponent(btnProduto, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(50, 50, 50)
                 .addComponent(btnOrcamento, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(50, Short.MAX_VALUE))
+                .addGap(27, 27, 27)
+                .addComponent(lblNome, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(29, 29, 29))
         );
 
         javax.swing.GroupLayout DeskPaneLayout = new javax.swing.GroupLayout(DeskPane);
@@ -130,7 +129,7 @@ public class Principal extends javax.swing.JFrame {
         );
         DeskPaneLayout.setVerticalGroup(
             DeskPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
+            .addGap(0, 524, Short.MAX_VALUE)
         );
 
         jMenu1.setText("Clientes");
@@ -188,16 +187,6 @@ public class Principal extends javax.swing.JFrame {
 
         jMenuBar1.add(jMenu4);
 
-        jMenu5.setText("Projetos");
-
-        jMenuItem10.setText("Cadastrar projeto");
-        jMenu5.add(jMenuItem10);
-
-        jMenuItem11.setText("Listar projetos");
-        jMenu5.add(jMenuItem11);
-
-        jMenuBar1.add(jMenu5);
-
         MenuUsuários.setText("Usuários");
 
         jMenuItem13.setText("Gerenciar usuários");
@@ -233,9 +222,7 @@ public class Principal extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(PainelAcoes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 9, Short.MAX_VALUE))
+            .addComponent(PainelAcoes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
             .addComponent(DeskPane)
         );
 
@@ -332,12 +319,9 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu4;
-    private javax.swing.JMenu jMenu5;
     private javax.swing.JMenu jMenu6;
     private javax.swing.JMenu jMenu7;
     private javax.swing.JMenuBar jMenuBar1;
-    private javax.swing.JMenuItem jMenuItem10;
-    private javax.swing.JMenuItem jMenuItem11;
     private javax.swing.JMenuItem jMenuItem12;
     private javax.swing.JMenuItem jMenuItem13;
     private javax.swing.JMenuItem jMenuItem2;
@@ -348,5 +332,6 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem7;
     private javax.swing.JMenuItem jMenuItem8;
     private javax.swing.JMenuItem jMenuItem9;
+    private javax.swing.JLabel lblNome;
     // End of variables declaration//GEN-END:variables
 }

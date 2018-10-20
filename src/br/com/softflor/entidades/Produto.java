@@ -16,6 +16,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
+import javax.swing.JOptionPane;
 import org.hibernate.annotations.NamedQueries;
 import org.hibernate.annotations.NamedQuery;
 
@@ -25,9 +26,11 @@ import org.hibernate.annotations.NamedQuery;
  */
 @Entity
 @Table(name = "produtos")
-@NamedQueries(
-        @NamedQuery(name = "Produto.consultarTodos", query = "SELECT p FROM Produto p")  //consulta nomeada
-)
+@NamedQueries({
+        @NamedQuery(name = "Produto.consultarTodos", query = "SELECT p FROM Produto p"),  //consulta nomeada
+//        @NamedQuery(name = "Produto.consultarPorFornecedor", query = "SELECT p FROM  Produto p INNER JOIN p.fornecedor f"
+//                + "WHERE p.fornecedor.idfornecedor = :idfornecedor") 
+})
 public class Produto implements EntidadeBase, Serializable {
 
     
@@ -66,6 +69,7 @@ public class Produto implements EntidadeBase, Serializable {
     }
 
     public void setFornecedor(List<Fornecedor> fornecedor) {
+                
         this.fornecedor = fornecedor;
     }
     
@@ -151,6 +155,27 @@ public class Produto implements EntidadeBase, Serializable {
         this.qntdOrc = qntdOrc;
     }
 
+       public boolean ChecaFornecedor(String nomeForn){
+        String padrao = "--SELECIONE--";
+        if(nomeForn == padrao){
+        JOptionPane.showMessageDialog(null, "Selecione um fornecedor", "Algo deu errado :(", 0);
+        return false;
+    }else {
+            return true;
+            
+        }
+     }
+       
+         public boolean ChecaUnidade(){
+        String padrao = "--SELECIONE--";
+        if(this.unidade_medida== padrao){
+        JOptionPane.showMessageDialog(null, "Selecione uma unidade", "Algo deu errado :(", 0);
+        return false;
+    }else {
+            return true;
+            
+        }
+     }
   
     
     
