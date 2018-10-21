@@ -46,6 +46,38 @@ public class CadastroCliente extends javax.swing.JDialog {
         txtTelefone.setText("");
     }
 
+     public void VerificaCampos(){
+         
+         if (txtBairro.equals("")) {
+             JOptionPane.showMessageDialog(this,"Informe o bairro","Aviso",JOptionPane.INFORMATION_MESSAGE);
+             return false;
+         } else if (txtCEP.equals("")) {
+             JOptionPane.showMessageDialog(this,"Informe o CEP","Aviso",JOptionPane.INFORMATION_MESSAGE);
+             return false;
+         }else if (txtCPF.equals("") && txtCPF.getText().length()< 11) {
+             JOptionPane.showMessageDialog(this,"Informe um CPF válido","Aviso",JOptionPane.INFORMATION_MESSAGE);
+             return false;
+         }else if (txtEmail.equals("")) {
+             JOptionPane.showMessageDialog(this,"Informe o E-mail","Aviso",JOptionPane.INFORMATION_MESSAGE);
+             return false;
+         }else if (txtMunicipio.equals("")) {
+             JOptionPane.showMessageDialog(this,"Informe o município","Aviso",JOptionPane.INFORMATION_MESSAGE);
+        return false;
+         }else if (txtNome.equals("")) {
+             JOptionPane.showMessageDialog(this,"Informe o Nome","Aviso",JOptionPane.INFORMATION_MESSAGE);
+         return false;
+         }else if (txtNumero.equals("")) {
+             JOptionPane.showMessageDialog(this,"Informe o numero","Aviso",JOptionPane.INFORMATION_MESSAGE);
+        return false;
+         }else if (txtRUA.equals("")) {
+             JOptionPane.showMessageDialog(this,"Informe a rua","Aviso",JOptionPane.INFORMATION_MESSAGE);
+         }else if(txtTelefone.equals("")) {
+             JOptionPane.showMessageDialog(this,"Informe o telefone","Aviso",JOptionPane.INFORMATION_MESSAGE);
+         return false;
+         }
+         return false;
+         
+     }
     //SETA OS DADOS NO FRAME QUANTO FOR ATUALIZAR 
     public void Atualiza(Cliente cliente) {
 
@@ -295,6 +327,8 @@ public class CadastroCliente extends javax.swing.JDialog {
 
     private void btnCadastrarFornActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadastrarFornActionPerformed
 
+                    
+            
         contato.setEmail(txtEmail.getText());
         contato.setNome(txtNome.getText());
         contato.setTelefone(txtTelefone.getText());
@@ -318,7 +352,8 @@ public class CadastroCliente extends javax.swing.JDialog {
         cliente.setCpf(txtCPF.getText());
         cliente.setNome(txtNome.getText());
 
-        if (end.ChecaEstado() == true) {
+        if (end.ChecaEstado() && VerificaCampos() == true) {
+            
             int resp = JOptionPane.showConfirmDialog(null, "Deseja salvar as informações?", "Aguardando resposta...", JOptionPane.YES_NO_CANCEL_OPTION);
             if (resp == 0) {
                 cd.salvarOuAtualizar(cliente);
@@ -329,6 +364,11 @@ public class CadastroCliente extends javax.swing.JDialog {
             }
 
         }
+            
+        
+        
+        
+        
 
     }//GEN-LAST:event_btnCadastrarFornActionPerformed
 

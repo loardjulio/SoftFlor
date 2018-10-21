@@ -15,16 +15,15 @@ import javax.persistence.Persistence;
  */
 public class ConectaBD {
 
-    public  EntityManagerFactory factory;
-    public  EntityManager getEntityManager() {
+    public EntityManagerFactory factory;
+
+    public EntityManager getEntityManager() {
         factory = Persistence.createEntityManagerFactory("tcc");
         return factory.createEntityManager();
     }
 
-    public void FechaConexao() {   
+    public void FechaConexao() {
         getEntityManager().close();
-        //factory.close();        
-        System.out.println("Conexão fechada");
     }
 
 }

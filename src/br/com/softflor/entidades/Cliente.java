@@ -7,7 +7,6 @@ package br.com.softflor.entidades;
 
 import java.io.Serializable;
 import javax.persistence.CascadeType;
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -24,21 +23,26 @@ import org.hibernate.annotations.NamedQuery;
 @Entity
 @Table(name = "clientes")
 @NamedQueries(
-        @NamedQuery(name = "Cliente.consultarPorNome", 
+        @NamedQuery(name = "Cliente.consultarPorNome",
                 query = "SELECT c from Cliente c WHERE c.nome LIKE :nome")//consulta nomeada
-) 
+)
 
 public class Cliente implements Serializable, EntidadeBase {
- @Id
+
+    @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer idCliente;
- @Column
+
     private String nome;
+
     private String cpf;
-    @OneToOne (cascade = CascadeType.ALL)
+
+    @OneToOne(cascade = CascadeType.ALL)
     private Contato contato;
-   @OneToOne (cascade = CascadeType.ALL)
+
+    @OneToOne(cascade = CascadeType.ALL)
     private Endereco endereco;
+
     @Override
     public Serializable getId() {
         return idCliente;
@@ -46,8 +50,6 @@ public class Cliente implements Serializable, EntidadeBase {
 
     public Cliente() {
     }
-
-  
 
     public Integer getIdCliente() {
         return idCliente;
@@ -90,7 +92,7 @@ public class Cliente implements Serializable, EntidadeBase {
     }
 
     public Cliente(Integer idCliente, String nome, String cpf, Contato contato, Endereco endereco) {
-       
+
         this.idCliente = idCliente;
         this.nome = nome;
         this.cpf = cpf;
