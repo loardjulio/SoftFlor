@@ -352,7 +352,7 @@ public class GeracaoOcamento extends javax.swing.JFrame {
     private void btnAdicionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAdicionarActionPerformed
 
         try {
-             Produto produto = new Produto();
+            Produto produto = new Produto();
             produto.setNome(txtNomeProduto.getText());
             produto.setUnidade_medida(txtUnidade.getText());
             produto.setPreco_venda(Double.parseDouble(txtPreco.getText()));
@@ -457,7 +457,7 @@ public class GeracaoOcamento extends javax.swing.JFrame {
     }//GEN-LAST:event_btnExcluirActionPerformed
 
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
-         List<Produto> po = new ArrayList<>();            
+        List<Produto> po = new ArrayList<>();
         for (int i = 0; i < tableOrcamento.getRowCount(); i++) {
             Produto produto2 = new Produto();
             produto2.setIdproduto((Integer) tableOrcamento.getValueAt(i, 0));
@@ -469,25 +469,26 @@ public class GeracaoOcamento extends javax.swing.JFrame {
             po.add(produto2);
         }
 
-        String arquivo = "relatorio/orcamento.jasper";
-        String nome = txtNomeCliente.getText();
-        String total =totalOrcamento.getText();
-        //cria datasource a partir da collection
+        String arquivo = "relatorio/orcamento.jasper"; //Local do modelo do relatório
+        String nome = txtNomeCliente.getText(); //pega o nome do cliente
+        String total = totalOrcamento.getText(); //pega o valor total
+        //cria datasource a partir da collection e manda o objeto
         JRBeanCollectionDataSource jrds = new JRBeanCollectionDataSource(po);
-        Map <String, Object> parametros = new HashMap<>();
-       
-        parametros.put("parameter1", nome);
-       parametros.put("parameter2",total);
-       
+        Map<String, Object> parametros = new HashMap<>();
+        parametros.put("parameter1", nome); //Manda o nome como parametro pro relatório
+        parametros.put("parameter2", total); //Manda o  total como parametro pro relatório
+
         JasperPrint printer = null;
         try {
             printer = JasperFillManager.fillReport(arquivo, parametros, jrds);
+            //CRIA UMA JANELA DE VISUALIAÇÃO
             JasperViewer jv = new JasperViewer(printer, false);
             jv.setTitle("Orçamento - " + nome);
             jv.setVisible(true);
 
             //grava relatorio pdf em disco
-            FileOutputStream fos = new FileOutputStream("C:/Users/Julio/Documents/Orçamentos-SoftFlor/Orçamento-" + nome + ".pdf");
+            FileOutputStream fos = new FileOutputStream("C:/Users/Julio/Documents/"
+                    + "Orçamentos-SoftFlor/Orçamento-" + nome + ".pdf");
             JasperExportManager.exportReportToPdfStream(printer, fos);
             fos.flush();
             fos.close();

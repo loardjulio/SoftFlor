@@ -17,20 +17,22 @@ import javax.swing.JOptionPane;
  */
 public class ProdutoDAO extends GenericDAO<Produto> {
 
+    private Serializable id;
+
     public List<Produto> consultarTodos() {
         try {
-            em.getTransaction().begin();
+             em.getTransaction().begin();
             Query q = em.createNamedQuery("Produto.consultarTodos");
-            List<Produto> produtos = q.getResultList();
+            List<Produto> produtos = q.getResultList();            
             return produtos;
-
+           
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "Erro buscar Produtos" + e);
+            JOptionPane.showMessageDialog(null, "Erro buscar Produtos"+ e);
             FechaConexao();
         }
         return null;
     }
-
+    
 //     public List<Produto> consultarPorFornecedor(Integer id) {
 //        try {
 //             em.getTransaction().begin();            
@@ -48,6 +50,7 @@ public class ProdutoDAO extends GenericDAO<Produto> {
 //        }
 //        return null;
 //    }
+
     public Serializable getId() {
         return id;
     }
@@ -56,4 +59,5 @@ public class ProdutoDAO extends GenericDAO<Produto> {
         this.id = id;
     }
 
+   
 }
