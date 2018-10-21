@@ -57,6 +57,8 @@ public class ListaProdutos extends javax.swing.JDialog {
         btnEntrada = new javax.swing.JButton();
         btnBuscar = new javax.swing.JButton();
         txtNomeBusca = new javax.swing.JTextField();
+        jLabel5 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -82,6 +84,7 @@ public class ListaProdutos extends javax.swing.JDialog {
 
         jPanel2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
+        btEDITAR.setBackground(new java.awt.Color(102, 204, 255));
         btEDITAR.setText("EDITAR");
         btEDITAR.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -89,6 +92,7 @@ public class ListaProdutos extends javax.swing.JDialog {
             }
         });
 
+        btVoltar.setBackground(new java.awt.Color(255, 51, 51));
         btVoltar.setText("VOLTAR");
         btVoltar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -96,6 +100,7 @@ public class ListaProdutos extends javax.swing.JDialog {
             }
         });
 
+        btEXCLUIR.setBackground(new java.awt.Color(255, 51, 51));
         btEXCLUIR.setText("EXCLUIR");
         btEXCLUIR.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -103,6 +108,7 @@ public class ListaProdutos extends javax.swing.JDialog {
             }
         });
 
+        btCADASTRAR.setBackground(new java.awt.Color(102, 204, 255));
         btCADASTRAR.setText("CADASTRAR ");
         btCADASTRAR.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -110,6 +116,7 @@ public class ListaProdutos extends javax.swing.JDialog {
             }
         });
 
+        btnSaida.setBackground(new java.awt.Color(102, 255, 102));
         btnSaida.setText("SAÍDA");
         btnSaida.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -117,6 +124,7 @@ public class ListaProdutos extends javax.swing.JDialog {
             }
         });
 
+        btnEntrada.setBackground(new java.awt.Color(102, 255, 102));
         btnEntrada.setText("ENTRADA ");
         btnEntrada.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -158,6 +166,7 @@ public class ListaProdutos extends javax.swing.JDialog {
                 .addContainerGap(19, Short.MAX_VALUE))
         );
 
+        btnBuscar.setBackground(new java.awt.Color(102, 255, 102));
         btnBuscar.setText("BUSCAR");
         btnBuscar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -196,6 +205,12 @@ public class ListaProdutos extends javax.swing.JDialog {
                 .addContainerGap())
         );
 
+        jLabel5.setFont(new java.awt.Font("Constantia", 1, 24)); // NOI18N
+        jLabel5.setText("LISTAGEM");
+
+        jLabel4.setFont(new java.awt.Font("Constantia", 0, 24)); // NOI18N
+        jLabel4.setText("PRODUTOS");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -204,11 +219,21 @@ public class ListaProdutos extends javax.swing.JDialog {
                 .addContainerGap()
                 .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
+            .addGroup(layout.createSequentialGroup()
+                .addGap(266, 266, 266)
+                .addComponent(jLabel5)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel4)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(91, Short.MAX_VALUE)
+                .addGap(28, 28, 28)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel4)
+                    .addComponent(jLabel5))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 30, Short.MAX_VALUE)
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
@@ -342,6 +367,8 @@ public class ListaProdutos extends javax.swing.JDialog {
     private javax.swing.JButton btnBuscar;
     private javax.swing.JButton btnEntrada;
     private javax.swing.JButton btnSaida;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane3;

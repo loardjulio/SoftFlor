@@ -12,7 +12,6 @@ import br.com.softflor.controller.ProdutoDAO;
 import br.com.softflor.entidades.Cliente;
 import br.com.softflor.entidades.Orcamento;
 import br.com.softflor.entidades.Produto;
-import java.awt.Dialog.ModalityType;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -24,15 +23,12 @@ import java.util.List;
 import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.JDialog;
 import javax.swing.JOptionPane;
 import net.sf.jasperreports.engine.JRException;
 import net.sf.jasperreports.engine.JasperExportManager;
 import net.sf.jasperreports.engine.JasperFillManager;
 import net.sf.jasperreports.engine.JasperPrint;
 import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
-import net.sf.jasperreports.engine.data.JRTableModelDataSource;
-import net.sf.jasperreports.swing.JRViewer;
 import net.sf.jasperreports.view.JasperViewer;
 
 /**
@@ -97,9 +93,13 @@ public class GeracaoOcamento extends javax.swing.JFrame {
         btnExcluir = new javax.swing.JButton();
         btnSalvar = new javax.swing.JButton();
         jButton6 = new javax.swing.JButton();
+        jButton7 = new javax.swing.JButton();
 
         jPanel1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
+        jButton1.setBackground(new java.awt.Color(51, 204, 255));
+        jButton1.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jButton1.setForeground(new java.awt.Color(255, 255, 255));
         jButton1.setText("BUSCAR CLIENTE");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -156,6 +156,9 @@ public class GeracaoOcamento extends javax.swing.JFrame {
 
         jLabel4.setText("PRODUTO:");
 
+        btnBuscarProduto.setBackground(new java.awt.Color(51, 204, 255));
+        btnBuscarProduto.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        btnBuscarProduto.setForeground(new java.awt.Color(255, 255, 255));
         btnBuscarProduto.setText("BUSCAR PRODUTO");
         btnBuscarProduto.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -196,6 +199,9 @@ public class GeracaoOcamento extends javax.swing.JFrame {
         ));
         jScrollPane1.setViewportView(tableOrcamento);
 
+        btnAdicionar.setBackground(new java.awt.Color(51, 204, 255));
+        btnAdicionar.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        btnAdicionar.setForeground(new java.awt.Color(255, 255, 255));
         btnAdicionar.setText("ADICIONAR");
         btnAdicionar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -214,6 +220,9 @@ public class GeracaoOcamento extends javax.swing.JFrame {
 
         txtNomeProduto.setEditable(false);
 
+        btnExcluir.setBackground(new java.awt.Color(255, 51, 51));
+        btnExcluir.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        btnExcluir.setForeground(new java.awt.Color(255, 255, 255));
         btnExcluir.setText("Excluir Item");
         btnExcluir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -296,6 +305,9 @@ public class GeracaoOcamento extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
+        btnSalvar.setBackground(new java.awt.Color(51, 204, 255));
+        btnSalvar.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        btnSalvar.setForeground(new java.awt.Color(255, 255, 255));
         btnSalvar.setText("SALVAR");
         btnSalvar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -303,10 +315,23 @@ public class GeracaoOcamento extends javax.swing.JFrame {
             }
         });
 
+        jButton6.setBackground(new java.awt.Color(102, 204, 255));
+        jButton6.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jButton6.setForeground(new java.awt.Color(255, 255, 255));
         jButton6.setText("GERAR ");
         jButton6.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton6ActionPerformed(evt);
+            }
+        });
+
+        jButton7.setBackground(new java.awt.Color(255, 51, 51));
+        jButton7.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jButton7.setForeground(new java.awt.Color(255, 255, 255));
+        jButton7.setText("VOLTAR");
+        jButton7.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton7ActionPerformed(evt);
             }
         });
 
@@ -321,7 +346,9 @@ public class GeracaoOcamento extends javax.swing.JFrame {
                 .addComponent(btnSalvar, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(37, 37, 37)
                 .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jButton7, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -332,7 +359,9 @@ public class GeracaoOcamento extends javax.swing.JFrame {
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jButton7, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(btnSalvar, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -502,6 +531,10 @@ public class GeracaoOcamento extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jButton6ActionPerformed
 
+    private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton7ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -544,6 +577,7 @@ public class GeracaoOcamento extends javax.swing.JFrame {
     private javax.swing.JButton btnSalvar;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton6;
+    private javax.swing.JButton jButton7;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;

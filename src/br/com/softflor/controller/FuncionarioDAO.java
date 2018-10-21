@@ -29,6 +29,7 @@ public class FuncionarioDAO extends GenericDAO<Funcionario> {
         q.setParameter("nome", nome);
         //pode receber uma lista de resultados
         funcionarios = q.getResultList();
+        //verifica as credenciais de acesso
         for (Funcionario funcionario : funcionarios) {
             if (funcionario.getSenha() == null ? senha == null : funcionario.getSenha().equals(senha)) {
                 acesso = true;
@@ -36,8 +37,9 @@ public class FuncionarioDAO extends GenericDAO<Funcionario> {
                 acesso = false;
             }
         }
-        valida(acesso);
+        valida(acesso); //Envia o resultado para o método valida
         if (acesso == true) {
+            //Controle da View
             return FecharJanela = true; //SE RETORNA TRUE É PQ A JANELA DEVE SER FECHADA
         } else {
             return false;

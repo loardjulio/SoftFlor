@@ -53,9 +53,10 @@ public class Principal extends javax.swing.JFrame {
         setLocationByPlatform(true);
         setResizable(false);
 
+        PainelAcoes.setBackground(new java.awt.Color(0, 204, 102));
         PainelAcoes.setBorder(javax.swing.BorderFactory.createTitledBorder("Menu Rápido"));
 
-        btnProduto.setText("produtos");
+        btnProduto.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/produto.png"))); // NOI18N
         btnProduto.setPreferredSize(new java.awt.Dimension(70, 20));
         btnProduto.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -63,7 +64,7 @@ public class Principal extends javax.swing.JFrame {
             }
         });
 
-        btnCliente.setText("clientes");
+        btnCliente.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/clientes.png"))); // NOI18N
         btnCliente.setPreferredSize(new java.awt.Dimension(70, 20));
         btnCliente.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -71,14 +72,14 @@ public class Principal extends javax.swing.JFrame {
             }
         });
 
-        btnFornecedor.setText("fornecedores");
+        btnFornecedor.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/forneceddores.png"))); // NOI18N
         btnFornecedor.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnFornecedorActionPerformed(evt);
             }
         });
 
-        btnOrcamento.setText("orçamentos");
+        btnOrcamento.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/orcamento.png"))); // NOI18N
         btnOrcamento.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnOrcamentoActionPerformed(evt);
@@ -117,7 +118,7 @@ public class Principal extends javax.swing.JFrame {
                 .addGap(50, 50, 50)
                 .addComponent(btnOrcamento, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(27, 27, 27)
-                .addComponent(lblNome, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(lblNome, javax.swing.GroupLayout.DEFAULT_SIZE, 23, Short.MAX_VALUE)
                 .addGap(29, 29, 29))
         );
 
@@ -222,8 +223,8 @@ public class Principal extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(PainelAcoes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
             .addComponent(DeskPane)
+            .addComponent(PainelAcoes, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();

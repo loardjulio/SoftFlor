@@ -151,14 +151,17 @@
     </DimensionLayout>
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Component id="PainelAcoes" alignment="0" min="-2" max="-2" attributes="0"/>
           <Component id="DeskPane" alignment="0" max="32767" attributes="0"/>
+          <Component id="PainelAcoes" alignment="0" max="32767" attributes="0"/>
       </Group>
     </DimensionLayout>
   </Layout>
   <SubComponents>
     <Container class="javax.swing.JPanel" name="PainelAcoes">
       <Properties>
+        <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+          <Color blue="66" green="cc" red="0" type="rgb"/>
+        </Property>
         <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
           <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
             <TitledBorder title="Menu R&#xe1;pido"/>
@@ -177,7 +180,7 @@
                               <Component id="btnOrcamento" min="-2" pref="70" max="-2" attributes="0"/>
                               <Component id="btnProduto" min="-2" pref="70" max="-2" attributes="0"/>
                               <Component id="btnFornecedor" min="-2" pref="72" max="-2" attributes="0"/>
-                              <Component id="btnCliente" min="-2" pref="70" max="-2" attributes="0"/>
+                              <Component id="btnCliente" alignment="1" min="-2" pref="70" max="-2" attributes="0"/>
                           </Group>
                       </Group>
                       <Group type="102" alignment="0" attributes="0">
@@ -201,7 +204,7 @@
                   <EmptySpace min="-2" pref="50" max="-2" attributes="0"/>
                   <Component id="btnOrcamento" min="-2" pref="60" max="-2" attributes="0"/>
                   <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
-                  <Component id="lblNome" max="32767" attributes="0"/>
+                  <Component id="lblNome" pref="23" max="32767" attributes="0"/>
                   <EmptySpace min="-2" pref="29" max="-2" attributes="0"/>
               </Group>
           </Group>
@@ -210,7 +213,9 @@
       <SubComponents>
         <Component class="javax.swing.JButton" name="btnProduto">
           <Properties>
-            <Property name="text" type="java.lang.String" value="produtos"/>
+            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+              <Image iconType="3" name="/icons/produto.png"/>
+            </Property>
             <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
               <Dimension value="[70, 20]"/>
             </Property>
@@ -221,7 +226,9 @@
         </Component>
         <Component class="javax.swing.JButton" name="btnCliente">
           <Properties>
-            <Property name="text" type="java.lang.String" value="clientes"/>
+            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+              <Image iconType="3" name="/icons/clientes.png"/>
+            </Property>
             <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
               <Dimension value="[70, 20]"/>
             </Property>
@@ -232,7 +239,9 @@
         </Component>
         <Component class="javax.swing.JButton" name="btnFornecedor">
           <Properties>
-            <Property name="text" type="java.lang.String" value="fornecedores"/>
+            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+              <Image iconType="3" name="/icons/forneceddores.png"/>
+            </Property>
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnFornecedorActionPerformed"/>
@@ -240,7 +249,9 @@
         </Component>
         <Component class="javax.swing.JButton" name="btnOrcamento">
           <Properties>
-            <Property name="text" type="java.lang.String" value="or&#xe7;amentos"/>
+            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+              <Image iconType="3" name="/icons/orcamento.png"/>
+            </Property>
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnOrcamentoActionPerformed"/>
