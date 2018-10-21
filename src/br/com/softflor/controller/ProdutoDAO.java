@@ -17,8 +17,6 @@ import javax.swing.JOptionPane;
  */
 public class ProdutoDAO extends GenericDAO<Produto> {
 
-    private Serializable id;
-
     public List<Produto> consultarTodos() {
         try {
              em.getTransaction().begin();
