@@ -237,7 +237,8 @@ public class Principal extends javax.swing.JFrame {
 
     private void btnProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnProdutoActionPerformed
       ListaProdutos listagemProduto = new ListaProdutos(this, true);
-        listagemProduto.setVisible(true);
+      listagemProduto.loadTable(null);
+      listagemProduto.setVisible(true);
         
     }//GEN-LAST:event_btnProdutoActionPerformed
 

@@ -28,8 +28,9 @@ import org.hibernate.annotations.NamedQuery;
 @Table(name = "produtos")
 @NamedQueries({
         @NamedQuery(name = "Produto.consultarTodos", query = "SELECT p FROM Produto p"),  //consulta nomeada
-//        @NamedQuery(name = "Produto.consultarPorFornecedor", query = "SELECT p FROM  Produto p INNER JOIN p.fornecedor f"
-//                + "WHERE p.fornecedor.idfornecedor = :idfornecedor") 
+        @NamedQuery(name = "Produto.consultarPorFornecedor", query = "select p from Produto p join p.fornecedor f where f.idfornecedor = :idfornecedor") 
+        
+        
 })
 public class Produto implements EntidadeBase, Serializable {
 

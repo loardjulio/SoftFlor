@@ -6,9 +6,11 @@
 package br.com.softflor.views;
 
 import br.com.softflor.controller.FornecedorDAO;
+import br.com.softflor.controller.ProdutoDAO;
 import br.com.softflor.controller.tableModel.FornecedorTableModel;
 import br.com.softflor.entidades.Fornecedor;
 import br.com.softflor.entidades.Produto;
+import java.util.List;
 import javax.swing.JOptionPane;
 
 /**
@@ -22,6 +24,7 @@ public class ListaFornecedores extends javax.swing.JFrame {
      */
     public FornecedorTableModel tableModel;
     FornecedorDAO fornecedordao = new FornecedorDAO();
+    ProdutoDAO pd = new ProdutoDAO();
     CadastroFornecedor cf = new CadastroFornecedor(this, true);
 
     public ListaFornecedores() {
@@ -53,6 +56,8 @@ public class ListaFornecedores extends javax.swing.JFrame {
         tabela = new javax.swing.JTable();
         jLabel5 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
+
+        setTitle("Lista de fornecedores");
 
         jPanel2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
@@ -255,6 +260,15 @@ public class ListaFornecedores extends javax.swing.JFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         int linha = tabela.getSelectedRow();
          int idFornecedor = (int) tableModel.getValueAt(linha, 0);
+         
+         ListaProdutos lp = new ListaProdutos(this, true);
+         lp.loadTable(idFornecedor);
+         lp.setVisible(true);
+         this.dispose();
+         
+        //List<Produto> p =  pd.consultarPorFornecedor(idFornecedor);
+        //System.out.println(p.get(0).getNome());
+        
          
        //CONSULTAR NA TABELA PRODUTO+FORNECEDOR OS PRODUTOS REFERENTES AO FORNECEDOR DO ID
        //LISTAR ESTES PRODUTOS 

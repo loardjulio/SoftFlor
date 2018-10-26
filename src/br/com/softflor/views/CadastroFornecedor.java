@@ -115,6 +115,7 @@ public class CadastroFornecedor extends javax.swing.JDialog {
         jLabel5 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Cadasto de Fornecedor\n");
 
         jLabel7.setText("NOME:");
 

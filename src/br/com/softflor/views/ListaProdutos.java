@@ -21,18 +21,24 @@ public class ListaProdutos extends javax.swing.JDialog {
      */
     public int idSelecionado;
     public ProdutoTableModel tableModel;
-    
+    //  prublic ProdutoForTableModel forProduTableModel;
 
     public ListaProdutos(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
         setLocationRelativeTo(null);
-        loadTable();
+        //loadTable();
     }
 
-    public void loadTable() {
+    public void loadTable(Integer idFornecedor) {
         ProdutoDAO pd = new ProdutoDAO();
-        tableModel = new ProdutoTableModel(pd.consultarTodos());
+
+        if (idFornecedor == null) {
+            tableModel = new ProdutoTableModel(pd.consultarTodos());
+        } else {
+            tableModel = new ProdutoTableModel(pd.consultarPorFornecedor(idFornecedor));
+        }
+
         listaBuscaProduto.setModel(tableModel);
     }
 
@@ -61,6 +67,7 @@ public class ListaProdutos extends javax.swing.JDialog {
         jLabel4 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Lista de produtos");
 
         jPanel3.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
@@ -308,12 +315,11 @@ public class ListaProdutos extends javax.swing.JDialog {
     }//GEN-LAST:event_btnSaidaActionPerformed
 
     private void btnEntradaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEntradaActionPerformed
-       int linha = listaBuscaProduto.getSelectedRow();
-       Object nome =  tableModel.getValueAt(linha, 1);
-        Object qtd =  tableModel.getValueAt(linha, 2);
-        
-        
-           
+        int linha = listaBuscaProduto.getSelectedRow();
+        Object nome = tableModel.getValueAt(linha, 1);
+        Object qtd = tableModel.getValueAt(linha, 2);
+
+
     }//GEN-LAST:event_btnEntradaActionPerformed
 
     /**
