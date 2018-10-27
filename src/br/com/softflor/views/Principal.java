@@ -14,7 +14,7 @@ public class Principal extends javax.swing.JFrame {
     public Principal() {
         initComponents();
         setLocationRelativeTo(null);
-        MenuUsuários.setEnabled(false);
+       // MenuUsuários.setEnabled(false);
         lblNome.setText("Olá, Bem vindo");
     }
 
@@ -253,7 +253,8 @@ public class Principal extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItem2ActionPerformed
 
     private void jMenuItem13ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem13ActionPerformed
-        // TODO add your handling code here:
+        ListaFuncionarios lf = new ListaFuncionarios(this,true);
+         lf.setVisible(true);
     }//GEN-LAST:event_jMenuItem13ActionPerformed
 
     private void btnOrcamentoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOrcamentoActionPerformed

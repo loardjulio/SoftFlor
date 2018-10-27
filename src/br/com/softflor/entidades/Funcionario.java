@@ -6,7 +6,6 @@
 package br.com.softflor.entidades;
 
 import java.io.Serializable;
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -21,9 +20,10 @@ import org.hibernate.annotations.NamedQuery;
  */
 @Entity
 @Table(name = "funcionarios")
-@NamedQueries(
-        @NamedQuery(name = "Funcionario.consultaPorNome", query = "SELECT f FROM Funcionario f WHERE f.nome = :nome")  //consulta nomeada
-)
+@NamedQueries({
+        @NamedQuery(name = "Funcionario.consultaPorUsuario", query = "SELECT f FROM Funcionario f WHERE f.usuario = :usuario"),  //consulta nomeada
+         @NamedQuery(name = "Funcionario.consultarTodos", query = "SELECT f FROM Funcionario f")  //consulta nomeada
+})
 public class Funcionario implements EntidadeBase, Serializable {
 
     @Id
@@ -34,6 +34,8 @@ public class Funcionario implements EntidadeBase, Serializable {
     private String setor;
     //@Column
     private String nome;
+    //@Column
+    private String usuario;
     //@Column
     private String senha;
 
@@ -83,5 +85,15 @@ public class Funcionario implements EntidadeBase, Serializable {
     public void setSenha(String senha) {
         this.senha = senha;
     }
+
+    public String getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(String usuario) {
+        this.usuario = usuario;
+    }
+    
+    
 
 }

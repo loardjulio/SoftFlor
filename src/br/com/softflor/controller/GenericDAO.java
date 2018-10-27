@@ -35,23 +35,19 @@ public class GenericDAO<T extends EntidadeBase> extends ConectaBD {
                 t = em.merge(t); //executa o update
                 JOptionPane.showMessageDialog(null, "Atualizado!");
             }
-            em.getTransaction().commit();
-            
+            em.getTransaction().commit();            
         } catch (Exception e) {
             System.out.println(e);
             JOptionPane.showMessageDialog(null, "Erro ao Salvar/Atualizar");
             FechaConexao();
         }
-
         return t;
-
     }
     
     
 
     public void remover(Class<T> clazz, Serializable id) { //clazz é so pra diferenciar da palavra reservada
-        T t = em.find(clazz, id); 
-        
+        T t = em.find(clazz, id);         
         try {             
             em.getTransaction().begin();
             em.remove(t); //executa o delete
@@ -65,9 +61,7 @@ public class GenericDAO<T extends EntidadeBase> extends ConectaBD {
     }
 
     public T buscarPorId(Class<T> clazz, Serializable id) {
-
         T t = null;
-
         try {           
             System.out.println("Tentei buscar " + id);
             t = em.find(clazz, id);
