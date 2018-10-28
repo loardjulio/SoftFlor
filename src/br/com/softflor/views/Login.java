@@ -178,7 +178,7 @@ public class Login extends javax.swing.JFrame {
         
         FuncionarioDAO fdao = new FuncionarioDAO();        
         if (fdao.InfoAcesso(txtUsuario1.getText(), txtSenha.getText())) {
-        this.setVisible(false);
+       this.setVisible(false);
         }
         
         

@@ -33,6 +33,9 @@ public class ProdutoDAO extends GenericDAO<Produto> {
         return null;
     }
     
+    
+    
+    
      public List<Produto> consultarPorFornecedor(Integer id) {
         try {
              em.getTransaction().begin();            

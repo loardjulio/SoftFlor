@@ -7,6 +7,7 @@ package br.com.softflor.controller;
 
 import br.com.softflor.entidades.Cliente;
 import br.com.softflor.entidades.Funcionario;
+import br.com.softflor.views.Login;
 import br.com.softflor.views.Principal;
 import java.util.List;
 import javax.persistence.Query;
@@ -19,9 +20,8 @@ import javax.swing.JOptionPane;
 public class FuncionarioDAO extends GenericDAO<Funcionario> {
 
     private boolean acesso;
-    public boolean FecharJanela;
 
-    public Boolean InfoAcesso(String usuario, String senha) {
+    public boolean InfoAcesso(String usuario, String senha) {
         List<Funcionario> funcionarios = null;
         //consulta por nome
         Query q = em.createNamedQuery("Funcionario.consultaPorUsuario");
@@ -32,40 +32,40 @@ public class FuncionarioDAO extends GenericDAO<Funcionario> {
         for (Funcionario funcionario : funcionarios) {
             if (funcionario.getSenha() == null ? senha == null : funcionario.getSenha().equals(senha)) {
                 acesso = true;
+            } else {
+                acesso = false;
             }
         }
         valida(acesso); //Envia o resultado para o método valida
 
-        return acesso = false;
+        if (acesso == true) {
+            return true; //SE RETORNA TRUE É PQ A JANELA DEVE SER FECHADA
+        } else {
+            return false;
+        }
 
     }
 
     private void valida(boolean chave) {
         if (chave == true) {
             JOptionPane.showMessageDialog(null, "Acesso liberado. Bem vindo");
-            FecharJanela = true; //SE RETORNA TRUE É PQ A JANELA DEVE SER FECHADA
             new Principal().setVisible(true);
         } else {
-            FecharJanela = false;
             JOptionPane.showMessageDialog(null, "Acesso negado");
-
         }
     }
 
-    
-
     public List<Funcionario> consultarTodos() {
-         try {            
+        try {
             Query q = em.createNamedQuery("Funcionario.consultarTodos");
-            List<Funcionario> funcionarios = q.getResultList();            
+            List<Funcionario> funcionarios = q.getResultList();
             return funcionarios;
-           
+
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "Erro buscar Produtos"+ e);
+            JOptionPane.showMessageDialog(null, "Erro buscar Produtos" + e);
             FechaConexao();
         }
         return null;
     }
 
 }
-
