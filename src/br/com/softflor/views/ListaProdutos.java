@@ -21,33 +21,27 @@ public class ListaProdutos extends javax.swing.JDialog {
      */
     public int idSelecionado;
     public ProdutoTableModel tableModel;
-    //  prublic ProdutoForTableModel forProduTableModel;
+    ProdutoDAO pd = new ProdutoDAO();
 
     public ListaProdutos(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
         setLocationRelativeTo(null);
-        //loadTable();
     }
 
     public void loadTable(Integer idFornecedor) {
-        ProdutoDAO pd = new ProdutoDAO();
-
+        //ProdutoDAO pd = new ProdutoDAO();
         if (idFornecedor == null) {
             tableModel = new ProdutoTableModel(pd.consultarTodos());
         } else {
             tableModel = new ProdutoTableModel(pd.consultarPorFornecedor(idFornecedor));
         }
-
         listaBuscaProduto.setModel(tableModel);
     }
-    
+
     public void carregaTabela() {
-        ProdutoDAO pd = new ProdutoDAO();
-
-       tableModel = new ProdutoTableModel(pd.consultarTodos());
-        
-
+        // ProdutoDAO pd = new ProdutoDAO();
+        tableModel = new ProdutoTableModel(pd.consultarTodos());
         listaBuscaProduto.setModel(tableModel);
     }
 
@@ -72,6 +66,7 @@ public class ListaProdutos extends javax.swing.JDialog {
         btnEntrada = new javax.swing.JButton();
         btnBuscar = new javax.swing.JButton();
         txtNomeBusca = new javax.swing.JTextField();
+        jLabel1 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
 
@@ -157,7 +152,7 @@ public class ListaProdutos extends javax.swing.JDialog {
                 .addComponent(btnEntrada, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(btnSaida, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 93, Short.MAX_VALUE)
                 .addComponent(btCADASTRAR)
                 .addGap(18, 18, 18)
                 .addComponent(btEDITAR, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -190,6 +185,14 @@ public class ListaProdutos extends javax.swing.JDialog {
             }
         });
 
+        txtNomeBusca.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtNomeBuscaActionPerformed(evt);
+            }
+        });
+
+        jLabel1.setText("BUSCAR POR NOME:");
+
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
@@ -201,8 +204,10 @@ public class ListaProdutos extends javax.swing.JDialog {
                     .addComponent(jScrollPane3, javax.swing.GroupLayout.Alignment.TRAILING))
                 .addContainerGap())
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                .addContainerGap(131, Short.MAX_VALUE)
-                .addComponent(txtNomeBusca, javax.swing.GroupLayout.PREFERRED_SIZE, 516, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(27, 27, 27)
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(txtNomeBusca)
                 .addGap(47, 47, 47)
                 .addComponent(btnBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(29, 29, 29))
@@ -213,7 +218,8 @@ public class ListaProdutos extends javax.swing.JDialog {
                 .addContainerGap()
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtNomeBusca, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnBuscar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(btnBuscar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLabel1))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 8, Short.MAX_VALUE)
                 .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 252, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -236,7 +242,7 @@ public class ListaProdutos extends javax.swing.JDialog {
                 .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
             .addGroup(layout.createSequentialGroup()
-                .addGap(266, 266, 266)
+                .addGap(300, 300, 300)
                 .addComponent(jLabel5)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel4)
@@ -258,7 +264,6 @@ public class ListaProdutos extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void listaBuscaProdutoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_listaBuscaProdutoMouseClicked
-
         if (evt.getClickCount() == 2) {
             int linha = listaBuscaProduto.getSelectedRow();
             int id = (int) tableModel.getValueAt(linha, 0);
@@ -272,14 +277,21 @@ public class ListaProdutos extends javax.swing.JDialog {
     }//GEN-LAST:event_btVoltarActionPerformed
 
     private void btCADASTRARActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btCADASTRARActionPerformed
-//        CadastroProduto cp = new CadastroProduto(null,true);       
         CadastroProduto cp = new CadastroProduto(null, true);
         cp.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_btCADASTRARActionPerformed
 
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
-        // TODO add your handling code here:
+        String nome = txtNomeBusca.getText();
+        
+        if (!nome.equals("") && !nome.equals(" ")) {            
+            tableModel = new ProdutoTableModel(pd.consultarPorNome(nome));
+            listaBuscaProduto.setModel(tableModel);
+        }else{
+            JOptionPane.showMessageDialog(this, "Informe um produto");
+        }
+
     }//GEN-LAST:event_btnBuscarActionPerformed
 
     private void btEXCLUIRActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btEXCLUIRActionPerformed
@@ -330,6 +342,10 @@ public class ListaProdutos extends javax.swing.JDialog {
 
 
     }//GEN-LAST:event_btnEntradaActionPerformed
+
+    private void txtNomeBuscaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNomeBuscaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtNomeBuscaActionPerformed
 
     /**
      * @param args the command line arguments
@@ -382,6 +398,7 @@ public class ListaProdutos extends javax.swing.JDialog {
     private javax.swing.JButton btnBuscar;
     private javax.swing.JButton btnEntrada;
     private javax.swing.JButton btnSaida;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel2;

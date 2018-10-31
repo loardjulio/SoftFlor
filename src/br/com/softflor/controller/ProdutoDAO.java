@@ -5,6 +5,7 @@
  */
 package br.com.softflor.controller;
 
+import br.com.softflor.entidades.Cliente;
 import br.com.softflor.entidades.Produto;
 import java.io.Serializable;
 import java.util.List;
@@ -49,6 +50,20 @@ public class ProdutoDAO extends GenericDAO<Produto> {
             FechaConexao();
         }
         return null;
+    }
+     
+     public List<Produto> consultarPorNome(String nome) {
+        List<Produto> produtos = null;
+        try {
+            Query q = em.createNamedQuery("Produto.consultarPorNome");
+            q.setParameter("nome", nome + "%");
+            produtos = q.getResultList();
+        } catch (Exception e) {
+              JOptionPane.showMessageDialog(null, "Erro buscar Produtos"+ e);            
+        } finally {
+            FechaConexao();            
+        }
+        return produtos;
     }
 
     public Serializable getId() {

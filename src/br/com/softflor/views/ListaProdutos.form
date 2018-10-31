@@ -30,7 +30,7 @@
               <EmptySpace max="-2" attributes="0"/>
           </Group>
           <Group type="102" alignment="0" attributes="0">
-              <EmptySpace min="-2" pref="266" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="300" max="-2" attributes="0"/>
               <Component id="jLabel5" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
               <Component id="jLabel4" min="-2" max="-2" attributes="0"/>
@@ -75,8 +75,10 @@
                   <EmptySpace max="-2" attributes="0"/>
               </Group>
               <Group type="102" alignment="1" attributes="0">
-                  <EmptySpace pref="131" max="32767" attributes="0"/>
-                  <Component id="txtNomeBusca" min="-2" pref="516" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
+                  <Component id="jLabel1" min="-2" pref="142" max="-2" attributes="0"/>
+                  <EmptySpace max="-2" attributes="0"/>
+                  <Component id="txtNomeBusca" max="32767" attributes="0"/>
                   <EmptySpace min="-2" pref="47" max="-2" attributes="0"/>
                   <Component id="btnBuscar" min="-2" pref="105" max="-2" attributes="0"/>
                   <EmptySpace min="-2" pref="29" max="-2" attributes="0"/>
@@ -90,6 +92,7 @@
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="txtNomeBusca" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="btnBuscar" alignment="3" max="32767" attributes="0"/>
+                      <Component id="jLabel1" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace pref="8" max="32767" attributes="0"/>
                   <Component id="jScrollPane3" min="-2" pref="252" max="-2" attributes="0"/>
@@ -142,7 +145,7 @@
                       <Component id="btnEntrada" min="-2" pref="104" max="-2" attributes="0"/>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Component id="btnSaida" min="-2" pref="104" max="-2" attributes="0"/>
-                      <EmptySpace max="32767" attributes="0"/>
+                      <EmptySpace pref="93" max="32767" attributes="0"/>
                       <Component id="btCADASTRAR" min="-2" max="-2" attributes="0"/>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Component id="btEDITAR" min="-2" pref="90" max="-2" attributes="0"/>
@@ -254,6 +257,14 @@
           </Events>
         </Component>
         <Component class="javax.swing.JTextField" name="txtNomeBusca">
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtNomeBuscaActionPerformed"/>
+          </Events>
+        </Component>
+        <Component class="javax.swing.JLabel" name="jLabel1">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="BUSCAR POR NOME:"/>
+          </Properties>
         </Component>
       </SubComponents>
     </Container>
