@@ -41,6 +41,15 @@ public class ListaProdutos extends javax.swing.JDialog {
 
         listaBuscaProduto.setModel(tableModel);
     }
+    
+    public void carregaTabela() {
+        ProdutoDAO pd = new ProdutoDAO();
+
+       tableModel = new ProdutoTableModel(pd.consultarTodos());
+        
+
+        listaBuscaProduto.setModel(tableModel);
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.

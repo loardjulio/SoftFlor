@@ -5,12 +5,7 @@
  */
 package br.com.softflor.views;
 
-import br.com.softflor.controller.ClienteDAO;
-import br.com.softflor.controller.EnderecoDAO;
 import br.com.softflor.controller.FuncionarioDAO;
-import br.com.softflor.entidades.Cliente;
-import br.com.softflor.entidades.Contato;
-import br.com.softflor.entidades.Endereco;
 import br.com.softflor.entidades.Funcionario;
 import javax.swing.JOptionPane;
 
@@ -18,7 +13,7 @@ import javax.swing.JOptionPane;
  *
  * @author Julio
  */
-public class CadastroFuncionarios extends javax.swing.JDialog {
+public class CadastroUsuarios extends javax.swing.JDialog {
 
     //----- OBJETOs USADO PARA MANIPULAR UM FUNCIONARIO------------//
     FuncionarioDAO fd = new FuncionarioDAO();
@@ -26,17 +21,18 @@ public class CadastroFuncionarios extends javax.swing.JDialog {
     /**
      * Creates new form CadastroCliente1
      */
-    public CadastroFuncionarios(java.awt.Frame parent, boolean modal) {
+    public CadastroUsuarios(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
         setLocationRelativeTo(null);
+        lblAlerta.setVisible(false);
     }
 
     //LIMPA OS CAMPOS DO FRAME APOS CADASTRAR OU EDITAR
     public void LimpaCampos() {
-        txtNome.setText("");
+        //txtNome.setText("");
         txtUser.setText("");
-        txtSetor.setText("");
+        txtNome.setText("");
         txtSenha.setText("");
     }
 
@@ -48,10 +44,10 @@ public class CadastroFuncionarios extends javax.swing.JDialog {
             } else {
                 // SE O OBJETO EXISTIR SETA OS DADOS
                 lblID.setText(funcionario.getId().toString());
-                txtNome.setText(funcionario.getNome());
+                //txtNome.setText(funcionario.getNome());
                 txtUser.setText(funcionario.getUsuario());
                 txtSenha.setText(funcionario.getSenha());
-                txtSetor.setText(funcionario.getSetor());
+               // txtSetor.setText(funcionario.getSetor());
                 this.setVisible(true);
             }
         } catch (Exception e) {
@@ -71,7 +67,6 @@ public class CadastroFuncionarios extends javax.swing.JDialog {
 
         jPanel1 = new javax.swing.JPanel();
         jLabel7 = new javax.swing.JLabel();
-        txtNome = new javax.swing.JTextField();
         txtUser = new javax.swing.JTextField();
         jLabel9 = new javax.swing.JLabel();
         btnSair = new javax.swing.JButton();
@@ -82,11 +77,17 @@ public class CadastroFuncionarios extends javax.swing.JDialog {
         jLabel5 = new javax.swing.JLabel();
         txtSenha = new javax.swing.JPasswordField();
         jLabel8 = new javax.swing.JLabel();
-        txtSetor = new javax.swing.JTextField();
+        txtNome = new javax.swing.JTextField();
+        checkADM = new javax.swing.JCheckBox();
+        lblAlerta = new javax.swing.JLabel();
 
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Cadastro de cliente");
+        setResizable(false);
 
-        jLabel7.setText("NOME:");
+        jPanel1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+
+        jLabel7.setText("NÍVEL DE ACESSO:");
 
         jLabel9.setText("USUÁRIO:");
 
@@ -114,7 +115,19 @@ public class CadastroFuncionarios extends javax.swing.JDialog {
         jLabel5.setFont(new java.awt.Font("Constantia", 1, 22)); // NOI18N
         jLabel5.setText("CADASTRO ");
 
-        jLabel8.setText("SETOR");
+        jLabel8.setText("NOME");
+
+        checkADM.setText("ADMINISTRADOR");
+        checkADM.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                checkADMMouseClicked(evt);
+            }
+        });
+
+        lblAlerta.setFont(new java.awt.Font("Calisto MT", 1, 12)); // NOI18N
+        lblAlerta.setForeground(new java.awt.Color(255, 0, 0));
+        lblAlerta.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/alerta.png"))); // NOI18N
+        lblAlerta.setText("Administrador tem acesso irrestrito ao dados de usuário!");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -124,9 +137,34 @@ public class CadastroFuncionarios extends javax.swing.JDialog {
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(lblID, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 62, Short.MAX_VALUE)
+                        .addComponent(jLabel5)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel4)
+                        .addGap(78, 78, 78))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lblAlerta, javax.swing.GroupLayout.PREFERRED_SIZE, 326, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                                .addComponent(btnCadastrarForn, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(30, 30, 30)
+                                .addComponent(btnSair, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(10, 10, 10)))
+                        .addGap(41, 41, 41))))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(19, 19, 19)
+                        .addComponent(jLabel7)
+                        .addGap(18, 18, 18)
+                        .addComponent(checkADM))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(48, 48, 48)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jLabel7)
+                                .addComponent(jLabel8)
                                 .addGap(31, 31, 31)
                                 .addComponent(txtNome, javax.swing.GroupLayout.PREFERRED_SIZE, 246, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(jPanel1Layout.createSequentialGroup()
@@ -134,25 +172,10 @@ public class CadastroFuncionarios extends javax.swing.JDialog {
                                     .addComponent(jLabel12)
                                     .addComponent(jLabel9))
                                 .addGap(22, 22, 22)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(txtSenha, javax.swing.GroupLayout.PREFERRED_SIZE, 246, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(txtUser, javax.swing.GroupLayout.PREFERRED_SIZE, 246, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(btnCadastrarForn, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(29, 29, 29)
-                                .addComponent(btnSair, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jLabel8)
-                                .addGap(31, 31, 31)
-                                .addComponent(txtSetor, javax.swing.GroupLayout.PREFERRED_SIZE, 246, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(lblID, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 19, Short.MAX_VALUE)
-                        .addComponent(jLabel5)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jLabel4)
-                        .addGap(78, 78, 78))))
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(txtUser, javax.swing.GroupLayout.PREFERRED_SIZE, 246, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(txtSenha, javax.swing.GroupLayout.PREFERRED_SIZE, 246, javax.swing.GroupLayout.PREFERRED_SIZE))))))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -163,27 +186,29 @@ public class CadastroFuncionarios extends javax.swing.JDialog {
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jLabel4)
                         .addComponent(jLabel5)))
-                .addGap(30, 30, 30)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel7)
-                    .addComponent(txtNome, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(20, 20, 20)
+                .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel8)
-                    .addComponent(txtSetor, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 20, Short.MAX_VALUE)
+                    .addComponent(txtNome, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(30, 30, 30)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtUser, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(20, 20, 20)
+                .addGap(30, 30, 30)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel12)
                     .addComponent(txtSenha, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(33, 33, 33)
+                .addGap(30, 30, 30)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnSair, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnCadastrarForn, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(28, 28, 28))
+                    .addComponent(jLabel7)
+                    .addComponent(checkADM))
+                .addGap(30, 30, 30)
+                .addComponent(lblAlerta, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(20, 20, 20)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnCadastrarForn, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnSair, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap())
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -198,25 +223,32 @@ public class CadastroFuncionarios extends javax.swing.JDialog {
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnCadastrarFornActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadastrarFornActionPerformed
 
         Funcionario funcionario = new Funcionario();
-        funcionario.setNome(txtNome.getText());
-        funcionario.setSetor(txtSetor.getText());
+       funcionario.setNome(txtNome.getText());       
         funcionario.setUsuario(txtUser.getText());
         funcionario.setSenha(txtSenha.getText());
+        
+        //VERIFICA SE É ADMINISTRADOR 
+        if (checkADM.isSelected()) {
+            funcionario.setAdministrador(true);
+        }else{
+            funcionario.setAdministrador(false);
+        }
+        //VERIFICA SE É EXISTENTE
         if (lblID.getText().equals("")) {
             funcionario.setIdfuncionario(null);
         } else {
             funcionario.setIdfuncionario(Integer.parseInt(lblID.getText()));
         }
+        //VERIFICA CAMPOS VAZIOS
         if (txtUser.equals("") && txtSenha.equals("")) {
-
             JOptionPane.showMessageDialog(this, "Obrigatório usuário e senha");
-        } else {
-
+        } else {                     
             int resp = JOptionPane.showConfirmDialog(null, "Deseja salvar as informações?", "Aguardando resposta...", JOptionPane.YES_NO_CANCEL_OPTION);
             if (resp == 0) {
                 fd.salvarOuAtualizar(funcionario);
@@ -235,6 +267,15 @@ public class CadastroFuncionarios extends javax.swing.JDialog {
         this.dispose();
     }//GEN-LAST:event_btnSairActionPerformed
 
+    private void checkADMMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_checkADMMouseClicked
+               
+        if (checkADM.isSelected()) {
+            lblAlerta.setVisible(true);
+        } else {
+            lblAlerta.setVisible(false);
+        }
+    }//GEN-LAST:event_checkADMMouseClicked
+
     /**
      * @param args the command line arguments
      */
@@ -252,14 +293,18 @@ public class CadastroFuncionarios extends javax.swing.JDialog {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(CadastroFuncionarios.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(CadastroUsuarios.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(CadastroFuncionarios.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(CadastroUsuarios.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(CadastroFuncionarios.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(CadastroUsuarios.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(CadastroFuncionarios.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(CadastroUsuarios.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
         //</editor-fold>
@@ -268,7 +313,7 @@ public class CadastroFuncionarios extends javax.swing.JDialog {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                CadastroFuncionarios dialog = new CadastroFuncionarios(new javax.swing.JFrame(), true);
+                CadastroUsuarios dialog = new CadastroUsuarios(new javax.swing.JFrame(), true);
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                     @Override
                     public void windowClosing(java.awt.event.WindowEvent e) {
@@ -283,6 +328,7 @@ public class CadastroFuncionarios extends javax.swing.JDialog {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCadastrarForn;
     private javax.swing.JButton btnSair;
+    private javax.swing.JCheckBox checkADM;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
@@ -290,10 +336,10 @@ public class CadastroFuncionarios extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JLabel lblAlerta;
     private javax.swing.JLabel lblID;
     private javax.swing.JTextField txtNome;
     private javax.swing.JPasswordField txtSenha;
-    private javax.swing.JTextField txtSetor;
     private javax.swing.JTextField txtUser;
     // End of variables declaration//GEN-END:variables
 

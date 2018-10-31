@@ -17,13 +17,9 @@ public class TesteFuncionario {
     
     public static void main(String[] args) throws Exception {
        
-    Funcionario novo = new Funcionario("administrador", "julio", "julio");
+    Funcionario novo = new Funcionario(true,"Administrador","admin", "admin");
         FuncionarioDAO fdao = new FuncionarioDAO();
-        fdao.salvarOuAtualizar(novo);   
-        
-        
-        
-       
+        fdao.salvarOuAtualizar(novo);
     }
     
     

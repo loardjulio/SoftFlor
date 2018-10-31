@@ -5,6 +5,8 @@
  */
 package br.com.softflor.views;
 
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author Julio
@@ -12,10 +14,18 @@ package br.com.softflor.views;
 public class Principal extends javax.swing.JFrame {
 
     public Principal() {
+        JOptionPane.showMessageDialog(null, "Erro ao iniciar");
+        System.exit(0);
+    }
+    
+    public Principal(String nome,boolean nível) {
         initComponents();
+        Desktop.add(new ProdutosEstoque());
         setLocationRelativeTo(null);
-       // MenuUsuários.setEnabled(false);
-        lblNome.setText("Olá, Bem vindo");
+        if (nível!=true) {
+          MenuUsuários.setEnabled(false);   
+        }     
+        lblNome.setText("Bem vindo, "+nome);        
     }
 
     @SuppressWarnings("unchecked")
@@ -28,7 +38,7 @@ public class Principal extends javax.swing.JFrame {
         btnFornecedor = new javax.swing.JButton();
         btnOrcamento = new javax.swing.JButton();
         lblNome = new javax.swing.JLabel();
-        DeskPane = new javax.swing.JDesktopPane();
+        Desktop = new javax.swing.JDesktopPane();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenuItem2 = new javax.swing.JMenuItem();
@@ -93,18 +103,14 @@ public class Principal extends javax.swing.JFrame {
         PainelAcoesLayout.setHorizontalGroup(
             PainelAcoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(PainelAcoesLayout.createSequentialGroup()
-                .addGroup(PainelAcoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(PainelAcoesLayout.createSequentialGroup()
-                        .addGap(30, 30, 30)
-                        .addGroup(PainelAcoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(btnOrcamento, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btnProduto, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btnFornecedor, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btnCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(PainelAcoesLayout.createSequentialGroup()
-                        .addGap(23, 23, 23)
-                        .addComponent(lblNome, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(21, Short.MAX_VALUE))
+                .addGap(30, 30, 30)
+                .addGroup(PainelAcoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(btnOrcamento, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnProduto, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnFornecedor, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(30, Short.MAX_VALUE))
+            .addComponent(lblNome, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         PainelAcoesLayout.setVerticalGroup(
             PainelAcoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -117,19 +123,19 @@ public class Principal extends javax.swing.JFrame {
                 .addComponent(btnProduto, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(50, 50, 50)
                 .addComponent(btnOrcamento, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(27, 27, 27)
-                .addComponent(lblNome, javax.swing.GroupLayout.DEFAULT_SIZE, 23, Short.MAX_VALUE)
-                .addGap(29, 29, 29))
+                .addGap(18, 18, 18)
+                .addComponent(lblNome, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
-        javax.swing.GroupLayout DeskPaneLayout = new javax.swing.GroupLayout(DeskPane);
-        DeskPane.setLayout(DeskPaneLayout);
-        DeskPaneLayout.setHorizontalGroup(
-            DeskPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        javax.swing.GroupLayout DesktopLayout = new javax.swing.GroupLayout(Desktop);
+        Desktop.setLayout(DesktopLayout);
+        DesktopLayout.setHorizontalGroup(
+            DesktopLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 635, Short.MAX_VALUE)
         );
-        DeskPaneLayout.setVerticalGroup(
-            DeskPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        DesktopLayout.setVerticalGroup(
+            DesktopLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 524, Short.MAX_VALUE)
         );
 
@@ -219,11 +225,11 @@ public class Principal extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addComponent(PainelAcoes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(DeskPane))
+                .addComponent(Desktop, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(DeskPane)
+            .addComponent(Desktop)
             .addComponent(PainelAcoes, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
@@ -253,8 +259,8 @@ public class Principal extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItem2ActionPerformed
 
     private void jMenuItem13ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem13ActionPerformed
-        ListaFuncionarios lf = new ListaFuncionarios(this,true);
-         lf.setVisible(true);
+        ListaUsuarios lf = new ListaUsuarios(this,true);
+       lf.setVisible(true);
     }//GEN-LAST:event_jMenuItem13ActionPerformed
 
     private void btnOrcamentoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOrcamentoActionPerformed
@@ -264,8 +270,7 @@ public class Principal extends javax.swing.JFrame {
 
     private void jMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem4ActionPerformed
         CadastroProduto cp = new CadastroProduto(this, true);
-        cp.setVisible(true);
-        
+        cp.setVisible(true);       
     }//GEN-LAST:event_jMenuItem4ActionPerformed
 
     private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
@@ -311,7 +316,7 @@ public class Principal extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JDesktopPane DeskPane;
+    private javax.swing.JDesktopPane Desktop;
     private javax.swing.JMenu Fornecedor;
     private javax.swing.JMenu MenuUsuários;
     private javax.swing.JPanel PainelAcoes;

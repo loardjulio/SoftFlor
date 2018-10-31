@@ -19,9 +19,14 @@ import javax.swing.JOptionPane;
  */
 public class FuncionarioDAO extends GenericDAO<Funcionario> {
 
-    private boolean acesso;
+private boolean acesso;
+ private String nome;
+ private boolean nível;
+
+  
 
     public boolean InfoAcesso(String usuario, String senha) {
+        
         List<Funcionario> funcionarios = null;
         //consulta por nome
         Query q = em.createNamedQuery("Funcionario.consultaPorUsuario");
@@ -31,7 +36,10 @@ public class FuncionarioDAO extends GenericDAO<Funcionario> {
         //verifica as credenciais de acesso
         for (Funcionario funcionario : funcionarios) {
             if (funcionario.getSenha() == null ? senha == null : funcionario.getSenha().equals(senha)) {
-                acesso = true;
+              this.nome = funcionario.getNome();
+              this.nível = funcionario.isAdministrador();
+                acesso = true;   
+              
             } else {
                 acesso = false;
             }
@@ -47,9 +55,12 @@ public class FuncionarioDAO extends GenericDAO<Funcionario> {
     }
 
     private void valida(boolean chave) {
-        if (chave == true) {
-            JOptionPane.showMessageDialog(null, "Acesso liberado. Bem vindo");
-            new Principal().setVisible(true);
+        if (chave == true) {          
+                                   
+            JOptionPane.showMessageDialog(null, "Acesso liberado. Bem vindo"); 
+            
+            
+            new Principal(nome,nível).setVisible(true);
         } else {
             JOptionPane.showMessageDialog(null, "Acesso negado");
         }
@@ -67,5 +78,33 @@ public class FuncionarioDAO extends GenericDAO<Funcionario> {
         }
         return null;
     }
+    
+    //fazer uma consulta no banco de dados. caso o id 1 nao existir, ele deve 
+    //criar usuario admin, senha admin nome Adminstrador
+    //caso existir 
+    
+    
+    //VERIFICA SE O ADMIN FIXO DE ID 1 EXISTE. SE SIM NÃO FAZ NADA, SE NÃO ELE CRIA O ADMIN FIXO
+    public void userAdmin(){
+       
+        Funcionario funcionario = null;
+        try {              
+            funcionario = em.find(Funcionario.class, 1);  
+            
+        } catch (Exception e) {
+            System.out.println("Erro FuncionarioDAO: " + e);
+        } 
+        
+        if (funcionario == null) { 
+            Funcionario padrão = new Funcionario(true, "Administrador", "admin", "admin") ;   
+             // this.salvarOuAtualizar(padrão);
+             em.getTransaction().begin();
+             em.persist(padrão);
+             em.getTransaction().commit();  
+             
+        }        
+        
+    }
+
 
 }

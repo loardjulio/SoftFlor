@@ -7,6 +7,7 @@ package br.com.softflor.controller;
 
 import br.com.softflor.conexao.ConectaBD;
 import br.com.softflor.entidades.EntidadeBase;
+import br.com.softflor.views.Login;
 import java.io.Serializable;
 import javax.persistence.EntityManager;
 import javax.swing.JOptionPane;
@@ -25,7 +26,7 @@ public class GenericDAO<T extends EntidadeBase> extends ConectaBD {
             em.getTransaction().begin();
             if (t.getId() == null) { //verifica se é nulo ou não
                 em.persist(t); // se for nulo executa o insert
-                JOptionPane.showMessageDialog(null, "Salvo!");
+                JOptionPane.showMessageDialog(null, "Salvo!");                
             } else { //se nao for nulo 
                 if (!em.contains(t)) {
                     if (em.find(t.getClass(), t.getId()) == null) {
@@ -44,9 +45,7 @@ public class GenericDAO<T extends EntidadeBase> extends ConectaBD {
         return t;
     }
     
-    
-
-    public void remover(Class<T> clazz, Serializable id) { //clazz é so pra diferenciar da palavra reservada
+        public void remover(Class<T> clazz, Serializable id) { //clazz é so pra diferenciar da palavra reservada
         T t = em.find(clazz, id);         
         try {             
             em.getTransaction().begin();

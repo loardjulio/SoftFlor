@@ -24,9 +24,9 @@ public class FuncionarioTableModel extends AbstractTableModel {
         this.listaFuncionarios= listaFuncionarios;
         cabecalho = new ArrayList<>();
         cabecalho.add("ID");
-        cabecalho.add("SETOR");
         cabecalho.add("NOME");
-        cabecalho.add("USUARIO");      
+        cabecalho.add("NÍVEL ACESSO");
+        cabecalho.add("USUÁRIO");            
     }
 
     public List<Funcionario> getlistaFuncionarios() {
@@ -43,7 +43,7 @@ public class FuncionarioTableModel extends AbstractTableModel {
     }
 
     @Override
-    public int getRowCount() {        
+    public int getRowCount() {       
         
         return listaFuncionarios.size();
     }
@@ -68,14 +68,19 @@ public class FuncionarioTableModel extends AbstractTableModel {
         switch (columnIndex) {
             case 0:
                 return listaFuncionarios.get(rowIndex).getIdfuncionario();
+            case 2:                
+                if (listaFuncionarios.get(rowIndex).isAdministrador()) {
+                    return "Administrador";
+                } else {
+                    return "Padrão";
+                } 
             case 1:
-                return listaFuncionarios.get(rowIndex).getSetor();
-            case 2:
-                return listaFuncionarios.get(rowIndex).getNome();
+                return listaFuncionarios.get(rowIndex).getNome();  
+                
             case 3:
                 return listaFuncionarios.get(rowIndex).getUsuario();
-          
-           
+                        
+                      
             default:
                 JOptionPane.showMessageDialog(null, "Algo deu errado na geração da tabela funcionarios");
                 return null;

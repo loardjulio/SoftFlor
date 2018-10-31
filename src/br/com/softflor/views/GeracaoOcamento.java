@@ -428,6 +428,7 @@ public class GeracaoOcamento extends javax.swing.JFrame {
     private void btnBuscarProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarProdutoActionPerformed
 
         ListaProdutos jb = new ListaProdutos(this, true);
+        jb.carregaTabela();       
         jb.setVisible(true);
         int id = jb.idSelecionado;
         lblNumero.setText("" + id + mes + dia);

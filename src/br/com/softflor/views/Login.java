@@ -23,10 +23,11 @@ public class Login extends javax.swing.JFrame {
      * Creates new form Login
      */
     
-
+    FuncionarioDAO fd = new FuncionarioDAO();
     public Login() {
         initComponents();
         setLocationRelativeTo(null);
+        fd.userAdmin();
     }
 
     /**

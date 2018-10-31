@@ -14,7 +14,7 @@ import javax.swing.JOptionPane;
  *
  * @author Julio
  */
-public class ListaFuncionarios extends javax.swing.JDialog {
+public class ListaUsuarios extends javax.swing.JDialog {
 
     /**
      * Creates new form ListaClientes
@@ -22,10 +22,10 @@ public class ListaFuncionarios extends javax.swing.JDialog {
     private FuncionarioDAO funcionarioDAO;
     private FuncionarioTableModel tableModel;
     public int idSelecionado;
-    CadastroFuncionarios cf = new CadastroFuncionarios(null, true);
+    CadastroUsuarios cf = new CadastroUsuarios(null, true);
     
 
-    public ListaFuncionarios(java.awt.Frame parent, boolean modal) {
+    public ListaUsuarios(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
         setLocationRelativeTo(null);
@@ -213,8 +213,7 @@ public class ListaFuncionarios extends javax.swing.JDialog {
         if (linha == -1) {
             JOptionPane.showMessageDialog(this, "Selecione um funcionário");
         } else {
-            int idSelecionado = (int) tableModel.getValueAt(linha, 0);
-           
+            int idSelecionado = (int) tableModel.getValueAt(linha, 0);           
             cf.Atualiza(funcionarioDAO.buscarPorId(Funcionario.class, idSelecionado));
             this.setVisible(false);
         }
@@ -227,13 +226,17 @@ public class ListaFuncionarios extends javax.swing.JDialog {
     }//GEN-LAST:event_tableListaMouseClicked
     
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        switch (JOptionPane.showConfirmDialog(null, "Deseja Excluir o item selecionado?")) {
-            case 0:
+         switch (JOptionPane.showConfirmDialog(null, "Deseja Excluir o item selecionado?")) {
+            case 0:                
                 int linha = tableLista.getSelectedRow();
                 Integer id =  (Integer) tableModel.getValueAt(linha, 0);
-                System.out.println(id);
-                funcionarioDAO.remover(Funcionario.class, id);
-                tableModel.removeRow(linha);
+                if (id!=1) {
+                  funcionarioDAO.remover(Funcionario.class, id);
+                  tableModel.removeRow(linha);  
+                }else{
+                   JOptionPane.showMessageDialog(this, "Impossível excluir administrador padrão");
+                }
+                
                 break;
             case 1:
                 JOptionPane.showMessageDialog(null, "Operação cancelada");
@@ -261,21 +264,23 @@ public class ListaFuncionarios extends javax.swing.JDialog {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(ListaFuncionarios.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ListaUsuarios.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(ListaFuncionarios.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ListaUsuarios.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(ListaFuncionarios.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ListaUsuarios.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(ListaFuncionarios.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ListaUsuarios.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                ListaFuncionarios dialog = new ListaFuncionarios(new javax.swing.JFrame(), true);
+                ListaUsuarios dialog = new ListaUsuarios(new javax.swing.JFrame(), true);
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                     @Override
                     public void windowClosing(java.awt.event.WindowEvent e) {

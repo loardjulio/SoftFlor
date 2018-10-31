@@ -29,9 +29,9 @@ public class Funcionario implements EntidadeBase, Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     // @Column
-    private Integer idfuncionario;
+    private Integer idfuncionario;   
     //@Column
-    private String setor;
+    private Boolean administrador=false;
     //@Column
     private String nome;
     //@Column
@@ -47,13 +47,16 @@ public class Funcionario implements EntidadeBase, Serializable {
     public Funcionario() {
     }
 
-    public Funcionario(String setor, String nome, String senha) {
+    public Funcionario(boolean administrador, String nome, String usuario, String senha) {
         
-        this.setor = setor;
+        this.administrador = administrador;
         this.nome = nome;
+         this.usuario = usuario;
         this.senha = senha;
     }
-
+    
+    
+    
     public Integer getIdfuncionario() {
         return idfuncionario;
     }
@@ -62,13 +65,17 @@ public class Funcionario implements EntidadeBase, Serializable {
         this.idfuncionario = idfuncionario;
     }
 
-    public String getSetor() {
-        return setor;
+    public boolean isAdministrador() {
+        return administrador;
     }
 
-    public void setSetor(String setor) {
-        this.setor = setor;
+    public void setAdministrador(boolean administrador) {
+        this.administrador = administrador;
     }
+
+   
+    
+    
 
     public String getNome() {
         return nome;
