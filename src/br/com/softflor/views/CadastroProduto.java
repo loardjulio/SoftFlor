@@ -267,29 +267,31 @@ public class CadastroProduto extends javax.swing.JDialog {
     private void btnCadastrarProActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadastrarProActionPerformed
 
         produto.setNome(txtNomeProduto.getText()); //PEGA P NOME DO PRODUTO NO CAMPO       
-        
+
         if (lblID.getText().equals("") == false) {  //SE O CAMPO ID NÃO ESTIVER VAZIO ELE PEGA O DADO         
-               produto.setIdproduto(Integer.parseInt(lblID.getText()));
-        } 
+            produto.setIdproduto(Integer.parseInt(lblID.getText()));
+        }
         produto.setEstoque_minimo(Double.parseDouble(txtEstoqueMin.getText())); //SETA O ESTOQUE
         produto.setPreco_compra(Double.parseDouble(txtPrecoCompra.getText())); //SETA PRECO COMPRA
         produto.setPreco_venda(Double.parseDouble(txtPrecoVenda.getText()));
         produto.setQuantidade(Double.parseDouble(txtQuantidadeProduto.getText()));
-        
+
         nomeForn = (String) ComboFornecedor.getSelectedItem(); //PEGA O NOME DO FORN QUE TA NO COMBO       
         produto.setUnidade_medida((String) ComboMedida.getSelectedItem());   //SETA A UNIDADE DE MEDIDA     
-        
 
         if (produto.ChecaFornecedor(nomeForn) && produto.ChecaUnidade() == true) { //VERIFICA OS COMBOS
             produto.setFornecedor(fdao.fornecedorProduto(nomeForn)); //PEGA O FORNECEDOR JA CADASTRADO E SETA ELE NO PRODUTO
             pd.salvarOuAtualizar(produto); //SALVA O PRODUTO
-        LimpaTela();
-        this.dispose(); 
+            //SE O CAMPO QUE EXIBE O ID ESTIVER VAZIO É PQ ESTA CADASTRANDO
+            // ENTAO AO CONCLUIR LIMPA A TELA. SE ESTIVER COM VALOR É PQ 
+            //TA EDITANDO, ENTÃO DEVE FECHAR A JANELA
+            if (lblID.getText().equals("")) {
+                LimpaTela();
+            } else {
+                this.setVisible(false);
+            }
+
         }
-        
-        
-       
-        
 
     }//GEN-LAST:event_btnCadastrarProActionPerformed
 

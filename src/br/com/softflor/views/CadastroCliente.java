@@ -1,12 +1,7 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package br.com.softflor.views;
 
 import br.com.softflor.controller.ClienteDAO;
-import br.com.softflor.controller.EnderecoDAO;
 import br.com.softflor.entidades.Cliente;
 import br.com.softflor.entidades.Contato;
 import br.com.softflor.entidades.Endereco;
@@ -18,15 +13,7 @@ import javax.swing.JOptionPane;
  */
 public class CadastroCliente extends javax.swing.JDialog {
 
-    //----- OBJETOs USADO PARA MANIPULAR UM CLIENTE------------//
-    ClienteDAO cd = new ClienteDAO();
-    Contato contato = new Contato();
-    Endereco end = new Endereco();
-    Cliente cliente = new Cliente();
-
-    /**
-     * Creates new form CadastroCliente1
-     */
+  
     public CadastroCliente(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
@@ -303,11 +290,13 @@ public class CadastroCliente extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnCadastrarFornActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadastrarFornActionPerformed
-            
+    ClienteDAO cd = new ClienteDAO();
+    Contato contato = new Contato();
+    Endereco end = new Endereco();
+    Cliente cliente = new Cliente();
           if (txtNome.equals("")) {
                 System.out.println("nome errado");
-            }
-          
+            }          
             
         contato.setEmail(txtEmail.getText());
         contato.setNome(txtNome.getText());
@@ -332,15 +321,23 @@ public class CadastroCliente extends javax.swing.JDialog {
         cliente.setCpf(txtCPF.getText());
         cliente.setNome(txtNome.getText());
 
+       //O CAMPO ESTADO NÃO PODE SER VAZIO, SE NÃO ELE GRAMA O --SELECIONE-- NO BANCO
         if (end.ChecaEstado() == true) {
             
             int resp = JOptionPane.showConfirmDialog(null, "Deseja salvar as informações?", "Aguardando resposta...", JOptionPane.YES_NO_CANCEL_OPTION);
             if (resp == 0) {
                 cd.salvarOuAtualizar(cliente);
-                LimpaCampos();
+                
+                //SE O CAMPO QUE EXIBE O ID ESTIVER VAZIO É PQ ESTA CADASTRANDO
+                // ENTAO AO CONCLUIR LIMPA A TELA. SE ESTIVER COM VALOR É PQ 
+                //TA EDITANDO, ENTÃO DEVE FECHAR A JANELA
+                if (lblID.getText().equals("")) {
+                   LimpaCampos();  
+                }else{
+                this.setVisible(false);                
+                }                
             } else if (resp == 1) {
-                JOptionPane.showMessageDialog(this, "Operação cancelada");
-                LimpaCampos();
+                JOptionPane.showMessageDialog(this, "Operação cancelada");                
             }
 
         }

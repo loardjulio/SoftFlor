@@ -252,11 +252,16 @@ public class CadastroUsuarios extends javax.swing.JDialog {
             int resp = JOptionPane.showConfirmDialog(null, "Deseja salvar as informações?", "Aguardando resposta...", JOptionPane.YES_NO_CANCEL_OPTION);
             if (resp == 0) {
                 fd.salvarOuAtualizar(funcionario);
-                LimpaCampos();
-                
+                //SE O CAMPO QUE EXIBE O ID ESTIVER VAZIO É PQ ESTA CADASTRANDO
+                // ENTAO AO CONCLUIR LIMPA A TELA. SE ESTIVER COM VALOR É PQ 
+                //TA EDITANDO, ENTÃO DEVE FECHAR A JANELA
+                if (lblID.getText().equals("")) {
+                   LimpaCampos();  
+                }else{
+                this.setVisible(false);                
+                }
             } else if (resp == 1) {
-                JOptionPane.showMessageDialog(this, "Operação cancelada");
-                LimpaCampos();
+                JOptionPane.showMessageDialog(this, "Operação cancelada");                
             }
             this.dispose();
         }
