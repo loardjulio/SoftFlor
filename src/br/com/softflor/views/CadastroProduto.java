@@ -296,8 +296,7 @@ public class CadastroProduto extends javax.swing.JDialog {
     }//GEN-LAST:event_btnCadastrarProActionPerformed
 
     private void btnSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSairActionPerformed
-        this.dispose();
-        pd.FechaConexao();
+        this.dispose();        
     }//GEN-LAST:event_btnSairActionPerformed
 
     /**
