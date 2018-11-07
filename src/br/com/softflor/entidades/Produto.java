@@ -29,8 +29,8 @@ import org.hibernate.annotations.NamedQuery;
 @NamedQueries({
         @NamedQuery(name = "Produto.consultarTodos", query = "SELECT p FROM Produto p"),  //consulta nomeada
         @NamedQuery(name = "Produto.consultarPorFornecedor", query = "select p from Produto p join p.fornecedor f where f.idfornecedor = :idfornecedor"), 
-        @NamedQuery(name = "Produto.consultarPorNome",query = "SELECT p from Produto p WHERE p.nome LIKE :nome")//consulta nomeada
-        
+        @NamedQuery(name = "Produto.consultarPorNome",query = "SELECT p from Produto p WHERE p.nome LIKE :nome"),//consulta nomeada
+       @NamedQuery(name = "Produto.consultarEstoque",query = "SELECT p FROM Produto p where p.quantidade <= p.estoque_minimo")//consulta nomeada
 })
 public class Produto implements EntidadeBase, Serializable {
 

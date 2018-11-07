@@ -331,6 +331,10 @@ public class ListaProdutos extends javax.swing.JDialog {
 
     }//GEN-LAST:event_btEDITARActionPerformed
 
+    private void txtNomeBuscaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNomeBuscaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtNomeBuscaActionPerformed
+
     private void btnSaidaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaidaActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_btnSaidaActionPerformed
@@ -340,12 +344,7 @@ public class ListaProdutos extends javax.swing.JDialog {
         Object nome = tableModel.getValueAt(linha, 1);
         Object qtd = tableModel.getValueAt(linha, 2);
 
-
     }//GEN-LAST:event_btnEntradaActionPerformed
-
-    private void txtNomeBuscaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNomeBuscaActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtNomeBuscaActionPerformed
 
     /**
      * @param args the command line arguments

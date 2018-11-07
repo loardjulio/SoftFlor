@@ -65,6 +65,23 @@ public class ProdutoDAO extends GenericDAO<Produto> {
         }
         return produtos;
     }
+     
+      public List<Produto> consultarEstoque() {
+        List<Produto> produtos = null;
+        try {
+            Query q = em.createNamedQuery("Produto.consultarEstoque");
+            //Query e = em.createNativeQuery("SELECT * FROM produtos where produtos.quantidade <= produtos.estoque_minimo");
+            produtos = q.getResultList();
+            //e.executeUpdate();
+            //System.out.println(e);
+            //produtos = e.getResultList();
+        } catch (Exception e) {
+              JOptionPane.showMessageDialog(null, "Erro buscar Produtos"+ e);            
+        } finally {
+            FechaConexao();            
+        }
+        return produtos;
+    }
 
     public Serializable getId() {
         return id;

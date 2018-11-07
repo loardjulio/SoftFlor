@@ -40,7 +40,7 @@ public class GenericDAO<T extends EntidadeBase> extends ConectaBD {
         } catch (Exception e) {
             System.out.println(e);
             JOptionPane.showMessageDialog(null, "Erro ao Salvar/Atualizar");
-            FechaConexao();
+            FechaConexao();           
         }
         return t;
     }

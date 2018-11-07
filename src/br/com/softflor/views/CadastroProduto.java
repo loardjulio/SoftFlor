@@ -7,13 +7,8 @@ package br.com.softflor.views;
 
 import br.com.softflor.controller.FornecedorDAO;
 import br.com.softflor.controller.ProdutoDAO;
-import br.com.softflor.entidades.Cliente;
 import br.com.softflor.entidades.Fornecedor;
 import br.com.softflor.entidades.Produto;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 /**
@@ -282,6 +277,7 @@ public class CadastroProduto extends javax.swing.JDialog {
         if (produto.ChecaFornecedor(nomeForn) && produto.ChecaUnidade() == true) { //VERIFICA OS COMBOS
             produto.setFornecedor(fdao.fornecedorProduto(nomeForn)); //PEGA O FORNECEDOR JA CADASTRADO E SETA ELE NO PRODUTO
             pd.salvarOuAtualizar(produto); //SALVA O PRODUTO
+            
             //SE O CAMPO QUE EXIBE O ID ESTIVER VAZIO É PQ ESTA CADASTRANDO
             // ENTAO AO CONCLUIR LIMPA A TELA. SE ESTIVER COM VALOR É PQ 
             //TA EDITANDO, ENTÃO DEVE FECHAR A JANELA
