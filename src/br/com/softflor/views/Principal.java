@@ -5,6 +5,12 @@
  */
 package br.com.softflor.views;
 
+import br.com.softflor.controller.ProdutoDAO;
+import br.com.softflor.entidades.Produto;
+import java.awt.Image;
+import java.awt.Toolkit;
+import java.net.URL;
+import java.util.List;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 
@@ -15,7 +21,8 @@ import javax.swing.JOptionPane;
 public class Principal extends javax.swing.JFrame {
 //ProdutosEstoque pe = new ProdutosEstoque();
 ImageIcon img = new ImageIcon("src/icons/backPrinc.png");
-
+ProdutoDAO pd = new ProdutoDAO();
+List<Produto> po = pd.consultarEstoque();
 
  
     public Principal() {
@@ -26,13 +33,23 @@ ImageIcon img = new ImageIcon("src/icons/backPrinc.png");
     public Principal(String nome,boolean nível) {        
         initComponents();       
         setLocationRelativeTo(null);
+        
+        
+        URL url = this.getClass().getResource("/icons/iconeSistema.png");
+        Image imagemTitulo = Toolkit.getDefaultToolkit().getImage(url);
+        this.setIconImage(imagemTitulo); 
+        
         img.setImage(img.getImage().getScaledInstance(lblImagem.getWidth(), lblImagem.getHeight(), 1));
         lblImagem.setIcon(img);
+        if (po.isEmpty()) {
+            lblaviso.setVisible(false);
+        } else {
+        }
         if (nível!=true) {
           MenuUsuario.setEnabled(false);   
         }     
         lblNome.setText("Olá, "+nome); 
-       //esk.add(pe);        
+             
     }
 
     @SuppressWarnings("unchecked")
@@ -51,7 +68,8 @@ ImageIcon img = new ImageIcon("src/icons/backPrinc.png");
         jLabel9 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
         btnProduto1 = new javax.swing.JButton();
-        jLabel1 = new javax.swing.JLabel();
+        lblaviso = new javax.swing.JLabel();
+        btnDeslogar = new javax.swing.JButton();
         lblImagem = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
@@ -64,13 +82,13 @@ ImageIcon img = new ImageIcon("src/icons/backPrinc.png");
         jMenuItem4 = new javax.swing.JMenuItem();
         jMenuItem8 = new javax.swing.JMenuItem();
         jMenu4 = new javax.swing.JMenu();
-        jMenuItem5 = new javax.swing.JMenuItem();
         jMenuItem9 = new javax.swing.JMenuItem();
         MenuUsuario = new javax.swing.JMenu();
         jMenuItem13 = new javax.swing.JMenuItem();
         jMenu6 = new javax.swing.JMenu();
         jMenuItem12 = new javax.swing.JMenuItem();
         jMenu7 = new javax.swing.JMenu();
+        jMenuItem1 = new javax.swing.JMenuItem();
 
         lblNome.setFont(new java.awt.Font("Constantia", 0, 14)); // NOI18N
         lblNome.setText("nome");
@@ -140,7 +158,14 @@ ImageIcon img = new ImageIcon("src/icons/backPrinc.png");
             }
         });
 
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/alerrta.png"))); // NOI18N
+        lblaviso.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/gifAlerta.gif"))); // NOI18N
+
+        btnDeslogar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/logout.png"))); // NOI18N
+        btnDeslogar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDeslogarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout PainelAcoesLayout = new javax.swing.GroupLayout(PainelAcoes);
         PainelAcoes.setLayout(PainelAcoesLayout);
@@ -151,15 +176,16 @@ ImageIcon img = new ImageIcon("src/icons/backPrinc.png");
                 .addGroup(PainelAcoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(PainelAcoesLayout.createSequentialGroup()
                         .addComponent(btnCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(77, 77, 77)
-                        .addComponent(btnFornecedor, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jLabel1))
+                        .addComponent(btnFornecedor, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(57, 57, 57)
+                        .addComponent(lblaviso))
                     .addGroup(PainelAcoesLayout.createSequentialGroup()
                         .addComponent(jLabel7)
-                        .addGap(62, 62, 62)
-                        .addComponent(jLabel6)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGap(43, 43, 43)
+                        .addComponent(jLabel6)
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addGap(0, 0, 0)
                 .addGroup(PainelAcoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(btnProduto, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel8))
@@ -167,43 +193,50 @@ ImageIcon img = new ImageIcon("src/icons/backPrinc.png");
                 .addGroup(PainelAcoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jLabel10)
                     .addComponent(btnProduto1, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGroup(PainelAcoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGap(42, 42, 42)
+                .addGroup(PainelAcoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(PainelAcoesLayout.createSequentialGroup()
-                        .addGap(90, 90, 90)
-                        .addComponent(btnOrcamento, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jLabel9)
+                        .addGap(118, 118, 118))
                     .addGroup(PainelAcoesLayout.createSequentialGroup()
-                        .addGap(73, 73, 73)
-                        .addComponent(jLabel9)))
-                .addGap(82, 82, 82))
+                        .addGap(17, 17, 17)
+                        .addComponent(btnOrcamento, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnDeslogar, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18))))
         );
         PainelAcoesLayout.setVerticalGroup(
             PainelAcoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(PainelAcoesLayout.createSequentialGroup()
+                .addContainerGap()
                 .addGroup(PainelAcoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(PainelAcoesLayout.createSequentialGroup()
-                        .addContainerGap()
+                        .addComponent(btnProduto1, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(PainelAcoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel10)
+                            .addComponent(jLabel8)))
+                    .addGroup(PainelAcoesLayout.createSequentialGroup()
                         .addGroup(PainelAcoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(PainelAcoesLayout.createSequentialGroup()
-                                .addComponent(btnProduto1, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(PainelAcoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(jLabel10)
-                                    .addComponent(jLabel8)))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PainelAcoesLayout.createSequentialGroup()
+                                .addComponent(btnProduto, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(7, 7, 7))
                             .addGroup(PainelAcoesLayout.createSequentialGroup()
                                 .addGroup(PainelAcoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(btnCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PainelAcoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(btnProduto, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(btnFornecedor, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(PainelAcoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel7)
-                                    .addComponent(jLabel6)))
-                            .addGroup(PainelAcoesLayout.createSequentialGroup()
-                                .addComponent(btnOrcamento, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jLabel9))))
-                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(PainelAcoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                        .addComponent(btnFornecedor, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(lblaviso, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
+                        .addGroup(PainelAcoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel7)
+                            .addComponent(jLabel6)))
+                    .addGroup(PainelAcoesLayout.createSequentialGroup()
+                        .addGroup(PainelAcoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(btnOrcamento, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnDeslogar))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel9)))
                 .addGap(0, 10, Short.MAX_VALUE))
         );
 
@@ -221,6 +254,11 @@ ImageIcon img = new ImageIcon("src/icons/backPrinc.png");
         jMenu1.add(jMenuItem2);
 
         jMenuItem6.setText("Listar Clientes");
+        jMenuItem6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem6ActionPerformed(evt);
+            }
+        });
         jMenu1.add(jMenuItem6);
 
         jMenuBar1.add(jMenu1);
@@ -236,6 +274,11 @@ ImageIcon img = new ImageIcon("src/icons/backPrinc.png");
         Fornecedor.add(jMenuItem3);
 
         jMenuItem7.setText("Listar fornecedores");
+        jMenuItem7.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem7ActionPerformed(evt);
+            }
+        });
         Fornecedor.add(jMenuItem7);
 
         jMenuBar1.add(Fornecedor);
@@ -251,16 +294,23 @@ ImageIcon img = new ImageIcon("src/icons/backPrinc.png");
         jMenu2.add(jMenuItem4);
 
         jMenuItem8.setText("Listar produtos");
+        jMenuItem8.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem8ActionPerformed(evt);
+            }
+        });
         jMenu2.add(jMenuItem8);
 
         jMenuBar1.add(jMenu2);
 
         jMenu4.setText("Orçamentos");
 
-        jMenuItem5.setText("Listar orçamentos");
-        jMenu4.add(jMenuItem5);
-
         jMenuItem9.setText("Novo orçamento");
+        jMenuItem9.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem9ActionPerformed(evt);
+            }
+        });
         jMenu4.add(jMenuItem9);
 
         jMenuBar1.add(jMenu4);
@@ -280,11 +330,25 @@ ImageIcon img = new ImageIcon("src/icons/backPrinc.png");
         jMenu6.setText("Sobre");
 
         jMenuItem12.setText("Sistema");
+        jMenuItem12.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem12ActionPerformed(evt);
+            }
+        });
         jMenu6.add(jMenuItem12);
 
         jMenuBar1.add(jMenu6);
 
         jMenu7.setText("Ajuda");
+
+        jMenuItem1.setText("Suporte");
+        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem1ActionPerformed(evt);
+            }
+        });
+        jMenu7.add(jMenuItem1);
+
         jMenuBar1.add(jMenu7);
 
         setJMenuBar(jMenuBar1);
@@ -303,7 +367,7 @@ ImageIcon img = new ImageIcon("src/icons/backPrinc.png");
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(PainelAcoes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(0, 0, 0)
                 .addComponent(lblImagem, javax.swing.GroupLayout.PREFERRED_SIZE, 445, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
@@ -322,7 +386,7 @@ ImageIcon img = new ImageIcon("src/icons/backPrinc.png");
     }//GEN-LAST:event_btnProdutoActionPerformed
 
     private void btnFornecedorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFornecedorActionPerformed
-        ListaFornecedores listagem = new ListaFornecedores();
+        ListaFornecedores listagem = new ListaFornecedores(this,true);
         listagem.setVisible(true);
     }//GEN-LAST:event_btnFornecedorActionPerformed
 
@@ -356,6 +420,53 @@ ImageIcon img = new ImageIcon("src/icons/backPrinc.png");
         listagemProduto.loadTable(null);
         listagemProduto.setVisible(true);
     }//GEN-LAST:event_btnProduto1ActionPerformed
+
+    private void btnDeslogarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeslogarActionPerformed
+         switch (JOptionPane.showConfirmDialog(null, "Deseja efetuar o Logout?")) {
+            case 0:
+               pd.FechaConexao();
+               this.setVisible(false);
+               new Login().setVisible(true);
+                break;
+            case 1:
+                JOptionPane.showMessageDialog(null, "Operação cancelada");
+                break;
+            case 2:
+                System.out.println("botao cancel clicado");
+                break;
+
+        }
+    }//GEN-LAST:event_btnDeslogarActionPerformed
+
+    private void jMenuItem6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem6ActionPerformed
+        ListaClientes view = new ListaClientes(this,true);
+        view.setVisible(true);
+    }//GEN-LAST:event_jMenuItem6ActionPerformed
+
+    private void jMenuItem7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem7ActionPerformed
+       ListaFornecedores view = new ListaFornecedores(this,true);
+        view.setVisible(true);
+    }//GEN-LAST:event_jMenuItem7ActionPerformed
+
+    private void jMenuItem8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem8ActionPerformed
+       ListaProdutos view = new ListaProdutos(this, true);
+       view.setVisible(true);
+    }//GEN-LAST:event_jMenuItem8ActionPerformed
+
+    private void jMenuItem9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem9ActionPerformed
+       GeracaoOcamento view = new GeracaoOcamento();
+       view.setVisible(true);
+    }//GEN-LAST:event_jMenuItem9ActionPerformed
+
+    private void jMenuItem12ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem12ActionPerformed
+       Sobre view = new Sobre(this, true);
+       view.setVisible(true);
+    }//GEN-LAST:event_jMenuItem12ActionPerformed
+
+    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+         Ajuda view = new Ajuda(this, true);
+       view.setVisible(true);
+    }//GEN-LAST:event_jMenuItem1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -399,11 +510,11 @@ ImageIcon img = new ImageIcon("src/icons/backPrinc.png");
     private javax.swing.JMenu MenuUsuario;
     private javax.swing.JPanel PainelAcoes;
     private javax.swing.JButton btnCliente;
+    private javax.swing.JButton btnDeslogar;
     private javax.swing.JButton btnFornecedor;
     private javax.swing.JButton btnOrcamento;
     private javax.swing.JButton btnProduto;
     private javax.swing.JButton btnProduto1;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
@@ -415,17 +526,18 @@ ImageIcon img = new ImageIcon("src/icons/backPrinc.png");
     private javax.swing.JMenu jMenu6;
     private javax.swing.JMenu jMenu7;
     private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem12;
     private javax.swing.JMenuItem jMenuItem13;
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JMenuItem jMenuItem4;
-    private javax.swing.JMenuItem jMenuItem5;
     private javax.swing.JMenuItem jMenuItem6;
     private javax.swing.JMenuItem jMenuItem7;
     private javax.swing.JMenuItem jMenuItem8;
     private javax.swing.JMenuItem jMenuItem9;
     private javax.swing.JLabel lblImagem;
     private javax.swing.JLabel lblNome;
+    private javax.swing.JLabel lblaviso;
     // End of variables declaration//GEN-END:variables
 }

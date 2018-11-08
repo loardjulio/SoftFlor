@@ -126,7 +126,6 @@ public class CadastroUsuarios extends javax.swing.JDialog {
 
         lblAlerta.setFont(new java.awt.Font("Calisto MT", 1, 12)); // NOI18N
         lblAlerta.setForeground(new java.awt.Color(255, 0, 0));
-        lblAlerta.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/alerta.png"))); // NOI18N
         lblAlerta.setText("Administrador tem acesso irrestrito ao dados de usuário!");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);

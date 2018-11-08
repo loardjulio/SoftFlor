@@ -8,6 +8,9 @@ package br.com.softflor.views;
 
 import br.com.softflor.controller.FuncionarioDAO;
 import br.com.softflor.entidades.Funcionario;
+import java.awt.Image;
+import java.awt.Toolkit;
+import java.net.URL;
 import java.util.List;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
@@ -22,14 +25,19 @@ public class Login extends javax.swing.JFrame {
     /**
      * Creates new form Login
      */
-    
+        
     FuncionarioDAO fd = new FuncionarioDAO();
     public Login() {
         initComponents();
         setLocationRelativeTo(null);
-       
+        URL url = this.getClass().getResource("/icons/iconeSistema.png");
+        Image imagemTitulo = Toolkit.getDefaultToolkit().getImage(url);
+        this.setIconImage(imagemTitulo); 
         fd.userAdmin();
     }
+    
+    
+		
 
     /**
      * This method is called from within the constructor to initialize the form.

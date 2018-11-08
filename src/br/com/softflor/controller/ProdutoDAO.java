@@ -79,8 +79,9 @@ public class ProdutoDAO extends GenericDAO<Produto> {
               JOptionPane.showMessageDialog(null, "Erro buscar Produtos"+ e);            
         } finally {
             FechaConexao();            
-        }
+        }       
         return produtos;
+          
     }
 
     public Serializable getId() {

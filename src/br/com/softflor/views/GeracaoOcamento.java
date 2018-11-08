@@ -12,11 +12,17 @@ import br.com.softflor.controller.ProdutoDAO;
 import br.com.softflor.entidades.Cliente;
 import br.com.softflor.entidades.Orcamento;
 import br.com.softflor.entidades.Produto;
+import java.awt.Desktop;
+import java.awt.Image;
+import java.awt.Toolkit;
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.net.URL;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -61,6 +67,12 @@ public class GeracaoOcamento extends javax.swing.JFrame {
         initComponents();
         setLocationRelativeTo(null);
         tableOrcamento.setModel(tableModel);
+        btnSalvar.setVisible(false);
+        
+         URL url = this.getClass().getResource("/icons/iconeSistema.png");
+        Image imagemTitulo = Toolkit.getDefaultToolkit().getImage(url);
+        this.setIconImage(imagemTitulo); 
+        
     }
 
     @SuppressWarnings("unchecked")
@@ -344,11 +356,11 @@ public class GeracaoOcamento extends javax.swing.JFrame {
             .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
-                .addGap(238, 238, 238)
+                .addGap(29, 29, 29)
                 .addComponent(btnSalvar, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(37, 37, 37)
-                .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(167, 167, 167)
                 .addComponent(jButton7, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
@@ -360,10 +372,9 @@ public class GeracaoOcamento extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jButton7, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton7, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnSalvar, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -434,6 +445,8 @@ public class GeracaoOcamento extends javax.swing.JFrame {
         lblNumero.setText("" + id + mes + dia);
 
         Produto p = pd.buscarPorId(Produto.class, id);
+        
+        
 
         try {
 
@@ -465,7 +478,6 @@ public class GeracaoOcamento extends javax.swing.JFrame {
     private void btnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcluirActionPerformed
 
         int linha = tableOrcamento.getSelectedRow();
-
         switch (JOptionPane.showConfirmDialog(null, "Deseja Excluir o item selecionado?")) {
             case 0:
                 if (linha == -1) {
@@ -475,7 +487,6 @@ public class GeracaoOcamento extends javax.swing.JFrame {
                     totalOrcamento.setText(String.valueOf(a));
                     tableModel.removeRow(linha);
                 }
-
                 break;
             case 1:
                 JOptionPane.showMessageDialog(null, "Operação cancelada");
@@ -489,6 +500,7 @@ public class GeracaoOcamento extends javax.swing.JFrame {
     }//GEN-LAST:event_btnExcluirActionPerformed
 
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
+                  
         List<Produto> po = new ArrayList<>();
         for (int i = 0; i < tableOrcamento.getRowCount(); i++) {
             Produto produto2 = new Produto();
@@ -501,37 +513,9 @@ public class GeracaoOcamento extends javax.swing.JFrame {
             po.add(produto2);
         }
 
-        String arquivo = "relatorio/orcamento.jasper"; //Local do modelo do relatório
-        String nome = txtNomeCliente.getText(); //pega o nome do cliente
-        String total = totalOrcamento.getText(); //pega o valor total
-        //cria datasource a partir da collection e manda o objeto
-        JRBeanCollectionDataSource jrds = new JRBeanCollectionDataSource(po);
-        Map<String, Object> parametros = new HashMap<>();
-        parametros.put("parameter1", nome); //Manda o nome como parametro pro relatório
-        parametros.put("parameter2", total); //Manda o  total como parametro pro relatório
-
-        JasperPrint printer = null;
-        try {
-            printer = JasperFillManager.fillReport(arquivo, parametros, jrds);
-            //CRIA UMA JANELA DE VISUALIAÇÃO
-            JasperViewer jv = new JasperViewer(printer, false);
-            jv.setTitle("Orçamento - " + nome);
-            jv.setVisible(true);
-
-            //grava relatorio pdf em disco
-            FileOutputStream fos = new FileOutputStream("C:/Users/Julio/Documents/"
-                    + "Orçamentos-SoftFlor/Orçamento-" + nome + ".pdf");
-            JasperExportManager.exportReportToPdfStream(printer, fos);
-            fos.flush();
-            fos.close();
-
-        } catch (JRException ex) {
-            Logger.getLogger(GeracaoOcamento.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (FileNotFoundException ex) {
-            Logger.getLogger(GeracaoOcamento.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (IOException ex) {
-            Logger.getLogger(GeracaoOcamento.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        OrcamentoDAO od = new OrcamentoDAO();
+        od.GeradorOrcamento(po, txtNomeCliente.getText(),totalOrcamento.getText());
+   
     }//GEN-LAST:event_jButton6ActionPerformed
 
     private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed

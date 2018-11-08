@@ -100,7 +100,7 @@ public class ListaClientes extends javax.swing.JDialog {
 
         jPanel2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
-        btnEditar.setBackground(new java.awt.Color(153, 204, 255));
+        btnEditar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/editarCliente.png"))); // NOI18N
         btnEditar.setText("EDITAR");
         btnEditar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -108,7 +108,7 @@ public class ListaClientes extends javax.swing.JDialog {
             }
         });
 
-        jButton2.setBackground(new java.awt.Color(255, 102, 102));
+        jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/voltar.png"))); // NOI18N
         jButton2.setText("VOLTAR");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -116,7 +116,7 @@ public class ListaClientes extends javax.swing.JDialog {
             }
         });
 
-        jButton3.setBackground(new java.awt.Color(255, 102, 102));
+        jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/delCliente.png"))); // NOI18N
         jButton3.setText("EXCLUIR");
         jButton3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -124,8 +124,8 @@ public class ListaClientes extends javax.swing.JDialog {
             }
         });
 
-        jButton4.setBackground(new java.awt.Color(153, 204, 255));
-        jButton4.setText("CADASTRAR ");
+        jButton4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/addCliente.png"))); // NOI18N
+        jButton4.setText("NOVO");
         jButton4.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton4ActionPerformed(evt);
@@ -137,13 +137,20 @@ public class ListaClientes extends javax.swing.JDialog {
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(24, 24, 24)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnEditar, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(30, Short.MAX_VALUE))
+                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addGroup(jPanel2Layout.createSequentialGroup()
+                            .addContainerGap()
+                            .addComponent(btnEditar, javax.swing.GroupLayout.DEFAULT_SIZE, 129, Short.MAX_VALUE))
+                        .addGroup(jPanel2Layout.createSequentialGroup()
+                            .addContainerGap()
+                            .addComponent(jButton4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jButton3)
+                            .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(20, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -216,7 +223,7 @@ public class ListaClientes extends javax.swing.JDialog {
         int linha = tableLista.getSelectedRow();
 
         if (linha == -1) {
-            JOptionPane.showMessageDialog(this, "Selecione um produto");
+            JOptionPane.showMessageDialog(this, "Selecione um cliente");
         } else {
             int idSelecionado = (int) tableModel.getValueAt(linha, 0);
             cc.Atualiza(clienteDAO.buscarPorId(Cliente.class, idSelecionado));
@@ -235,21 +242,26 @@ public class ListaClientes extends javax.swing.JDialog {
     }//GEN-LAST:event_tableListaMouseClicked
     }
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        switch (JOptionPane.showConfirmDialog(null, "Deseja Excluir o item selecionado?")) {
-            case 0:
-                int linha = tableLista.getSelectedRow();
-                int id = (int) tableModel.getValueAt(linha, 0);
-                clienteDAO.remover(Cliente.class, id);
-                tableModel.removeRow(linha);
+        int linha = tableLista.getSelectedRow();
+        if (linha == -1) {
+            JOptionPane.showMessageDialog(this, "Selecione um cliente");
+        } else {
+            switch (JOptionPane.showConfirmDialog(null, "Deseja Excluir o item selecionado?")) {
+                case 0:
+                    int id = (int) tableModel.getValueAt(linha, 0);
+                    clienteDAO.remover(Cliente.class, id);
+                    tableModel.removeRow(linha);
 
-                break;
-            case 1:
-                JOptionPane.showMessageDialog(null, "Operação cancelada");
-                break;
-            case 2:
-                System.out.println("botao cancel clicado");
-                break;
+                    break;
+                case 1:
+                    JOptionPane.showMessageDialog(null, "Operação cancelada");
+                    break;
+                case 2:
+                    System.out.println("botao cancel clicado");
+                    break;
+            }
         }
+
     }//GEN-LAST:event_jButton3ActionPerformed
 
     /**
