@@ -268,7 +268,7 @@ public class AlteraEstoque extends javax.swing.JDialog {
                 p.setIdproduto(Integer.parseInt(lblID.getText()));
                 p.setQuantidade( (Double.parseDouble(txtQuantidade.getText())-Double.parseDouble(txtEntrada.getText())));               
                 pd.salvarOuAtualizar(p);
-                                
+                                               
             } else if (resp == 1) {
                 JOptionPane.showMessageDialog(this, "Operação cancelada");                
             }

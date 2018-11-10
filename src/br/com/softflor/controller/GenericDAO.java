@@ -7,7 +7,6 @@ package br.com.softflor.controller;
 
 import br.com.softflor.conexao.ConectaBD;
 import br.com.softflor.entidades.EntidadeBase;
-import br.com.softflor.views.Login;
 import java.io.Serializable;
 import javax.persistence.EntityManager;
 import javax.swing.JOptionPane;

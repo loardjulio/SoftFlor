@@ -5,7 +5,6 @@
  */
 package br.com.softflor.controller;
 
-import br.com.softflor.entidades.Cliente;
 import br.com.softflor.entidades.Produto;
 import java.io.Serializable;
 import java.util.List;

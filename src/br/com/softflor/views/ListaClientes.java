@@ -8,8 +8,6 @@ package br.com.softflor.views;
 import br.com.softflor.controller.ClienteDAO;
 import br.com.softflor.controller.tableModel.ClienteTableModel;
 import br.com.softflor.entidades.Cliente;
-import br.com.softflor.entidades.Fornecedor;
-import br.com.softflor.entidades.Produto;
 import javax.swing.JOptionPane;
 
 /**

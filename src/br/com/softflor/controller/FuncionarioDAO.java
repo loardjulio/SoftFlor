@@ -5,9 +5,7 @@
  */
 package br.com.softflor.controller;
 
-import br.com.softflor.entidades.Cliente;
 import br.com.softflor.entidades.Funcionario;
-import br.com.softflor.views.Login;
 import br.com.softflor.views.Principal;
 import java.util.List;
 import javax.persistence.Query;
@@ -60,7 +58,7 @@ private boolean acesso;
             JOptionPane.showMessageDialog(null, "Acesso liberado. Bem vindo"); 
             
             
-            new Principal(nome,nível).setVisible(true);
+            new Principal(nível).setVisible(true);
         } else {
             JOptionPane.showMessageDialog(null, "Acesso negado");
         }

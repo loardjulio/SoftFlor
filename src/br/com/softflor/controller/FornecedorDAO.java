@@ -5,12 +5,10 @@
  */
 package br.com.softflor.controller;
 
-import br.com.softflor.entidades.Cliente;
 import br.com.softflor.entidades.Fornecedor;
 import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.Query;
-import javax.swing.JOptionPane;
 
 /**
  *

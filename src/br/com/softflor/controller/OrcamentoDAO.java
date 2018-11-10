@@ -9,7 +9,6 @@ import br.com.softflor.entidades.Orcamento;
 import br.com.softflor.entidades.Produto;
 import br.com.softflor.views.GeracaoOcamento;
 import java.awt.Desktop;
-import java.awt.Dialog.ModalityType;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -21,15 +20,11 @@ import java.util.List;
 import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.JDialog;
-import javax.swing.JTable;
 import net.sf.jasperreports.engine.JRException;
 import net.sf.jasperreports.engine.JasperExportManager;
 import net.sf.jasperreports.engine.JasperFillManager;
 import net.sf.jasperreports.engine.JasperPrint;
 import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
-import net.sf.jasperreports.engine.data.JRTableModelDataSource;
-import net.sf.jasperreports.swing.JRViewer;
 
 /**
  *

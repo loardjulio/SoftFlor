@@ -48,6 +48,10 @@ public class CadastroUsuarios extends javax.swing.JDialog {
                 txtUser.setText(funcionario.getUsuario());
                 txtSenha.setText(funcionario.getSenha());
                // txtSetor.setText(funcionario.getSetor());
+               if(funcionario.isAdministrador()){
+                   checkADM.setSelected(true);
+                   checkADM.setEnabled(false);
+               }
                 this.setVisible(true);
             }
         } catch (Exception e) {
@@ -272,7 +276,7 @@ public class CadastroUsuarios extends javax.swing.JDialog {
     }//GEN-LAST:event_btnSairActionPerformed
 
     private void checkADMMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_checkADMMouseClicked
-               
+          
         if (checkADM.isSelected()) {
             lblAlerta.setVisible(true);
         } else {

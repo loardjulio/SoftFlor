@@ -7,8 +7,9 @@ package br.com.softflor.views;
 
 import br.com.softflor.controller.ProdutoDAO;
 import br.com.softflor.controller.tableModel.ProdutoTableModel;
-import br.com.softflor.entidades.Produto;
-import java.util.List;
+import java.awt.Image;
+import java.awt.Toolkit;
+import java.net.URL;
 
 /**
  *
@@ -27,6 +28,10 @@ public class GerenciadorEstoque extends javax.swing.JFrame {
         tableModel = new ProdutoTableModel(pd.consultarEstoque());
         listaProdutos.setModel(tableModel);
         setLocationRelativeTo(null);
+        
+        URL url = this.getClass().getResource("/icons/iconeSistema.png");
+        Image imagemTitulo = Toolkit.getDefaultToolkit().getImage(url);
+        this.setIconImage(imagemTitulo); 
     }
 
     /**
@@ -43,7 +48,6 @@ public class GerenciadorEstoque extends javax.swing.JFrame {
         listaProdutos = new javax.swing.JTable();
         jLabel5 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
-        lblaviso = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         btnSaida = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
@@ -57,8 +61,9 @@ public class GerenciadorEstoque extends javax.swing.JFrame {
         jLabel10 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setResizable(false);
 
-        jPanel1.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        jPanel1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
         listaProdutos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -84,41 +89,34 @@ public class GerenciadorEstoque extends javax.swing.JFrame {
         jLabel4.setFont(new java.awt.Font("Constantia", 0, 18)); // NOI18N
         jLabel4.setText("ESTOQUE BAIXO");
 
-        lblaviso.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/gifAlerta.gif"))); // NOI18N
-
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(lblaviso, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(163, 163, 163)
-                        .addComponent(jLabel5)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel4)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addComponent(jScrollPane3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 767, Short.MAX_VALUE))
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 771, Short.MAX_VALUE)
                 .addContainerGap())
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(230, 230, 230)
+                .addComponent(jLabel5)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel4)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lblaviso, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(20, 20, 20)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel4)
-                            .addComponent(jLabel5))))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 141, Short.MAX_VALUE)
+                .addContainerGap()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel5)
+                    .addComponent(jLabel4))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 128, Short.MAX_VALUE)
                 .addGap(26, 26, 26))
         );
 
-        jPanel2.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        jPanel2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
         btnSaida.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/saidaProduto.png"))); // NOI18N
         btnSaida.addActionListener(new java.awt.event.ActionListener() {
@@ -238,7 +236,7 @@ public class GerenciadorEstoque extends javax.swing.JFrame {
                     .addComponent(jLabel10))
                 .addGap(39, 39, 39)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 62, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 112, Short.MAX_VALUE)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
@@ -246,12 +244,26 @@ public class GerenciadorEstoque extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnSaidaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaidaActionPerformed
-        ListaProdutos listagemProduto = new ListaProdutos(null, true);
+        
+        
+         int linha = listaProdutos.getSelectedRow();
+        
+        if (linha == -1) {
+         ListaProdutos listagemProduto = new ListaProdutos(null, true);
         listagemProduto.painelBotao.setVisible(false);
         listagemProduto.btnSaida.setVisible(true);
          listagemProduto.btnEntrada.setVisible(false);
         listagemProduto.loadTable(null);
-        listagemProduto.setVisible(true);;
+        listagemProduto.setVisible(true);            
+        }else{
+            int id = (int) tableModel.getValueAt(linha, 0);
+            AlteraEstoque ae = new AlteraEstoque(null, true, "-");
+            ae.recebeProduto(id); //ENVIA O ID PARA O FRAME ALTERA ESTOQUE
+            ae.setVisible(true);
+            this.setVisible(false);
+        }
+        
+        
     }//GEN-LAST:event_btnSaidaActionPerformed
 
     private void listaProdutosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_listaProdutosMouseClicked
@@ -273,12 +285,24 @@ public class GerenciadorEstoque extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void btnEntradaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEntradaActionPerformed
-        ListaProdutos listagemProduto = new ListaProdutos(null, true);
+        int linha = listaProdutos.getSelectedRow();
+        
+        if (linha == -1) {
+          ListaProdutos listagemProduto = new ListaProdutos(null, true);
         listagemProduto.painelBotao.setVisible(false);
         listagemProduto.btnEntrada.setVisible(true);
         listagemProduto.btnSaida.setVisible(false);
         listagemProduto.loadTable(null);
-        listagemProduto.setVisible(true);
+        listagemProduto.setVisible(true);             
+        }else{
+            int id = (int) tableModel.getValueAt(linha, 0);
+            AlteraEstoque ae = new AlteraEstoque(null, true, "+");
+            ae.recebeProduto(id); //ENVIA O ID PARA O FRAME ALTERA ESTOQUE
+            ae.setVisible(true);
+            this.setVisible(false);
+        }
+
+        
     }//GEN-LAST:event_btnEntradaActionPerformed
 
     /**
@@ -332,7 +356,6 @@ public class GerenciadorEstoque extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane3;
-    private javax.swing.JLabel lblaviso;
     private javax.swing.JTable listaProdutos;
     // End of variables declaration//GEN-END:variables
 }

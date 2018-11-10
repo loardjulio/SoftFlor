@@ -9,8 +9,6 @@ import br.com.softflor.controller.FornecedorDAO;
 import br.com.softflor.controller.ProdutoDAO;
 import br.com.softflor.controller.tableModel.FornecedorTableModel;
 import br.com.softflor.entidades.Fornecedor;
-import br.com.softflor.entidades.Produto;
-import java.util.List;
 import javax.swing.JOptionPane;
 
 /**
@@ -28,9 +26,9 @@ public class ListaFornecedores extends javax.swing.JDialog {
     CadastroFornecedor cf = new CadastroFornecedor(null, true);
 
     public ListaFornecedores(java.awt.Frame parent, boolean modal) {
-          super(parent, modal);
+        super(parent, modal);
         initComponents();
-        
+
         tableModel = new FornecedorTableModel(fornecedordao.consultarTodos());//realizo a consulta e coloco na tabela
 
         tabela.setModel(tableModel);
@@ -224,56 +222,58 @@ public class ListaFornecedores extends javax.swing.JDialog {
     }//GEN-LAST:event_btnCadastrarActionPerformed
 
     private void btnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcluirActionPerformed
+        int linha = tabela.getSelectedRow();
 
-        switch (JOptionPane.showConfirmDialog(null, "Deseja Excluir o item selecionado?")) {
-            case 0:
-                int linha = tabela.getSelectedRow();
-                int id = (int) tableModel.getValueAt(linha, 0);
-                fornecedordao.remover(Fornecedor.class, id);
-                tableModel.removeRow(linha);
-                break;
-            case 1:
-                JOptionPane.showMessageDialog(null, "Operação cancelada");
-                break;
-            case 2:
-                System.out.println("botao cancel clicado");
-                break;
+        if (linha == -1) {
+            JOptionPane.showMessageDialog(this, "Selecione um fornecedor");
+        } else {
+            switch (JOptionPane.showConfirmDialog(null, "Deseja Excluir o item selecionado?")) {
+                case 0:
 
+                    int id = (int) tableModel.getValueAt(linha, 0);
+                    fornecedordao.remover(Fornecedor.class, id);
+                    tableModel.removeRow(linha);
+                    break;
+                case 1:
+                    JOptionPane.showMessageDialog(null, "Operação cancelada");
+                    break;
+                case 2:
+                    System.out.println("botao cancel clicado");
+                    break;
+
+            }
         }
+
 
     }//GEN-LAST:event_btnExcluirActionPerformed
 
     private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarActionPerformed
         int linha = tabela.getSelectedRow();
-       
+
         if (linha == -1) {
-            JOptionPane.showMessageDialog(this,"Selecione um fornecedor");
-        }else{
-             int id = (int) tableModel.getValueAt(linha, 0);
-             cf.Atualiza(fornecedordao.buscarPorId(Fornecedor.class, id));
-             this.setVisible(false);
+            JOptionPane.showMessageDialog(this, "Selecione um fornecedor");
+        } else {
+            int id = (int) tableModel.getValueAt(linha, 0);
+            cf.Atualiza(fornecedordao.buscarPorId(Fornecedor.class, id));
+            this.setVisible(false);
         }
-        
-        
-       
+
+
     }//GEN-LAST:event_btnEditarActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         int linha = tabela.getSelectedRow();
-         int idFornecedor = (int) tableModel.getValueAt(linha, 0);
-         
-         ListaProdutos lp = new ListaProdutos(null, true);
-         lp.loadTable(idFornecedor);
-         lp.setVisible(true);
-         this.dispose();
-         
-        //List<Produto> p =  pd.consultarPorFornecedor(idFornecedor);
-        //System.out.println(p.get(0).getNome());
-        
-         
-       //CONSULTAR NA TABELA PRODUTO+FORNECEDOR OS PRODUTOS REFERENTES AO FORNECEDOR DO ID
-       //LISTAR ESTES PRODUTOS 
-         
+
+        if (linha == -1) {
+            JOptionPane.showMessageDialog(this, "Selecione um fornecedor");
+        } else {
+            int idFornecedor = (int) tableModel.getValueAt(linha, 0);
+            ListaProdutos lp = new ListaProdutos(null, true);
+            lp.loadTable(idFornecedor);
+            lp.setVisible(true);
+            this.dispose();
+        }
+
     }//GEN-LAST:event_jButton1ActionPerformed
 
     /**

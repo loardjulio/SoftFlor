@@ -7,14 +7,9 @@ package br.com.softflor.views;
 
 
 import br.com.softflor.controller.FuncionarioDAO;
-import br.com.softflor.entidades.Funcionario;
 import java.awt.Image;
 import java.awt.Toolkit;
 import java.net.URL;
-import java.util.List;
-import javax.swing.ImageIcon;
-import javax.swing.JFrame;
-import javax.swing.JOptionPane;
 
 /**
  *
