@@ -177,7 +177,6 @@ public class ListaProdutos extends javax.swing.JDialog {
                         .addComponent(btVoltar, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(30, 30, 30))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, painelBotaoLayout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabel12)
                         .addGap(52, 52, 52))))
         );
@@ -198,7 +197,6 @@ public class ListaProdutos extends javax.swing.JDialog {
                     .addComponent(jLabel12)))
         );
 
-        btnBuscar.setBackground(new java.awt.Color(102, 255, 102));
         btnBuscar.setText("BUSCAR");
         btnBuscar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

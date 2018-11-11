@@ -154,8 +154,6 @@ public class GeracaoOcamento extends javax.swing.JFrame {
 
         jLabel4.setText("PRODUTO:");
 
-        btnBuscarProduto.setBackground(new java.awt.Color(51, 204, 255));
-        btnBuscarProduto.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         btnBuscarProduto.setForeground(new java.awt.Color(255, 255, 255));
         btnBuscarProduto.setText("BUSCAR PRODUTO");
         btnBuscarProduto.addActionListener(new java.awt.event.ActionListener() {
@@ -197,7 +195,6 @@ public class GeracaoOcamento extends javax.swing.JFrame {
         ));
         jScrollPane1.setViewportView(tableOrcamento);
 
-        btnAdicionar.setBackground(new java.awt.Color(51, 204, 255));
         btnAdicionar.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         btnAdicionar.setForeground(new java.awt.Color(255, 255, 255));
         btnAdicionar.setText("ADICIONAR");
@@ -218,7 +215,6 @@ public class GeracaoOcamento extends javax.swing.JFrame {
 
         txtNomeProduto.setEditable(false);
 
-        btnExcluir.setBackground(new java.awt.Color(255, 51, 51));
         btnExcluir.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         btnExcluir.setForeground(new java.awt.Color(255, 255, 255));
         btnExcluir.setText("Excluir Item");
@@ -313,9 +309,9 @@ public class GeracaoOcamento extends javax.swing.JFrame {
             }
         });
 
-        jButton6.setBackground(new java.awt.Color(102, 204, 255));
         jButton6.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jButton6.setForeground(new java.awt.Color(255, 255, 255));
+        jButton6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/GeraOrc.png"))); // NOI18N
         jButton6.setText("GERAR ");
         jButton6.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -323,9 +319,9 @@ public class GeracaoOcamento extends javax.swing.JFrame {
             }
         });
 
-        jButton7.setBackground(new java.awt.Color(255, 51, 51));
         jButton7.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jButton7.setForeground(new java.awt.Color(255, 255, 255));
+        jButton7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/voltar.png"))); // NOI18N
         jButton7.setText("VOLTAR");
         jButton7.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -343,7 +339,7 @@ public class GeracaoOcamento extends javax.swing.JFrame {
                 .addGap(29, 29, 29)
                 .addComponent(btnSalvar, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jButton6)
                 .addGap(167, 167, 167)
                 .addComponent(jButton7, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())

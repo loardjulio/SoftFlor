@@ -20,7 +20,7 @@ import javax.swing.JOptionPane;
  */
 public class Principal extends javax.swing.JFrame {
 //ProdutosEstoque pe = new ProdutosEstoque();
-ImageIcon img = new ImageIcon("src/icons/backPrinc.png");
+//ImageIcon img = new ImageIcon("src/icons/backPrinc.png");
 ProdutoDAO pd = new ProdutoDAO();
 List<Produto> po = pd.consultarEstoque();
 
@@ -38,8 +38,8 @@ List<Produto> po = pd.consultarEstoque();
         Image imagemTitulo = Toolkit.getDefaultToolkit().getImage(url);
         this.setIconImage(imagemTitulo); 
         
-        img.setImage(img.getImage().getScaledInstance(lblImagem.getWidth(), lblImagem.getHeight(), 1));
-        lblImagem.setIcon(img);
+        //img.setImage(img.getImage().getScaledInstance(lblImagem.getWidth(), lblImagem.getHeight(), 1));
+        //lblImagem.setIcon(img);
         if (po.isEmpty()) {
             lblaviso.setVisible(false);
         } else {
@@ -205,7 +205,7 @@ List<Produto> po = pd.consultarEstoque();
                         .addComponent(btnOrcamento, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(btnDeslogar, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18))))
+                        .addGap(42, 42, 42))))
         );
         PainelAcoesLayout.setVerticalGroup(
             PainelAcoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -217,10 +217,11 @@ List<Produto> po = pd.consultarEstoque();
                             .addComponent(btnProduto1, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(btnFornecedor, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(PainelAcoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel10)
+                        .addGroup(PainelAcoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel8)
-                            .addComponent(jLabel6)))
+                            .addGroup(PainelAcoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(jLabel10)
+                                .addComponent(jLabel6))))
                     .addGroup(PainelAcoesLayout.createSequentialGroup()
                         .addGroup(PainelAcoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(btnCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -237,7 +238,7 @@ List<Produto> po = pd.consultarEstoque();
                 .addGap(0, 10, Short.MAX_VALUE))
         );
 
-        lblImagem.setText("jLabel1");
+        lblImagem.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/backPrinc.png"))); // NOI18N
         lblImagem.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
 
         jMenu1.setText("Clientes");
@@ -354,9 +355,10 @@ List<Produto> po = pd.consultarEstoque();
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(PainelAcoes, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(lblImagem, javax.swing.GroupLayout.PREFERRED_SIZE, 816, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addComponent(PainelAcoes, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                    .addComponent(lblImagem, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
