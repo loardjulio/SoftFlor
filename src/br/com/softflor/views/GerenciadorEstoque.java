@@ -133,6 +133,11 @@ public class GerenciadorEstoque extends javax.swing.JFrame {
         });
 
         jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/relatorioProduto.png"))); // NOI18N
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         btnEntrada.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/EntradaProduto.png"))); // NOI18N
         btnEntrada.addActionListener(new java.awt.event.ActionListener() {
@@ -304,6 +309,10 @@ public class GerenciadorEstoque extends javax.swing.JFrame {
 
         
     }//GEN-LAST:event_btnEntradaActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+       new Relatorios(this,true).setVisible(true);
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments

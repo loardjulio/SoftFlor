@@ -2,7 +2,7 @@
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="orcamento" language="groovy" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="250b4a09-18c7-4e2c-aba9-a4e944880933">
 	<property name="ireport.zoom" value="1.610510000000007"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="80"/>
+	<property name="ireport.y" value="48"/>
 	<style name="Title" forecolor="#FFFFFF" fontName="Times New Roman" fontSize="50" isBold="false" pdfFontName="Times-Bold"/>
 	<style name="SubTitle" forecolor="#666666" fontName="Times New Roman" fontSize="18" isBold="false" pdfFontName="Times-Roman"/>
 	<style name="Column header" forecolor="#666666" fontName="Times New Roman" fontSize="14" isBold="true" pdfFontName="Times-Roman"/>
@@ -14,25 +14,27 @@
 		</conditionalStyle>
 	</style>
 	<subDataset name="PieChartDataset" uuid="4a535673-750f-4781-8428-6cbd0530d227"/>
-	<parameter name="parameter1" class="java.lang.String"/>
 	<parameter name="parameter2" class="java.lang.String"/>
+	<parameter name="parameter3" class="java.lang.String"/>
 	<field name="idproduto" class="java.lang.String"/>
 	<field name="nome" class="java.lang.String"/>
 	<field name="unidade_medida" class="java.lang.String"/>
 	<field name="preco_venda" class="java.lang.String"/>
 	<field name="quantidade" class="java.lang.String"/>
 	<field name="precoTotal" class="java.lang.String"/>
+	<field name="preco_compra" class="java.lang.String"/>
+	<variable name="variable1" class="java.lang.String"/>
 	<background>
 		<band height="802" splitType="Stretch"/>
 	</background>
 	<title>
 		<band height="94" splitType="Stretch">
 			<staticText>
-				<reportElement style="SubTitle" x="346" y="65" width="208" height="29" uuid="0733691f-125f-439e-a68f-7b72a78924e6"/>
+				<reportElement style="SubTitle" x="379" y="65" width="175" height="29" uuid="0733691f-125f-439e-a68f-7b72a78924e6"/>
 				<textElement textAlignment="Right">
 					<font size="22" isBold="false"/>
 				</textElement>
-				<text><![CDATA[Produtos em estoque]]></text>
+				<text><![CDATA[Lista de produtos]]></text>
 			</staticText>
 			<frame>
 				<reportElement mode="Opaque" x="-20" y="0" width="597" height="65" forecolor="#006699" backcolor="#006699" uuid="d8919b33-c1f8-480c-8d02-68afc537f940"/>
@@ -54,46 +56,46 @@
 			<frame>
 				<reportElement x="0" y="0" width="555" height="49" uuid="46ce492b-44fa-4ddb-ba4b-e44ee31262dc"/>
 				<textField>
-					<reportElement style="Detail" isPrintRepeatedValues="false" x="279" y="29" width="101" height="20" uuid="5f6d68a7-6688-44c5-8c92-dc8fc451a92e"/>
+					<reportElement style="Detail" isPrintRepeatedValues="false" x="200" y="29" width="101" height="20" uuid="5f6d68a7-6688-44c5-8c92-dc8fc451a92e"/>
 					<textElement textAlignment="Center" verticalAlignment="Middle" markup="none">
-						<font size="10" isBold="true"/>
+						<font size="8" isBold="true"/>
 					</textElement>
 					<textFieldExpression><![CDATA["UNIDADE MEDIDA"]]></textFieldExpression>
 				</textField>
 				<textField>
-					<reportElement style="Detail" isPrintRepeatedValues="false" x="512" y="29" width="43" height="20" uuid="9f79f4f6-c1b1-4386-8d57-2d3bbbb96efb"/>
+					<reportElement style="Detail" isPrintRepeatedValues="false" x="44" y="29" width="131" height="20" uuid="9a8bf1c4-fe40-4e5e-91b5-ae5c9d2a8f8f"/>
 					<textElement textAlignment="Center" verticalAlignment="Middle" markup="none">
-						<font size="10" isBold="true"/>
-					</textElement>
-					<textFieldExpression><![CDATA["PREÇO TOTAL"]]></textFieldExpression>
-				</textField>
-				<textField>
-					<reportElement style="Detail" isPrintRepeatedValues="false" x="43" y="29" width="236" height="20" uuid="9a8bf1c4-fe40-4e5e-91b5-ae5c9d2a8f8f"/>
-					<textElement textAlignment="Center" verticalAlignment="Middle" markup="none">
-						<font size="10" isBold="true"/>
+						<font size="8" isBold="true"/>
 					</textElement>
 					<textFieldExpression><![CDATA["PRODUTO"]]></textFieldExpression>
 				</textField>
 				<textField>
-					<reportElement style="Detail" isPrintRepeatedValues="false" x="380" y="29" width="75" height="20" uuid="cbca875d-ed8d-4619-af6e-45cb63044188"/>
+					<reportElement style="Detail" isPrintRepeatedValues="false" x="309" y="29" width="75" height="20" uuid="cbca875d-ed8d-4619-af6e-45cb63044188"/>
 					<textElement textAlignment="Center" verticalAlignment="Middle" markup="none">
-						<font size="10" isBold="true"/>
+						<font size="8" isBold="true"/>
 					</textElement>
 					<textFieldExpression><![CDATA["QUANTIDADE"]]></textFieldExpression>
 				</textField>
 				<textField>
 					<reportElement style="Detail" isPrintRepeatedValues="false" x="1" y="29" width="42" height="20" uuid="5507ace8-f56b-4b36-acaa-93b2cca359fd"/>
 					<textElement textAlignment="Center" verticalAlignment="Middle" markup="none">
-						<font size="10" isBold="true"/>
+						<font size="8" isBold="true"/>
 					</textElement>
 					<textFieldExpression><![CDATA["ITEM"]]></textFieldExpression>
 				</textField>
 				<textField>
-					<reportElement style="Detail" isPrintRepeatedValues="false" x="455" y="29" width="58" height="20" backcolor="#330033" uuid="59b7827a-23a9-47b5-8a2e-45147745a0d7"/>
+					<reportElement style="Detail" isPrintRepeatedValues="false" x="397" y="29" width="58" height="20" backcolor="#330033" uuid="59b7827a-23a9-47b5-8a2e-45147745a0d7"/>
 					<textElement textAlignment="Center" verticalAlignment="Middle" markup="none">
-						<font size="10" isBold="true"/>
+						<font size="8" isBold="true"/>
 					</textElement>
-					<textFieldExpression><![CDATA["PREÇO UNITÁRIO"]]></textFieldExpression>
+					<textFieldExpression><![CDATA["PREÇO VENDA"]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement style="Detail" isPrintRepeatedValues="false" x="475" y="29" width="79" height="20" backcolor="#330033" uuid="5fe1d1cd-1734-45ea-9ee4-aaa675a441fa"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle" markup="none">
+						<font size="8" isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA["PREÇO COMPRA"]]></textFieldExpression>
 				</textField>
 			</frame>
 		</band>
@@ -101,9 +103,9 @@
 	<detail>
 		<band height="27" splitType="Stretch">
 			<frame>
-				<reportElement x="0" y="6" width="557" height="18" uuid="a9db8631-08a6-4839-8739-9be83d9daf0a"/>
+				<reportElement x="2" y="9" width="552" height="18" uuid="a9db8631-08a6-4839-8739-9be83d9daf0a"/>
 				<textField>
-					<reportElement x="42" y="0" width="236" height="17" uuid="ed1b32ee-7e66-4a54-93cb-c5a1e159e245"/>
+					<reportElement x="42" y="0" width="132" height="17" uuid="ed1b32ee-7e66-4a54-93cb-c5a1e159e245"/>
 					<textElement textAlignment="Center">
 						<font isItalic="false"/>
 					</textElement>
@@ -117,58 +119,55 @@
 					<textFieldExpression><![CDATA[$F{idproduto}]]></textFieldExpression>
 				</textField>
 				<textField>
-					<reportElement x="454" y="0" width="58" height="17" uuid="e188262e-9e27-4180-834f-cfbb6afda9d9"/>
+					<reportElement x="395" y="0" width="58" height="18" uuid="e188262e-9e27-4180-834f-cfbb6afda9d9"/>
 					<textElement textAlignment="Center">
 						<font isItalic="false"/>
 					</textElement>
 					<textFieldExpression><![CDATA[$F{preco_venda}]]></textFieldExpression>
 				</textField>
 				<textField>
-					<reportElement x="379" y="0" width="75" height="17" uuid="dd7be718-c35c-40ed-8a90-6c9eaab8ba2a"/>
+					<reportElement x="308" y="0" width="75" height="17" uuid="dd7be718-c35c-40ed-8a90-6c9eaab8ba2a"/>
 					<textElement textAlignment="Center">
 						<font isItalic="false"/>
 					</textElement>
 					<textFieldExpression><![CDATA[$F{quantidade}]]></textFieldExpression>
 				</textField>
 				<textField>
-					<reportElement x="278" y="0" width="101" height="17" uuid="c3a44f46-53a9-4aa3-9c62-a292813cba77"/>
+					<reportElement x="199" y="0" width="101" height="17" uuid="c3a44f46-53a9-4aa3-9c62-a292813cba77"/>
 					<textElement textAlignment="Center">
 						<font isItalic="false"/>
 					</textElement>
 					<textFieldExpression><![CDATA[$F{unidade_medida}]]></textFieldExpression>
 				</textField>
-				<textField>
-					<reportElement x="512" y="0" width="43" height="17" uuid="96464ce9-812e-4f8a-990e-ce288e407308"/>
-					<textElement textAlignment="Center">
-						<font isItalic="false"/>
-					</textElement>
-					<textFieldExpression><![CDATA[$F{precoTotal}]]></textFieldExpression>
-				</textField>
 			</frame>
+			<textField>
+				<reportElement x="476" y="9" width="78" height="18" uuid="7e489758-97a7-480c-b61a-5accf72d8fd7"/>
+				<textFieldExpression><![CDATA[$F{preco_compra}]]></textFieldExpression>
+			</textField>
 		</band>
 	</detail>
 	<columnFooter>
-		<band height="39" splitType="Stretch">
+		<band height="34" splitType="Stretch">
 			<line>
 				<reportElement positionType="FixRelativeToBottom" x="0" y="0" width="555" height="4" uuid="11253f06-1d66-4a9a-b11f-376762471e71"/>
 				<graphicElement>
 					<pen lineWidth="0.5" lineColor="#999999"/>
 				</graphicElement>
 			</line>
-			<textField>
-				<reportElement style="Detail" isPrintRepeatedValues="false" x="346" y="10" width="136" height="17" forecolor="#000000" uuid="a3bed632-7286-4ac9-9868-a1611cc24804"/>
-				<textElement textAlignment="Center" markup="none">
-					<font size="10" isBold="true"/>
-				</textElement>
-				<textFieldExpression><![CDATA["VALOR DO ESTOQUE.....:"]]></textFieldExpression>
-			</textField>
-			<textField>
-				<reportElement isPrintRepeatedValues="false" x="482" y="10" width="72" height="18" uuid="94cbbfe3-e320-400d-9d2d-1591b4df5598"/>
-				<textFieldExpression><![CDATA[$P{parameter2}]]></textFieldExpression>
-			</textField>
 			<line>
 				<reportElement positionType="FixRelativeToBottom" x="2" y="0" width="553" height="1" uuid="dcb9b7de-bddc-4370-898c-967a07abb943"/>
 			</line>
+			<textField>
+				<reportElement style="Detail" isPrintRepeatedValues="false" x="2" y="4" width="99" height="17" forecolor="#000000" uuid="c3effcb9-65e6-4aeb-973b-9a492ed212fa"/>
+				<textElement textAlignment="Center" markup="none">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["TOTAL DE ITENS.....:"]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="101" y="5" width="75" height="16" uuid="f6abb3e2-dc13-4c2b-bf51-b557fd02748a"/>
+				<textFieldExpression><![CDATA[$V{COLUMN_COUNT}]]></textFieldExpression>
+			</textField>
 		</band>
 	</columnFooter>
 	<pageFooter>

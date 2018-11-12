@@ -370,7 +370,6 @@ public class ListaProdutos extends javax.swing.JDialog {
             int id = (int) tableModel.getValueAt(linha, 0);
             CadastroProduto cp = new CadastroProduto(null, true);
             cp.Atualiza(pd.buscarPorId(Produto.class, id));
-
             this.setVisible(false);
         }
 

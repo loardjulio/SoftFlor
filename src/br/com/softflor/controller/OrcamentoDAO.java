@@ -65,5 +65,66 @@ public class OrcamentoDAO extends GenericDAO<Orcamento> {
             Logger.getLogger(GeracaoOcamento.class.getName()).log(Level.SEVERE, null, ex);
         }
         }
+      
+     
+        public void RelatorioProdutos(List<Produto> p){
+        SimpleDateFormat sdf = new SimpleDateFormat("HHmmss");
+        Date hora = Calendar.getInstance().getTime(); 
+        String dataFormatada = sdf.format(hora);
         
+        String arquivo = "relatorio/TodosProdutos.jasper"; //Local do modelo do relatório      
+        //cria datasource a partir da collection e manda o objeto
+        JRBeanCollectionDataSource jrds = new JRBeanCollectionDataSource(p);
+        Map<String, Object> parametros = new HashMap<>();       
+        
+
+        JasperPrint printer = null;
+        try {
+            printer = JasperFillManager.fillReport(arquivo, parametros, jrds);
+            
+            JasperExportManager.exportReportToPdfFile(printer,"C:/Users/Public/"+dataFormatada+"Produtos.pdf");
+            Desktop desktop = Desktop.getDesktop();
+            File file = new File("C:/Users/Public/"+dataFormatada+"Produtos.pdf");
+            desktop.open(file);
+            
+            
+        } catch (JRException ex) {
+            Logger.getLogger(GeracaoOcamento.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(GeracaoOcamento.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(GeracaoOcamento.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        }
+        
+          public void RelatorioEstoqueBaixo(List<Produto> p){
+        SimpleDateFormat sdf = new SimpleDateFormat("HHmmss");
+        Date hora = Calendar.getInstance().getTime(); 
+        String dataFormatada = sdf.format(hora);
+        
+        String arquivo = "relatorio/RelatórioEstoqueBaixo.jasper"; //Local do modelo do relatório      
+        //cria datasource a partir da collection e manda o objeto
+        JRBeanCollectionDataSource jrds = new JRBeanCollectionDataSource(p);
+        Map<String, Object> parametros = new HashMap<>();       
+        
+
+        JasperPrint printer = null;
+        try {
+            printer = JasperFillManager.fillReport(arquivo, parametros, jrds);
+            
+            JasperExportManager.exportReportToPdfFile(printer,"C:/Users/Public/"+dataFormatada+"EstoqueBaixoProdutos.pdf");
+            Desktop desktop = Desktop.getDesktop();
+            File file = new File("C:/Users/Public/"+dataFormatada+"EstoqueBaixoProdutos.pdf");
+            desktop.open(file);
+            
+            
+        } catch (JRException ex) {
+            Logger.getLogger(GeracaoOcamento.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(GeracaoOcamento.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(GeracaoOcamento.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        }
+     
 }

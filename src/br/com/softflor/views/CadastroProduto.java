@@ -277,15 +277,16 @@ public class CadastroProduto extends javax.swing.JDialog {
         if (produto.ChecaFornecedor(nomeForn) && produto.ChecaUnidade() == true) { //VERIFICA OS COMBOS
             produto.setFornecedor(fdao.fornecedorProduto(nomeForn)); //PEGA O FORNECEDOR JA CADASTRADO E SETA ELE NO PRODUTO
             pd.salvarOuAtualizar(produto); //SALVA O PRODUTO
+            this.setVisible(false);
             
             //SE O CAMPO QUE EXIBE O ID ESTIVER VAZIO É PQ ESTA CADASTRANDO
             // ENTAO AO CONCLUIR LIMPA A TELA. SE ESTIVER COM VALOR É PQ 
             //TA EDITANDO, ENTÃO DEVE FECHAR A JANELA
-            if (lblID.getText().equals("")) {
-                LimpaTela();
-            } else {
-                this.setVisible(false);
-            }
+          //  if (lblID.getText().equals("")) {
+          //    LimpaTela();                
+           // } else {
+            //    this.setVisible(false);
+            //}
 
         }
 
