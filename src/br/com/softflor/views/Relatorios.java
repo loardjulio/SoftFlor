@@ -35,8 +35,10 @@ import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
  * @author Julio
  */
 public class Relatorios extends javax.swing.JDialog {
-ImageIcon img = new ImageIcon("src/icons/Logo.png");
+
+    ImageIcon img = new ImageIcon("src/icons/Logo.png");
     ProdutoDAO pd = new ProdutoDAO();
+    OrcamentoDAO od = new OrcamentoDAO();
 
     /**
      * Creates new form Sobre
@@ -47,7 +49,7 @@ ImageIcon img = new ImageIcon("src/icons/Logo.png");
         setLocationRelativeTo(null);
         URL url = this.getClass().getResource("/icons/iconeSistema.png");
         Image imagemTitulo = Toolkit.getDefaultToolkit().getImage(url);
-        this.setIconImage(imagemTitulo);         
+        this.setIconImage(imagemTitulo);
     }
 
     /**
@@ -61,10 +63,10 @@ ImageIcon img = new ImageIcon("src/icons/Logo.png");
 
         jPanel1 = new javax.swing.JPanel();
         jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Relatórios disponíveis");
         setBackground(new java.awt.Color(255, 255, 255));
         setResizable(false);
 
@@ -73,14 +75,6 @@ ImageIcon img = new ImageIcon("src/icons/Logo.png");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
-            }
-        });
-
-        jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/relatorioProduto.png"))); // NOI18N
-        jButton2.setText("PRODUTOS POR FORNECEDOR");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
             }
         });
 
@@ -97,12 +91,11 @@ ImageIcon img = new ImageIcon("src/icons/Logo.png");
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap(98, Short.MAX_VALUE)
+                .addContainerGap(90, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jButton3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(98, Short.MAX_VALUE))
+                .addContainerGap(90, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -111,9 +104,7 @@ ImageIcon img = new ImageIcon("src/icons/Logo.png");
                 .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(20, 20, 20)
                 .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(20, 20, 20)
-                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(30, Short.MAX_VALUE))
+                .addContainerGap(50, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -133,56 +124,56 @@ ImageIcon img = new ImageIcon("src/icons/Logo.png");
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-         OrcamentoDAO od = new OrcamentoDAO();
-         
+
         switch (JOptionPane.showConfirmDialog(null, "Deseja gerar o relatório de produtos?")) {
-                case 0:  
-                    JOptionPane.showMessageDialog(null, " Salvo no caminho: C:/Users/Public/");
-                    od.RelatorioProdutos(pd.consultarTodos());                    
-                  
-                    this.dispose();
-                    break;
-                case 1:
-                    JOptionPane.showMessageDialog(null, "Operação cancelada");
-                    break;
-                case 2:
-                    System.out.println("botao cancel clicado");
-                    break;
-            }  
-         
-         
-        
-        
-        
-        
+            case 0:
+                JOptionPane.showMessageDialog(null, " Salvo no caminho: C:/Users/Public/");
+                 {
+                    try {
+                        od.RelatorioProdutos(pd.consultarTodos());
+                    } catch (JRException ex) {
+                        Logger.getLogger(Relatorios.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                }
+
+                this.dispose();
+                break;
+            case 1:
+                JOptionPane.showMessageDialog(null, "Operação cancelada");
+                break;
+            case 2:
+                System.out.println("botao cancel clicado");
+                break;
+        }
+
+
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        
-        
-           OrcamentoDAO od = new OrcamentoDAO();
-         
-        switch (JOptionPane.showConfirmDialog(null, "Deseja gerar o relatório de produtos com estoque baixo?")) {
-                case 0:  
-                    JOptionPane.showMessageDialog(null, " Salvo no caminho: C:/Users/Public/");
-                    od.RelatorioEstoqueBaixo(pd.consultarEstoque());                   
-                  
-                    this.dispose();
-                    break;
-                case 1:
-                    JOptionPane.showMessageDialog(null, "Operação cancelada");
-                    break;
-                case 2:
-                    System.out.println("botao cancel clicado");
-                    break;
-            }  
-         
-        
-    }//GEN-LAST:event_jButton3ActionPerformed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-       new ListaFornecedores(null,true).setVisible(true);
-    }//GEN-LAST:event_jButton2ActionPerformed
+        switch (JOptionPane.showConfirmDialog(null, "Deseja gerar o relatório de produtos com estoque baixo?")) {
+            case 0:
+                JOptionPane.showMessageDialog(null, " Salvo no caminho: C:/Users/Public/");
+                 {
+                    try {
+                        od.RelatorioEstoqueBaixo(pd.consultarEstoque());
+                    } catch (JRException ex) {
+                        Logger.getLogger(Relatorios.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                }
+
+                this.dispose();
+                break;
+            case 1:
+                JOptionPane.showMessageDialog(null, "Operação cancelada");
+                break;
+            case 2:
+                System.out.println("botao cancel clicado");
+                break;
+        }
+
+
+    }//GEN-LAST:event_jButton3ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -229,7 +220,6 @@ ImageIcon img = new ImageIcon("src/icons/Logo.png");
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JPanel jPanel1;
     // End of variables declaration//GEN-END:variables

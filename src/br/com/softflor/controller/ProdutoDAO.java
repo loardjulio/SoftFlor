@@ -21,51 +21,48 @@ public class ProdutoDAO extends GenericDAO<Produto> {
 
     public List<Produto> consultarTodos() {
         try {
-             em.getTransaction().begin();
+            em.getTransaction().begin();
             Query q = em.createNamedQuery("Produto.consultarTodos");
-            List<Produto> produtos = q.getResultList();            
+            List<Produto> produtos = q.getResultList();
             return produtos;
-           
+
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "Erro buscar Produtos"+ e);
+            JOptionPane.showMessageDialog(null, "Erro buscar Produtos" + e);
             FechaConexao();
         }
         return null;
     }
-    
-    
-    
-    
-     public List<Produto> consultarPorFornecedor(Integer id) {
+
+    public List<Produto> consultarPorFornecedor(Integer id) {
         try {
-             em.getTransaction().begin();            
-            Query q = em.createNamedQuery("Produto.consultarPorFornecedor");            
-            q.setParameter("idfornecedor", id );
-            List<Produto> produtos = q.getResultList();            
+            em.getTransaction().begin();
+            Query q = em.createNamedQuery("Produto.consultarPorFornecedor");
+            q.setParameter("idfornecedor", id);
+            List<Produto> produtos = q.getResultList();
             return produtos;
-           
+
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "Erro buscar Produtos"+ e);
+            JOptionPane.showMessageDialog(null, "Erro buscar Produtos" + e);
             FechaConexao();
         }
         return null;
     }
-     
-     public List<Produto> consultarPorNome(String nome) {
+    
+    public List<Produto> consultarPorNome(String nome) {
         List<Produto> produtos = null;
         try {
             Query q = em.createNamedQuery("Produto.consultarPorNome");
             q.setParameter("nome", nome + "%");
             produtos = q.getResultList();
         } catch (Exception e) {
-              JOptionPane.showMessageDialog(null, "Erro buscar Produtos"+ e);            
+            JOptionPane.showMessageDialog(null, "Erro buscar Produtos" + e);
         } finally {
-            FechaConexao();            
+            FechaConexao();
         }
         return produtos;
     }
-     
-      public List<Produto> consultarEstoque() {
+
+    public List<Produto> consultarEstoque() {
         List<Produto> produtos = null;
         try {
             Query q = em.createNamedQuery("Produto.consultarEstoque");
@@ -75,15 +72,14 @@ public class ProdutoDAO extends GenericDAO<Produto> {
             //System.out.println(e);
             //produtos = e.getResultList();
         } catch (Exception e) {
-              JOptionPane.showMessageDialog(null, "Erro buscar Produtos"+ e);            
+            JOptionPane.showMessageDialog(null, "Erro buscar Produtos" + e);
         } finally {
-            FechaConexao();            
-        }       
+            FechaConexao();
+        }
         return produtos;
-          
+
     }
-      
-    
+
     public Serializable getId() {
         return id;
     }
@@ -92,5 +88,4 @@ public class ProdutoDAO extends GenericDAO<Produto> {
         this.id = id;
     }
 
-   
 }

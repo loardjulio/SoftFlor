@@ -124,7 +124,7 @@ public class CadastroProduto extends javax.swing.JDialog {
 
         ComboFornecedor.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "--SELECIONE--" }));
 
-        btnSair.setBackground(new java.awt.Color(255, 51, 51));
+        btnSair.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/voltar.png"))); // NOI18N
         btnSair.setText("VOLTAR");
         btnSair.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -132,7 +132,7 @@ public class CadastroProduto extends javax.swing.JDialog {
             }
         });
 
-        btnCadastrarPro.setBackground(new java.awt.Color(153, 255, 153));
+        btnCadastrarPro.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/CadastrarProduto.png"))); // NOI18N
         btnCadastrarPro.setText("CADASTRAR");
         btnCadastrarPro.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -167,36 +167,34 @@ public class CadastroProduto extends javax.swing.JDialog {
                                 .addComponent(jLabel11)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(txtEstoqueMin, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 43, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                                .addComponent(btnCadastrarPro, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(232, 232, 232))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                                .addComponent(jLabel10)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(txtPrecoVenda, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(102, 102, 102))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                                 .addComponent(jLabel3)
                                 .addGap(18, 18, 18)
                                 .addComponent(ComboFornecedor, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(98, 98, 98))))
+                                .addGap(98, 98, 98))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(btnCadastrarPro)
+                                    .addComponent(jLabel10))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(txtPrecoVenda, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(btnSair, javax.swing.GroupLayout.Alignment.TRAILING))
+                                .addGap(102, 102, 102))))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(btnSair)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jLabel7)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(txtNomeProduto, javax.swing.GroupLayout.PREFERRED_SIZE, 265, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(35, 35, 35)
-                                .addComponent(jLabel8)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(txtQuantidadeProduto, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jLabel7)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(txtNomeProduto, javax.swing.GroupLayout.PREFERRED_SIZE, 265, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(35, 35, 35)
+                        .addComponent(jLabel8)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(txtQuantidadeProduto, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, Short.MAX_VALUE))))
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addComponent(lblID, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(643, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
                 .addComponent(jLabel5)
@@ -235,7 +233,7 @@ public class CadastroProduto extends javax.swing.JDialog {
                 .addGap(27, 27, 27)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(btnCadastrarPro, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btnCadastrarPro, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(btnSair))
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jLabel11)
@@ -261,34 +259,26 @@ public class CadastroProduto extends javax.swing.JDialog {
 
     private void btnCadastrarProActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadastrarProActionPerformed
 
-        produto.setNome(txtNomeProduto.getText()); //PEGA P NOME DO PRODUTO NO CAMPO       
+        try {
+            if (lblID.getText().equals("") == false) {  //SE O CAMPO ID NÃO ESTIVER VAZIO ELE PEGA O DADO         
+                produto.setIdproduto(Integer.parseInt(lblID.getText()));
+            }
+            produto.setNome(txtNomeProduto.getText()); //PEGA P NOME DO PRODUTO NO CAMPO  
+            produto.setEstoque_minimo(Double.parseDouble(txtEstoqueMin.getText())); //SETA O ESTOQUE
+            produto.setPreco_compra(Double.parseDouble(txtPrecoCompra.getText())); //SETA PRECO COMPRA
+            produto.setPreco_venda(Double.parseDouble(txtPrecoVenda.getText()));
+            produto.setQuantidade(Double.parseDouble(txtQuantidadeProduto.getText()));
+            nomeForn = (String) ComboFornecedor.getSelectedItem(); //PEGA O NOME DO FORN QUE TA NO COMBO       
+            produto.setUnidade_medida((String) ComboMedida.getSelectedItem());   //SETA A UNIDADE DE MEDIDA   
 
-        if (lblID.getText().equals("") == false) {  //SE O CAMPO ID NÃO ESTIVER VAZIO ELE PEGA O DADO         
-            produto.setIdproduto(Integer.parseInt(lblID.getText()));
+            if (produto.ChecaFornecedor(nomeForn) && produto.ChecaUnidade() == true) { //VERIFICA OS COMBOS
+                produto.setFornecedor(fdao.fornecedorProduto(nomeForn)); //PEGA O FORNECEDOR JA CADASTRADO E SETA ELE NO PRODUTO
+                this.setVisible(false);
+            }
+        } catch (NumberFormatException e) {
+             JOptionPane.showMessageDialog(this,"Erro em valor informado "+e);
         }
-        produto.setEstoque_minimo(Double.parseDouble(txtEstoqueMin.getText())); //SETA O ESTOQUE
-        produto.setPreco_compra(Double.parseDouble(txtPrecoCompra.getText())); //SETA PRECO COMPRA
-        produto.setPreco_venda(Double.parseDouble(txtPrecoVenda.getText()));
-        produto.setQuantidade(Double.parseDouble(txtQuantidadeProduto.getText()));
-
-        nomeForn = (String) ComboFornecedor.getSelectedItem(); //PEGA O NOME DO FORN QUE TA NO COMBO       
-        produto.setUnidade_medida((String) ComboMedida.getSelectedItem());   //SETA A UNIDADE DE MEDIDA     
-
-        if (produto.ChecaFornecedor(nomeForn) && produto.ChecaUnidade() == true) { //VERIFICA OS COMBOS
-            produto.setFornecedor(fdao.fornecedorProduto(nomeForn)); //PEGA O FORNECEDOR JA CADASTRADO E SETA ELE NO PRODUTO
-            pd.salvarOuAtualizar(produto); //SALVA O PRODUTO
-            this.setVisible(false);
-            
-            //SE O CAMPO QUE EXIBE O ID ESTIVER VAZIO É PQ ESTA CADASTRANDO
-            // ENTAO AO CONCLUIR LIMPA A TELA. SE ESTIVER COM VALOR É PQ 
-            //TA EDITANDO, ENTÃO DEVE FECHAR A JANELA
-          //  if (lblID.getText().equals("")) {
-          //    LimpaTela();                
-           // } else {
-            //    this.setVisible(false);
-            //}
-
-        }
+         
 
     }//GEN-LAST:event_btnCadastrarProActionPerformed
 

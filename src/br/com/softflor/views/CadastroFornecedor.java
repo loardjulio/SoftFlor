@@ -358,14 +358,16 @@ public class CadastroFornecedor extends javax.swing.JDialog {
         if ((endereco.ChecaEstado() && fornecedor.ChecaStatus()) == true) {
            
                 fDao.salvarOuAtualizar(fornecedor);
+                 this.dispose();
                 //SE O CAMPO QUE EXIBE O ID ESTIVER VAZIO É PQ ESTA CADASTRANDO
                 // ENTAO AO CONCLUIR LIMPA A TELA. SE ESTIVER COM VALOR É PQ 
                 //TA EDITANDO, ENTÃO DEVE FECHAR A JANELA
-                if (lblID.getText().equals("")) {
-                   LimpaTela();  
-                }else{
-                this.setVisible(false);                
-                }
+//                if (lblID.getText().equals("")) {
+//                   LimpaTela(); 
+//                  
+//                }else{
+//                this.setVisible(false);                
+//                }
                 
             
 

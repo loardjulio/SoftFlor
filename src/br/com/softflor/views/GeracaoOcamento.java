@@ -19,7 +19,10 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import net.sf.jasperreports.engine.JRException;
 
 /**
  *
@@ -52,11 +55,11 @@ public class GeracaoOcamento extends javax.swing.JFrame {
         setLocationRelativeTo(null);
         tableOrcamento.setModel(tableModel);
         btnSalvar.setVisible(false);
-        
-         URL url = this.getClass().getResource("/icons/iconeSistema.png");
+
+        URL url = this.getClass().getResource("/icons/iconeSistema.png");
         Image imagemTitulo = Toolkit.getDefaultToolkit().getImage(url);
-        this.setIconImage(imagemTitulo); 
-        
+        this.setIconImage(imagemTitulo);
+
     }
 
     @SuppressWarnings("unchecked")
@@ -95,8 +98,6 @@ public class GeracaoOcamento extends javax.swing.JFrame {
 
         jPanel1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
-        jButton1.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        jButton1.setForeground(new java.awt.Color(255, 255, 255));
         jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/buscaCliente.png"))); // NOI18N
         jButton1.setText("BUSCAR CLIENTE");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -154,7 +155,6 @@ public class GeracaoOcamento extends javax.swing.JFrame {
 
         jLabel4.setText("PRODUTO:");
 
-        btnBuscarProduto.setForeground(new java.awt.Color(255, 255, 255));
         btnBuscarProduto.setText("BUSCAR PRODUTO");
         btnBuscarProduto.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -195,8 +195,6 @@ public class GeracaoOcamento extends javax.swing.JFrame {
         ));
         jScrollPane1.setViewportView(tableOrcamento);
 
-        btnAdicionar.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        btnAdicionar.setForeground(new java.awt.Color(255, 255, 255));
         btnAdicionar.setText("ADICIONAR");
         btnAdicionar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -215,8 +213,6 @@ public class GeracaoOcamento extends javax.swing.JFrame {
 
         txtNomeProduto.setEditable(false);
 
-        btnExcluir.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        btnExcluir.setForeground(new java.awt.Color(255, 255, 255));
         btnExcluir.setText("Excluir Item");
         btnExcluir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -309,8 +305,6 @@ public class GeracaoOcamento extends javax.swing.JFrame {
             }
         });
 
-        jButton6.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        jButton6.setForeground(new java.awt.Color(255, 255, 255));
         jButton6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/GeraOrc.png"))); // NOI18N
         jButton6.setText("GERAR ");
         jButton6.addActionListener(new java.awt.event.ActionListener() {
@@ -319,8 +313,6 @@ public class GeracaoOcamento extends javax.swing.JFrame {
             }
         });
 
-        jButton7.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        jButton7.setForeground(new java.awt.Color(255, 255, 255));
         jButton7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/voltar.png"))); // NOI18N
         jButton7.setText("VOLTAR");
         jButton7.addActionListener(new java.awt.event.ActionListener() {
@@ -419,14 +411,12 @@ public class GeracaoOcamento extends javax.swing.JFrame {
     private void btnBuscarProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarProdutoActionPerformed
 
         ListaProdutos jb = new ListaProdutos(this, true);
-        jb.carregaTabela();       
+        jb.carregaTabela();
         jb.setVisible(true);
         int id = jb.idSelecionado;
         lblNumero.setText("" + id + mes + dia);
 
         Produto p = pd.buscarPorId(Produto.class, id);
-        
-        
 
         try {
 
@@ -480,22 +470,40 @@ public class GeracaoOcamento extends javax.swing.JFrame {
     }//GEN-LAST:event_btnExcluirActionPerformed
 
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
-                  
-        List<Produto> po = new ArrayList<>();
-        for (int i = 0; i < tableOrcamento.getRowCount(); i++) {
-            Produto produto2 = new Produto();
-            produto2.setIdproduto((Integer) tableOrcamento.getValueAt(i, 0));
-            produto2.setNome((String) tableOrcamento.getValueAt(i, 1));
-            produto2.setUnidade_medida((String) tableOrcamento.getValueAt(i, 2));
-            produto2.setQuantidade((Double) tableOrcamento.getValueAt(i, 3));
-            produto2.setPreco_venda((Double) tableOrcamento.getValueAt(i, 4));
-            produto2.setPrecoTotal((Double) tableOrcamento.getValueAt(i, 5));
-            po.add(produto2);
+
+        switch (JOptionPane.showConfirmDialog(null, "Deseja gerar o orçamento?")) {
+            case 0:
+                JOptionPane.showMessageDialog(null, " Salvo no caminho: C:/Users/Public/");
+
+                List<Produto> po = new ArrayList<>();
+                for (int i = 0; i < tableOrcamento.getRowCount(); i++) {
+                    Produto produto2 = new Produto();
+                    produto2.setIdproduto((Integer) tableOrcamento.getValueAt(i, 0));
+                    produto2.setNome((String) tableOrcamento.getValueAt(i, 1));
+                    produto2.setUnidade_medida((String) tableOrcamento.getValueAt(i, 2));
+                    produto2.setQuantidade((Double) tableOrcamento.getValueAt(i, 3));
+                    produto2.setPreco_venda((Double) tableOrcamento.getValueAt(i, 4));
+                    produto2.setPrecoTotal((Double) tableOrcamento.getValueAt(i, 5));
+                    po.add(produto2);
+                }
+                OrcamentoDAO od = new OrcamentoDAO();
+                try {
+                    od.GeradorOrcamento(po, txtNomeCliente.getText(), totalOrcamento.getText());
+                } catch (JRException ex) {
+                    Logger.getLogger(GeracaoOcamento.class.getName()).log(Level.SEVERE, null, ex);
+                }
+
+                this.setVisible(false);
+                break;
+            case 1:
+                JOptionPane.showMessageDialog(null, "Operação cancelada");
+                break;
+            case 2:
+                System.out.println("botao cancel clicado");
+                break;
         }
 
-        OrcamentoDAO od = new OrcamentoDAO();
-        od.GeradorOrcamento(po, txtNomeCliente.getText(),totalOrcamento.getText());
-   
+
     }//GEN-LAST:event_jButton6ActionPerformed
 
     private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed

@@ -52,8 +52,11 @@ ImageIcon img = new ImageIcon("src/icons/Logo.png");
         jLabel8 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Ajuda do sistema");
         setBackground(new java.awt.Color(255, 255, 255));
         setResizable(false);
+
+        lblLogo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/Logo.png"))); // NOI18N
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel1.setText("PARA CENTROS DE JARDINAGEM  ");

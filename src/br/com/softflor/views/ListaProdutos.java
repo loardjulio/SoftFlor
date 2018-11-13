@@ -34,7 +34,7 @@ public class ListaProdutos extends javax.swing.JDialog {
         if (idFornecedor == null) {
             tableModel = new ProdutoTableModel(pd.consultarTodos());
         } else {
-            tableModel = new ProdutoTableModel(pd.consultarPorFornecedor(idFornecedor));
+            tableModel = new ProdutoTableModel(pd.consultarPorFornecedor(idFornecedor));           
         }
         listaBuscaProduto.setModel(tableModel);
     }
